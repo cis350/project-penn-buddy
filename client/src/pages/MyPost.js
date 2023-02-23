@@ -1,11 +1,13 @@
 /* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable import/no-named-as-default */
+
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
   AppBar, Button, Container, Toolbar, Typography, Stack, Box, Avatar, IconButton,
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import PostDetail from './PostDetail';
+import PostDetail from '../components/PostDetail';
 
 export default function Post({ name }) {
   const { group_id } = useParams();
@@ -29,9 +31,8 @@ export default function Post({ name }) {
             <Button variant="text" color="secondary" sx={{ flex: 1 }}>Back to Activity Feed</Button>
           </Box>
           <Stack direction="row" spacing={3}>
-            <Button variant="contained" color="secondary">Join Group</Button>
-            {/* If user is in the group already, display below
-            <Button variant="contained" color="warning">Leave Group</Button> */}
+            <Button variant="contained" color="warning">Delete Group</Button>
+            <Button variant="contained" color="secondary">Edit Group</Button>
           </Stack>
         </Toolbar>
       </AppBar>

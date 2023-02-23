@@ -4,8 +4,8 @@ import { useParams } from 'react-router-dom';
 import {
   AppBar, Button, Container, Toolbar, Typography, Stack, Box, Avatar, IconButton,
 } from '@mui/material';
-import MyPost from '../components/MyPost';
-import OtherPost from '../components/OtherPost';
+import MyPost from './MyPost';
+import OtherPost from './OtherPost';
 
 export default function Post({ name, userId }) {
   const { group_id } = useParams();
