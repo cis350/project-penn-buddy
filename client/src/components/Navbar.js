@@ -21,8 +21,9 @@ export default function Navbar() {
           variant="h4"
           component="div"
           sx={{
-            flexGrow: 1, color: '#0096FF', fontWeight: 800, fontSize: '3.1rem',
+            flexGrow: 1, fontWeight: 800, fontSize: '3.1rem',
           }}
+          color="secondary"
         >
           Penn Buddy
         </Typography>
@@ -31,7 +32,15 @@ export default function Navbar() {
           <Button color="inherit" sx={{ color: 'black' }}>Chat Room</Button>
           <Button color="inherit" sx={{ color: 'black' }}>My History</Button>
           <Button color="inherit" sx={{ color: '#0096FF' }}>Create Post</Button>
-          <Button color="inherit" sx={{ color: 'white', backgroundColor: '#EA3C3C' }}>My Profile</Button>
+          <Button
+            color="inherit"
+            sx={{ color: 'white', backgroundColor: '#EA3C3C' }}
+            style={{
+              minWidth: '110px',
+            }}
+          >
+            My Profile
+          </Button>
         </Stack>
       </Toolbar>
     </AppBar>
