@@ -19,3 +19,15 @@ export const getGroupById = async (groupId) => {
     console.log('error', err.message);
   }
 };
+
+/**
+ * Join/leave a group by userId
+ */
+export const changeGroupMember = async (groupId, newGroup) => {
+  try {
+    const response = await axios.put(`${rootURL}/group/${groupId}`, newGroup);
+    return response.data;
+  } catch (err) {
+    console.log('error', err.message);
+  }
+};

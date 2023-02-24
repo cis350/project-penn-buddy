@@ -12,7 +12,7 @@ import MemberCard from './MemberCard';
 
 export default function PostDetail({
   ownerId, location, departDate, modeTransport,
-  departPlace, maxCapacity, currCapacity, currMemberIds,
+  departPlace, maxCapacity, currCapacity, currMemberIds, group,
 }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -65,8 +65,6 @@ export default function PostDetail({
                 <Typography id="modal-modal-title" variant="h6" component="h3">
                   Group Members
                 </Typography>
-                <Box sx={{ p: 1 }} />
-                <MemberCard id={ownerId} userId={ownerId} />
                 {
                   currMemberIds.map(
                     (currMemberId) => (

@@ -61,7 +61,7 @@ function App() {
     // wrapper function
     async function getAllUsersWrapper() {
       const response = await getAllUsers();
-      // console.log('getUser', response.filter((item) => item.name === name.current)[0]);
+      console.log('UserID that logged in', response.filter((item) => item.name === name.current)[0].id);
       setUserId(response.filter((item) => item.name === name.current)[0].id);
       // console.log('current userId', userId.current);
     }

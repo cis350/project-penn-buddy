@@ -9,9 +9,9 @@ import {
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import PostDetail from '../components/PostDetail';
 
-export default function Post({
+export default function MyPost({
   ownerId, location, departDate, modeTransport,
-  departPlace, maxCapacity, currCapacity, currMemberIds,
+  departPlace, maxCapacity, currCapacity, currMemberIds, groupId, userId, group,
 }) {
   return (
     <div>
