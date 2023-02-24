@@ -1,3 +1,8 @@
+# Steps to run Penn Buddy
+
+- cd to client and run `npm start` ([http://localhost:3000](http://localhost:3000))
+- cd to json-server and run `json-server --watch db.json` (As per configuration, this will be on [http://localhost:3004](http://localhost:3004))
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
