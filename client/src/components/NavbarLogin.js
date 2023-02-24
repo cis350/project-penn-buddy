@@ -1,15 +1,15 @@
 /* eslint-disable react/jsx-no-bind */
 import React from 'react';
 import {
-  AppBar, Button, Toolbar, Typography, Stack,
+  AppBar, Button, Toolbar, Typography, Stack, Link,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-export default function Navbar() {
+export default function NavbarLogin() {
   const navigate = useNavigate();
 
-  function handleActivity() {
-    navigate('/group/1');
+  function handleHome() {
+    navigate('/');
   }
 
   return (
@@ -36,10 +36,9 @@ export default function Navbar() {
           Penn Buddy
         </Typography>
         <Stack direction="row" spacing={6}>
-          <Button color="inherit" sx={{ color: 'black' }} onClick={handleActivity}>Activity Feed</Button>
-          <Button color="inherit" sx={{ color: 'black' }}>Chat Room</Button>
-          <Button color="inherit" sx={{ color: 'black' }}>My History</Button>
-          <Button color="inherit" sx={{ color: '#0096FF' }}>Create Post</Button>
+          <Button color="inherit" sx={{ color: 'black' }} onClick={handleHome}>Home</Button>
+          <Button color="inherit" sx={{ color: 'black' }}>About Us</Button>
+          <Button color="inherit" sx={{ color: 'black' }}>How We Work</Button>
           <Button
             color="inherit"
             sx={{ color: 'white', backgroundColor: '#EA3C3C' }}
@@ -47,7 +46,7 @@ export default function Navbar() {
               minWidth: '110px',
             }}
           >
-            My Profile
+            Register
           </Button>
         </Stack>
       </Toolbar>

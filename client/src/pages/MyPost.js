@@ -9,9 +9,10 @@ import {
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import PostDetail from '../components/PostDetail';
 
-export default function Post({ name }) {
-  const { group_id } = useParams();
-
+export default function Post({
+  ownerId, location, departDate, modeTransport,
+  departPlace, maxCapacity, currCapacity, currMemberIds,
+}) {
   return (
     <div>
       <AppBar
@@ -36,7 +37,16 @@ export default function Post({ name }) {
           </Stack>
         </Toolbar>
       </AppBar>
-      <PostDetail />
+      <PostDetail
+        ownerId={ownerId}
+        location={location}
+        departDate={departDate}
+        modeTransport={modeTransport}
+        departPlace={departPlace}
+        maxCapacity={maxCapacity}
+        currCapacity={currCapacity}
+        currMemberIds={currMemberIds}
+      />
 
     </div>
 

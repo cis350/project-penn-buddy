@@ -10,44 +10,10 @@ import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import MemberCard from './MemberCard';
 
-function stringToColor(string) {
-  let hash = 0;
-  let i;
-  /* eslint-disable no-bitwise */
-  for (i = 0; i < string.length; i += 1) {
-    hash = string.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  let color = '#';
-  for (i = 0; i < 3; i += 1) {
-    const value = (hash >> (i * 8)) & 0xff;
-    color += `00${value.toString(16)}`.slice(-2);
-  }
-  /* eslint-enable no-bitwise */
-  return color;
-}
-
-function stringAvatar(name) {
-  if (name.split(' ').length === 1) {
-    return {
-      sx: {
-        bgcolor: stringToColor(name),
-        width: 48,
-        height: 48,
-      },
-      children: `${name.split(' ')[0][0]}`,
-    };
-  }
-  return {
-    sx: {
-      bgcolor: stringToColor(name),
-      width: 48,
-      height: 48,
-    },
-    children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
-  };
-}
-
-export default function PostDetail() {
+export default function PostDetail({
+  ownerId, location, departDate, modeTransport,
+  departPlace, maxCapacity, currCapacity, currMemberIds,
+}) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -56,11 +22,21 @@ export default function PostDetail() {
     <Container>
       <Box className="postTab">
         <Stack direction="row" justifyContent="center">
-          <MemberCard id="member-owner" name="Nicky" username="nickyktp" />
+          <MemberCard key={ownerId} userId={ownerId} />
           <Stack direction="row" spacing={5} alignItems="center">
             <Stack spacing={1}>
-              <Typography variant="h6">2/4 people</Typography>
-              <Typography variant="h7">2 spots remaining</Typography>
+              <Typography variant="h6">
+                {currCapacity}
+                /
+                {maxCapacity}
+                {' '}
+                people
+              </Typography>
+              <Typography variant="h7">
+                {maxCapacity - currCapacity}
+                {' '}
+                spots remaining
+              </Typography>
             </Stack>
             <Button
               variant="outlined"
@@ -90,9 +66,17 @@ export default function PostDetail() {
                   Group Members
                 </Typography>
                 <Box sx={{ p: 1 }} />
-                <MemberCard id="member-1" name="Grace" username="chanyat" />
-                <Box sx={{ p: 1 }} />
-                <MemberCard id="member-2" name="Grace" username="chanyat" />
+                <MemberCard id={ownerId} userId={ownerId} />
+                {
+                  currMemberIds.map(
+                    (currMemberId) => (
+                      <div>
+                        <Box sx={{ p: 1 }} />
+                        <MemberCard key={currMemberId} userId={currMemberId} />
+                      </div>
+                    ),
+                  )
+                }
               </Box>
             </Modal>
           </Stack>
@@ -105,8 +89,8 @@ export default function PostDetail() {
             <Stack className="location" direction="row" spacing={3} alignItems="center">
               <LocationOnOutlinedIcon color="secondary" sx={{ fontSize: 70 }} />
               <Stack spacing={1}>
-                <Typography variant="h6">Location</Typography>
-                <Typography variant="h7">City, State</Typography>
+                <Typography variant="h6">{location}</Typography>
+                <Typography variant="h7">Location</Typography>
               </Stack>
             </Stack>
           </Grid>
@@ -114,7 +98,7 @@ export default function PostDetail() {
             <Stack className="location" direction="row" spacing={3} alignItems="center">
               <DirectionsCarFilledOutlinedIcon color="secondary" sx={{ fontSize: 70 }} />
               <Stack spacing={1}>
-                <Typography variant="h6">Uber/Lyft XL</Typography>
+                <Typography variant="h6">{modeTransport}</Typography>
                 <Typography variant="h7">Mode of Transportation</Typography>
               </Stack>
             </Stack>
@@ -123,7 +107,7 @@ export default function PostDetail() {
             <Stack className="location" direction="row" spacing={3} alignItems="center">
               <AccessTimeOutlinedIcon color="secondary" sx={{ fontSize: 70 }} />
               <Stack spacing={1}>
-                <Typography variant="h6">05:00 PM, December 22, 2023</Typography>
+                <Typography variant="h6">{departDate}</Typography>
                 <Typography variant="h7">Time to Depart</Typography>
               </Stack>
             </Stack>
@@ -132,7 +116,7 @@ export default function PostDetail() {
             <Stack className="location" direction="row" spacing={3} alignItems="center">
               <LogoutOutlinedIcon color="secondary" sx={{ fontSize: 70 }} />
               <Stack spacing={1}>
-                <Typography variant="h6">The Radian</Typography>
+                <Typography variant="h6">{departPlace}</Typography>
                 <Typography variant="h7">Departing Spot</Typography>
               </Stack>
             </Stack>

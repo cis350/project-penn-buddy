@@ -1,9 +1,11 @@
+/* eslint-disable no-console */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
   AppBar, Button, Container, Toolbar, Typography, Stack, Box, Avatar, IconButton, Grid, Modal,
 } from '@mui/material';
+import { getUserById } from '../api/users';
 
 function stringToColor(string) {
   let hash = 0;
@@ -42,16 +44,24 @@ function stringAvatar(name) {
   };
 }
 
-export default function MemberCard({ name, username }) {
+export default function MemberCard({ userId }) {
+  const [name, setName] = useState('');
+
+  useEffect(() => {
+    // wrapper function
+    async function getUserByIdWrapper() {
+      const response = await getUserById(userId);
+      setName(response.name);
+    }
+    // run the wrapper function
+    getUserByIdWrapper();
+  }, []);
+
   return (
     <Stack direction="row" sx={{ flexGrow: 1 }} spacing={3} alignItems="center">
       <Avatar {...stringAvatar(name)} />
       <Stack spacing={0}>
         <Typography variant="h5" component="div">{name}</Typography>
-        <Typography variant="h7" color="primary.dark">
-          @
-          {username}
-        </Typography>
       </Stack>
     </Stack>
   );

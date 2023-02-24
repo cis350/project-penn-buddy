@@ -1,0 +1,15 @@
+{
+  "user": [
+    {"id": 1, "name": "Nicky", "email": "nickywon@wharton.upenn.edu", "password": "nickypass123", "venmo": "Nicky_Wong", "rating": 5.0},
+    {"id": 2, "name": "Grace", "email": "grace@upenn.edu", "password": "grace555", "venmo": "Grace_grace", "rating": 4.8},
+    {"id": 3, "name": "Iain", "email": "iainli@gmail.com", "password": "iaianchenli", "venmo": "iain888", "rating": 4.7},
+    {"id": 4, "name": "Linda", "email": "lindashen7@gmail.com", "password": "linda777", "venmo": "Linda_Shen_7", "rating": 4.9},
+    {"id": 5, "name": "Salam", "email": "salamk@sas.upenn.edu", "password": "salam12345", "venmo": "Salam-Kar", "rating": 4.2}
+  ],
+  "group": [
+    {"id": 1, "ownerId": 1, "location": "PHL Airport", "departDate": "2023-08-29T09:12:33.001Z", "modeTransport": "Uber/Lyft XL", "departPlace": "The Radian",
+  "maxCapacity": 4, "currCapacity": 3, "currMemberIds": [2,3]},
+    {"id": 2, "ownerId": 3, "location": "EWR Airport", "departDate": "2023-07-03T17:22:00.001Z", "modeTransport": "Uber/Lyft XL", "departPlace": "Lauder",
+  "maxCapacity": 4, "currCapacity": 2, "currMemberIds": [4]}
+  ]
+}
