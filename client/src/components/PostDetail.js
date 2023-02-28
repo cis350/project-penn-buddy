@@ -69,7 +69,7 @@ export default function PostDetail({
                   currMemberIds.map(
                     (currMemberId) => (
                       <div>
-                        <Box sx={{ p: 1 }} />
+                        <Box key={currMemberId} sx={{ p: 1 }} />
                         <MemberCard key={currMemberId} userId={currMemberId} />
                       </div>
                     ),

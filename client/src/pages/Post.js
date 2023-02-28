@@ -23,14 +23,14 @@ export default function Post({ name, userId }) {
   const [membership, setMembership] = useState(currMemberIds.includes(userId));
 
   const modifyDataOnServer = async (data) => {
-    console.log('membership at modification', membership);
+    // console.log('membership at modification', membership);
     const response = await changeGroupMember(groupId, data);
   };
 
   const handleLeaveGroup = (e) => {
     setMembership(false);
-    console.log('membership', membership);
-    console.log('group', group);
+    // console.log('membership', membership);
+    // console.log('group', group);
     const modifiedData = {
       id: groupId,
       ownerId,
@@ -51,7 +51,7 @@ export default function Post({ name, userId }) {
   const handleJoinGroup = (e) => {
     // setMembership(true);
     // console.log('membership', membership);
-    console.log('group', group);
+    // console.log('group', group);
     const modifiedData = {
       id: groupId,
       ownerId,
@@ -73,7 +73,7 @@ export default function Post({ name, userId }) {
     // wrapper function
     async function getGroupByIdWrapper() {
       const response = await getGroupById(groupId);
-      console.log('response', response);
+      // console.log('response', response);
       setGroup(response);
       setOwnerId(response.ownerId);
       setLocation(response.location);
