@@ -22,7 +22,7 @@ export default function Post({ name, userId }) {
   const [group, setGroup] = useState([]);
   const [membership, setMembership] = useState(currMemberIds.includes(userId));
 
-  const modifyDataOnServer = async (data) => {
+  const modifyGroupMemberOnServer = async (data) => {
     // console.log('membership at modification', membership);
     const response = await changeGroupMember(groupId, data);
   };
@@ -45,7 +45,7 @@ export default function Post({ name, userId }) {
     setCurrMemberIds(currMemberIds.filter((item) => item !== userId));
     setCurrCapacity(currCapacity - 1);
     console.log('modifiedData', modifiedData);
-    modifyDataOnServer(modifiedData);
+    modifyGroupMemberOnServer(modifiedData);
   };
 
   const handleJoinGroup = (e) => {
@@ -66,7 +66,7 @@ export default function Post({ name, userId }) {
     setCurrMemberIds([...currMemberIds, userId]);
     setCurrCapacity(currCapacity + 1);
     console.log('modifiedData', modifiedData);
-    modifyDataOnServer(modifiedData);
+    modifyGroupMemberOnServer(modifiedData);
   };
 
   useEffect(() => {
