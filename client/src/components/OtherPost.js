@@ -6,7 +6,7 @@ import {
   AppBar, Button, Container, Toolbar, Typography, Stack, Box, Avatar, IconButton,
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import PostDetail from '../components/PostDetail';
+import PostDetail from './PostDetail';
 
 export default function OtherPost({
   ownerId, location, departDate, modeTransport,

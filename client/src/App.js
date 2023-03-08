@@ -5,8 +5,7 @@
 import React, {
   useState, useRef, useLocalStorage, useEffect,
 } from 'react';
-import './App.css';
-import { Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import {
   CssBaseline, createTheme, TextField, Stack, Button, Typography,
 } from '@mui/material';
@@ -61,7 +60,7 @@ function App() {
     // wrapper function
     async function getAllUsersWrapper() {
       const response = await getAllUsers();
-      console.log('UserID that logged in', response.filter((item) => item.name === name.current)[0].id);
+      // console.log('User login', response.filter((item) => item.name === name.current)[0]);
       setUserId(response.filter((item) => item.name === name.current)[0].id);
       // console.log('current userId', userId.current);
     }
@@ -79,25 +78,31 @@ function App() {
 
   if (login === false) {
     return (
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <NavbarLogin />
-        <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>
-          <TextField id="standard-required" label="Name" variant="outlined" onChange={handleChangeName} />
-          <Button variant="contained" color="primary" onClick={handleClickLogin}>Login</Button>
-        </Stack>
-      </ThemeProvider>
+      <BrowserRouter>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <NavbarLogin />
+          <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>
+            <TextField id="standard-required" label="Name" variant="outlined" onChange={handleChangeName} />
+            <Button variant="contained" color="primary" onClick={handleClickLogin}>Login</Button>
+          </Stack>
+        </ThemeProvider>
+      </BrowserRouter>
+
     );
   }
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<HomePage name={name.current} />} />
-        <Route path="/group/:groupId" element={<Post name={name.current} userId={userId} />} />
-      </Routes>
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<HomePage name={name.current} />} />
+          <Route path="/group/:groupId" element={<Post name={name.current} userId={userId} />} />
+        </Routes>
+      </ThemeProvider>
+    </BrowserRouter>
+
   );
 
   // );

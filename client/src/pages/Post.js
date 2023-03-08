@@ -5,8 +5,8 @@ import { useParams } from 'react-router-dom';
 import {
   AppBar, Button, Container, Toolbar, Typography, Stack, Box, Avatar, IconButton,
 } from '@mui/material';
-import MyPost from './MyPost';
-import OtherPost from './OtherPost';
+import MyPost from '../components/MyPost';
+import OtherPost from '../components/OtherPost';
 import { getGroupById, changeGroupMember } from '../api/groups';
 
 export default function Post({ name, userId }) {
