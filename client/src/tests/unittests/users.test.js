@@ -1,7 +1,7 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { getAllUsers, getUserById } from '../api/users';
-import { rootURL } from "../utils/utils";
+import { getAllUsers, getUserById } from '../../api/users';
+import { rootURL } from "../../utils/utils";
 
 // This sets the mock adapter on the default axios instance
 const mockAxios = new MockAdapter(axios);

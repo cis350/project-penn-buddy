@@ -8,7 +8,7 @@ import '@testing-library/jest-dom/extend-expect';
 import { render, screen, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderer from 'react-test-renderer';
-import App from '../App';
+import App from '../../App';
 
 test('test that Login button is in the document', () => {
   // render the component

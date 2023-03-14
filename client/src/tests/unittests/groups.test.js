@@ -1,7 +1,7 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { getGroupById } from '../api/groups';
-import { rootURL } from "../utils/utils";
+import { getGroupById } from '../../api/groups';
+import { rootURL } from "../../utils/utils";
 
 // This sets the mock adapter on the default axios instance
 const mockAxios = new MockAdapter(axios);
@@ -53,7 +53,7 @@ const allGroups = [
   },
 ];
 
-describe('the api returned correct data of group 1', () => {
+describe('the api returned correct data of group 3', () => {
   mockAxios.onGet(`${rootURL}/group/3`).reply(200, allGroups[2]);
   test('Group 3 is returned', async () => {
     const data = await getGroupById(3);

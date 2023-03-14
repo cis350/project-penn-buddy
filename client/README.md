@@ -3,6 +3,13 @@
 - cd to client and run `npm start` ([http://localhost:3000](http://localhost:3000))
 - cd to json-server and run `json-server --watch db.json` (As per configuration, this will be on [http://localhost:3004](http://localhost:3004))
 
+# Steps to Run Test
+
+- cd to client
+- For Unit Tests, run `npm run unittest`
+- For UI Tests, run `npm run uitest`
+- To stop Jest from listening to the JSON-server, use the following commands: `lsof -nP -iTCP:3004 | grep LISTEN` and then `sudo kill -9 63314` (Note that you have to change 63314 according to the number appeared after the first command)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
