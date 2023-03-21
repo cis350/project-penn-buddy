@@ -3,7 +3,7 @@
 /* eslint-disable import/no-named-as-default-member */
 /* eslint-disable import/no-named-as-default */
 import React, {
-  useState, useRef, useLocalStorage, useEffect,
+  useState, useRef, useEffect,
 } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import {
@@ -15,6 +15,9 @@ import HomePage from './pages/HomePage';
 import Navbar from './components/Navbar';
 import NavbarLogin from './components/NavbarLogin';
 import Post from './pages/Post';
+import Profile from './pages/Profile';
+import UserInfo from './components/UserInfo';
+import CreatePost from './pages/CreatePost';
 import { getAllUsers } from './api/users';
 
 function App() {
@@ -99,6 +102,9 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage name={name.current} />} />
           <Route path="/group/:groupId" element={<Post name={name.current} userId={userId} />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/newpost" element={<CreatePost />} />
+          <Route path="" element={<UserInfo />} />
         </Routes>
       </ThemeProvider>
     </BrowserRouter>
