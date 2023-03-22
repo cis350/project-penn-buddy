@@ -102,8 +102,8 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage name={name.current} />} />
           <Route path="/group/:groupId" element={<Post name={name.current} userId={userId} />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/newpost" element={<CreatePost />} />
+          <Route path="/profile" element={<Profile userId={userId} />} />
+          <Route path="/newpost" element={<CreatePost userId={userId} />} />
           <Route path="" element={<UserInfo />} />
         </Routes>
       </ThemeProvider>
