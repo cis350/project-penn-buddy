@@ -56,7 +56,7 @@ function App() {
 
   const [login, setLogin] = useState(false);
   const name = useRef('');
-  // Please change later. Now, we obtain userId from the name user inputs in
+  // Please change this part & useEffect later. Now, we obtain userId from the name user inputs in.
   const [userId, setUserId] = useState(0);
 
   useEffect(() => {
