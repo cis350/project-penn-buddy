@@ -19,6 +19,8 @@ import Profile from './pages/Profile';
 import UserInfo from './components/UserInfo';
 import CreatePost from './pages/CreatePost';
 import { getAllUsers } from './api/users';
+import ActivityFeed from './pages/ActivityFeed';
+import ActivityFeedPost from './components/ActivityFeedPost';
 
 function App() {
   const theme = createTheme({
@@ -105,6 +107,7 @@ function App() {
           <Route path="/profile" element={<Profile userId={userId} />} />
           <Route path="/newpost" element={<CreatePost userId={userId} />} />
           <Route path="" element={<UserInfo />} />
+          <Route path="/activityfeed" element={<ActivityFeed />} />
         </Routes>
       </ThemeProvider>
     </BrowserRouter>
