@@ -33,11 +33,6 @@ export default function ActivityFeedPost({
           <Grid container rowSpacing={3} columnSpacing={3}>
             <Grid item sx={{ flexGrow: 1 }}>
               <MemberCard key={ownerId} userId={ownerId} />
-              <Typography variant="h5" component="div" sx={{ mt: 2 }}>
-                Group ID:
-                {' '}
-                {groupId}
-              </Typography>
             </Grid>
             <Grid item xs={6} justify="flex-end">
               <Stack className="location" direction="row" spacing={3} alignItems="center">
