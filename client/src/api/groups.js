@@ -31,3 +31,15 @@ export const changeGroupMember = async (groupId, newGroup) => {
     console.log('error', err.message);
   }
 };
+
+/**
+ * Get all groups
+ */
+export const getAllGroups = async () => {
+  try {
+    const response = await axios.get(`${rootURL}/group`);
+    return response.data;
+  } catch (err) {
+    console.log('error', err.message);
+  }
+};

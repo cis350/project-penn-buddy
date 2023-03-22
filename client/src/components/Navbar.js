@@ -9,7 +9,7 @@ export default function Navbar() {
   const navigate = useNavigate();
 
   function handleActivity() {
-    navigate('/group/1');
+    navigate('/activityfeed');
   }
 
   // To view profile page, event handler
