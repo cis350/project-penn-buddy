@@ -5,7 +5,9 @@ import {
   AppBar, Button, Container, Toolbar, Typography, Stack, Box, Avatar, IconButton, Grid, Modal,
 } from '@mui/material';
 
-export default function UserInfo(userName, userEmail, userBio) {
+export default function UserInfo({
+  userEmail, userName, userMajor, userVenmo, userBio,
+}) {
   // implemented during Milestone 4, users will be able to edit their own profile
   function editField(field) {
     const textField = document.createElement('input');
@@ -42,14 +44,14 @@ export default function UserInfo(userName, userEmail, userBio) {
       />
       <Typography variant="body1" sx={{ textAlign: 'left' }}>
         <b>
-          value=
+          username=
           {userName}
         </b>
       </Typography>
       <Typography variant="body1" sx={{ textAlign: 'left' }}>
         <b>Email:</b>
         {' '}
-        value =
+        email =
         {' '}
         {userEmail}
         <button type="button" onClick={() => editField('email')}>Edit</button>

@@ -1,8 +1,13 @@
+/* eslint-disable no-console */
 import React, { useState, useEffect } from 'react';
 import UserInfo from '../components/UserInfo';
-import { getUserById } from "../api/users";
+import { getUserById } from '../api/users';
 
 function Profile({ userId }) {
+  if (userId === null) {
+    return <div>Loading...</div>;
+  }
+
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [userNumber, setUserNumber] = useState('');
@@ -13,7 +18,7 @@ function Profile({ userId }) {
 
   useEffect(() => {
     async function getProfileInfoWrapper() {
-      console.log('Hi');
+      console.log('UserId in Profile', userId);
       const response = await getUserById(userId);
       console.log('Profile Info', response);
       setUserName(response.name);
@@ -21,7 +26,7 @@ function Profile({ userId }) {
       setUserVenmo(response.venmo);
     }
     getProfileInfoWrapper();
-  }, [userName, userEmail, userVenmo]);
+  }, []);
 
   return (
     <div>
