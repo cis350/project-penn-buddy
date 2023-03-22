@@ -10,6 +10,10 @@ import OtherPost from '../components/OtherPost';
 import { getGroupById, changeGroupMember } from '../api/groups';
 
 export default function Post({ name, userId }) {
+  if (userId === null) {
+    return <div>Loading...</div>;
+  }
+
   const { groupId } = useParams();
   const [ownerId, setOwnerId] = useState(0);
   const [location, setLocation] = useState('');
@@ -72,6 +76,7 @@ export default function Post({ name, userId }) {
   useEffect(() => {
     // wrapper function
     async function getGroupByIdWrapper() {
+      console.log('UserId in Post', userId);
       const response = await getGroupById(groupId);
       // console.log('response', response);
       setGroup(response);

@@ -57,7 +57,7 @@ function App() {
   const [login, setLogin] = useState(false);
   const name = useRef('');
   // Please change this part & useEffect later. Now, we obtain userId from the name user inputs in.
-  const [userId, setUserId] = useState(0);
+  const [userId, setUserId] = useState(null);
 
   useEffect(() => {
     // wrapper function
@@ -65,7 +65,7 @@ function App() {
       const response = await getAllUsers();
       // console.log('User login', response.filter((item) => item.name === name.current)[0]);
       setUserId(response.filter((item) => item.name === name.current)[0].id);
-      // console.log('current userId', userId.current);
+      // console.log('current userId', response.filter((item) => item.name === name.current)[0].id);
     }
     // run the wrapper function
     getAllUsersWrapper();
@@ -102,8 +102,8 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage name={name.current} />} />
           <Route path="/group/:groupId" element={<Post name={name.current} userId={userId} />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/newpost" element={<CreatePost />} />
+          <Route path="/profile" element={<Profile userId={userId} />} />
+          <Route path="/newpost" element={<CreatePost userId={userId} />} />
           <Route path="" element={<UserInfo />} />
         </Routes>
       </ThemeProvider>

@@ -6,6 +6,7 @@
       "email": "nickywon@wharton.upenn.edu",
       "password": "nickypass123",
       "venmo": "Nicky_Wong",
+      "bio": "I love CIS350 !",
       "rating": 5
     },
     {
@@ -14,6 +15,7 @@
       "email": "grace@upenn.edu",
       "password": "grace555",
       "venmo": "Grace_grace",
+      "bio": "I love CIS350 !",
       "rating": 4.8
     },
     {
@@ -22,6 +24,7 @@
       "email": "iainli@gmail.com",
       "password": "iaianchenli",
       "venmo": "iain888",
+      "bio": "I love CIS350 !",
       "rating": 4.7
     },
     {
@@ -30,6 +33,7 @@
       "email": "lindashen7@gmail.com",
       "password": "linda777",
       "venmo": "Linda_Shen_7",
+      "bio": "I love CIS350 !",
       "rating": 4.9
     },
     {
@@ -38,6 +42,7 @@
       "email": "salamk@sas.upenn.edu",
       "password": "salam12345",
       "venmo": "Salam-Kar",
+      "bio": "I love CIS350 !",
       "rating": 4.2
     }
   ],

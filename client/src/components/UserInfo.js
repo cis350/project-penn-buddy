@@ -6,13 +6,9 @@ import {
 } from '@mui/material';
 
 export default function UserInfo({
-  userName, userEmail, userNumber, userYear,
-  userMajor, userVenmo, userBio,
+  userEmail, userName, userMajor, userVenmo, userBio,
 }) {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
+  // implemented during Milestone 4, users will be able to edit their own profile
   function editField(field) {
     const textField = document.createElement('input');
     const currentText = document.getElementById(`${field}-text`).textContent;
@@ -47,42 +43,57 @@ export default function UserInfo({
         src="/images/pfp.png"
       />
       <Typography variant="body1" sx={{ textAlign: 'left' }}>
-        <b>Linda Shen</b>
+        <b>
+          username=
+          {userName}
+        </b>
       </Typography>
       <Typography variant="body1" sx={{ textAlign: 'left' }}>
         <b>Email:</b>
         {' '}
-        lshen7@sas.upenn
+        email =
+        {' '}
+        {userEmail}
         <button type="button" onClick={() => editField('email')}>Edit</button>
       </Typography>
-      <Typography variant="body1" sx={{ textAlign: 'left' }}>
+      {/* <Typography variant="body1" sx={{ textAlign: 'left' }}>
         <b>Number:</b>
         {' '}
-        (315) 572 - 6114
+        value =
+        {' '}
+        {userNumber}
         <button type="button" onClick={() => editField('number')}>Edit</button>
-      </Typography>
-      <Typography variant="body1" sx={{ textAlign: 'left' }}>
+      </Typography> */}
+      {/* <Typography variant="body1" sx={{ textAlign: 'left' }}>
         <b>Year:</b>
         {' '}
-        Sophomore
+        value =
+        {' '}
+        {userYear}
         <button type="button" onClick={() => editField('year')}>Edit</button>
-      </Typography>
-      <Typography variant="body1" sx={{ textAlign: 'left' }}>
+      </Typography> */}
+      {/* <Typography variant="body1" sx={{ textAlign: 'left' }}>
         <b>Major:</b>
         {' '}
-        Econ/CS
+        value =
+        {' '}
+        {userMajor}
         <button type="button" onClick={() => editField('major')}>Edit</button>
-      </Typography>
-      <Typography variant="body1" sx={{ textAlign: 'left' }}>
+      </Typography> */}
+      {/* <Typography variant="body1" sx={{ textAlign: 'left' }}>
         <b>Venmo:</b>
         {' '}
-        @lindashen
+        value =
+        {' '}
+        {userVenmo}
         <button type="button" onClick={() => editField('venmo')}>Edit</button>
-      </Typography>
+      </Typography> */}
       <Typography variant="body1" sx={{ textAlign: 'left' }}>
         <b>Bio:</b>
         {' '}
-        I love to eat and sleep!
+        value =
+        {' '}
+        {userBio}
         <button type="button" onClick={() => editField('bio')}>Edit</button>
       </Typography>
       <Button
