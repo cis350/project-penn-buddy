@@ -6,9 +6,11 @@ import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import DirectionsCarFilledOutlinedIcon from '@mui/icons-material/DirectionsCarFilledOutlined';
 import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import MemberCard from './MemberCard';
 
 export default function ActivityFeedPost({
   ownerId, location, departDate, modeTransport, departPlace,
+  maxCapacity, currCapacity, currMemberIds, groupId,
 }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -29,14 +31,15 @@ export default function ActivityFeedPost({
           }}
         >
           <Grid container rowSpacing={3} columnSpacing={3}>
-            <Grid item>
-              <Avatar sx={{ width: 100, height: 100 }} src="/images/pfp.png" />
+            <Grid item sx={{ flexGrow: 1 }}>
+              <MemberCard key={ownerId} userId={ownerId} />
               <Typography variant="h5" component="div" sx={{ mt: 2 }}>
-                {ownerId}
+                Group ID:
+                {' '}
+                {groupId}
               </Typography>
             </Grid>
-
-            <Grid item xs={6}>
+            <Grid item xs={6} justify="flex-end">
               <Stack className="location" direction="row" spacing={3} alignItems="center">
                 <Stack spacing={1}>
                   <Button
@@ -47,6 +50,20 @@ export default function ActivityFeedPost({
                     View Post Details
                   </Button>
                 </Stack>
+              </Stack>
+              <Stack spacing={1}>
+                <Typography variant="h6">
+                  {currCapacity}
+                  /
+                  {maxCapacity}
+                  {' '}
+                  people
+                </Typography>
+                <Typography variant="h7">
+                  {maxCapacity - currCapacity}
+                  {' '}
+                  spots remaining
+                </Typography>
               </Stack>
             </Grid>
 
