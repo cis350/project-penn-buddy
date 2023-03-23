@@ -10,6 +10,7 @@ import userEvent from '@testing-library/user-event';
 import renderer from 'react-test-renderer';
 import { MemoryRouter } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
+import NavbarLogin from '../../components/NavbarLogin';
 
 test('test that Activity Feed is in the document', () => {
   // render the component
@@ -93,17 +94,17 @@ test('test user flow type name -> hit Login', async () => {
   expect(screen.getByText(/My History/)).toBeInTheDocument();
 });
 
-// test('test user flow type name -> hit Login', async () => {
+// test('test navigation navbar login', async () => {
 //   // render the component
 //   const { getByLabelText } = render(
 //     <MemoryRouter>
-//       <Navbar />
+//       <NavbarLogin />
 //     </MemoryRouter>,
 //   );
 //   // fire the user event
 //   // find the textbox and type atlanta into it
 //   // click on the OK button
-//   await userEvent.click(screen.getByText('Chat Room'));
+//   await userEvent.click(screen.getByText('Home'));
 //   // check that My Profile is now is the document
-//   expect(screen.getByText(/All Messages/)).toBeInTheDocument();
+//   expect(screen.getByText(/Register/)).toBeInTheDocument();
 // });

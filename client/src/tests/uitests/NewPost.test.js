@@ -29,3 +29,23 @@ describe('test that destination is in document', () => {
     expect(dest).toBeInTheDocument();
   });
 });
+
+describe('test that time box is in document', () => {
+  test('test that time box is in the document', async () => {
+    // render the component
+    const { getHistory } = render(
+      <MemoryRouter>
+        <NewPost userId={1} />
+      </MemoryRouter>,
+    );
+    // assert that the element is in the document
+    const dest = screen.getByTestId("Time");
+    expect(dest).toBeInTheDocument();
+    const dest2 = screen.getByTestId("Date");
+    expect(dest2).toBeInTheDocument();
+    const dest3 = screen.getByTestId("Destination");
+    expect(dest3).toBeInTheDocument();
+    const dest4 = screen.getByTestId("Departure");
+    expect(dest4).toBeInTheDocument();
+  });
+});

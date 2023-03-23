@@ -48,7 +48,7 @@ export default function Post({ name, userId }) {
     };
     setCurrMemberIds(currMemberIds.filter((item) => item !== userId));
     setCurrCapacity(currCapacity - 1);
-    console.log('modifiedData', modifiedData);
+    // console.log('modifiedData', modifiedData);
     modifyGroupMemberOnServer(modifiedData);
   };
 
@@ -69,7 +69,7 @@ export default function Post({ name, userId }) {
     };
     setCurrMemberIds([...currMemberIds, userId]);
     setCurrCapacity(currCapacity + 1);
-    console.log('modifiedData', modifiedData);
+    // console.log('modifiedData', modifiedData);
     modifyGroupMemberOnServer(modifiedData);
   };
 

@@ -22,7 +22,7 @@ import { getAllUsers } from './api/users';
 import ActivityFeed from './pages/ActivityFeed';
 import History from './pages/History';
 import ActivityFeedPost from './components/ActivityFeedPost';
-
+import AboutUs from './pages/AboutUs';
 import Chatroom from './pages/Chatroom';
 
 function App() {
@@ -71,14 +71,14 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(firstName, lastName, email, password);
+    // console.log(firstName, lastName, email, password);
   };
 
   useEffect(() => {
     // wrapper function
     async function getAllUsersWrapper() {
       const response = await getAllUsers();
-      console.log('User login', response.filter((item) => item.name === name.current)[0]);
+      // console.log('User login', response.filter((item) => item.name === name.current)[0]);
       setUserId(response.filter((item) => item.name === name.current)[0].id);
       // console.log('current userId', response.filter((item) => item.name === name.current)[0].id);
     }
@@ -106,6 +106,7 @@ function App() {
                 label="First Name"
                 variant="filled"
                 required
+                data-testid="First Name"
                 onChange={handleChangeName}
               />
               <TextField
@@ -150,6 +151,9 @@ function App() {
               </Button>
             </div>
           </Stack>
+          <Routes>
+            <Route path="/aboutus" element={<AboutUs />} />
+          </Routes>
         </ThemeProvider>
       </BrowserRouter>
     );
@@ -164,6 +168,7 @@ function App() {
           <Route path="/" element={<HomePage name={name.current} />} />
           <Route path="/group/:groupId" element={<Post name={name.current} userId={userId} />} />
           <Route path="/profile" element={<Profile userId={userId} />} />
+          <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/newpost" element={<CreatePost userId={userId} />} />
           <Route path="/History" element={<History userId={userId} />} />
           <Route path="/activityfeed" element={<ActivityFeed />} />

@@ -55,6 +55,23 @@ test('test that How We Work button is in the document', () => {
   expect(okButton).toBeInTheDocument();
 });
 
+describe('test that box is in document', () => {
+  test('test that box is in the document', async () => {
+    // render the component
+    const { getHistory } = render(
+      <App />,
+    );
+    // assert that the element is in the document
+    const dest = screen.getByTestId("First Name");
+    expect(dest).toBeInTheDocument();
+    // const dest2 = screen.getByTestId("Date");
+    // expect(dest2).toBeInTheDocument();
+    // const dest3 = screen.getByTestId("Destination");
+    // expect(dest3).toBeInTheDocument();
+    // const dest4 = screen.getByTestId("Departure");
+    // expect(dest4).toBeInTheDocument();
+  });
+});
 // test('test that First Name is in the document', () => {
 //   // render the component
 //   const { getByLabelText } = render(<App />);

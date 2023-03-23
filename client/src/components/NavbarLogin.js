@@ -12,6 +12,10 @@ export default function NavbarLogin() {
     navigate('/');
   }
 
+  function handleAboutUs() {
+    navigate('/aboutus');
+  }
+
   return (
     <AppBar
       className="appbar"
@@ -37,7 +41,7 @@ export default function NavbarLogin() {
         </Typography>
         <Stack direction="row" spacing={6}>
           <Button color="inherit" sx={{ color: 'black' }} onClick={handleHome}>Home</Button>
-          <Button color="inherit" sx={{ color: 'black' }}>About Us</Button>
+          <Button color="inherit" sx={{ color: 'black' }} onClick={handleAboutUs}>About Us</Button>
           <Button color="inherit" sx={{ color: 'black' }}>How We Work</Button>
         </Stack>
       </Toolbar>
