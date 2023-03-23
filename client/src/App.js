@@ -141,7 +141,7 @@ function App() {
             </form>
             <div>
               <Button type="submit" variant="contained" color="primary" onClick={handleClickLogin}>
-                login
+                Login
               </Button>
             </div>
             <div>
@@ -166,7 +166,6 @@ function App() {
           <Route path="/profile" element={<Profile userId={userId} />} />
           <Route path="/newpost" element={<CreatePost userId={userId} />} />
           <Route path="/History" element={<History userId={userId} />} />
-          <Route path="" element={<UserInfo />} />
           <Route path="/activityfeed" element={<ActivityFeed />} />
           <Route path="/chatroom" element={<Chatroom />} />
         </Routes>

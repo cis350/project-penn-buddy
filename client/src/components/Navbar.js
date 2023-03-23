@@ -24,10 +24,10 @@ export default function Navbar() {
 
   function handleActivityCR() {
     navigate('/chatroom');
+  }
 
   function handleHistory() {
     navigate('/History');
-
   }
 
   return (
