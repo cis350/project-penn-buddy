@@ -3,7 +3,7 @@
 /* eslint-disable import/no-named-as-default-member */
 /* eslint-disable import/no-named-as-default */
 import React, {
-  useState, useRef, useLocalStorage, useEffect,
+  useState, useRef, useEffect,
 } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import {
@@ -15,7 +15,12 @@ import HomePage from './pages/HomePage';
 import Navbar from './components/Navbar';
 import NavbarLogin from './components/NavbarLogin';
 import Post from './pages/Post';
+import Profile from './pages/Profile';
+import UserInfo from './components/UserInfo';
+import CreatePost from './pages/CreatePost';
 import { getAllUsers } from './api/users';
+import ActivityFeed from './pages/ActivityFeed';
+import ActivityFeedPost from './components/ActivityFeedPost';
 
 import Chatroom from './pages/Chatroom';
 
@@ -55,8 +60,8 @@ function App() {
 
   const [login, setLogin] = useState(false);
   const name = useRef('');
-  // Please change later. Now, we obtain userId from the name user inputs in
-  const [userId, setUserId] = useState(0);
+  // Please change this part & useEffect later. Now, we obtain userId from the name user inputs in.
+  const [userId, setUserId] = useState(null);
 
   useEffect(() => {
     // wrapper function
@@ -64,7 +69,7 @@ function App() {
       const response = await getAllUsers();
       console.log('User login', response.filter((item) => item.name === name.current)[0]);
       setUserId(response.filter((item) => item.name === name.current)[0].id);
-      // console.log('current userId', userId.current);
+      // console.log('current userId', response.filter((item) => item.name === name.current)[0].id);
     }
     // run the wrapper function
     getAllUsersWrapper();
@@ -101,12 +106,14 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage name={name.current} />} />
           <Route path="/group/:groupId" element={<Post name={name.current} userId={userId} />} />
+          <Route path="/profile" element={<Profile userId={userId} />} />
+          <Route path="/newpost" element={<CreatePost userId={userId} />} />
+          <Route path="" element={<UserInfo />} />
+          <Route path="/activityfeed" element={<ActivityFeed />} />
           <Route path="/chatroom" element={<Chatroom />} />
-          {/* Check if we need to use switch */}
         </Routes>
       </ThemeProvider>
     </BrowserRouter>
-
   );
 
   // );

@@ -9,7 +9,17 @@ export default function Navbar() {
   const navigate = useNavigate();
 
   function handleActivity() {
-    navigate('/group/1');
+    navigate('/activityfeed');
+  }
+
+  // To view profile page, event handler
+  function handleProfile() {
+    navigate('/profile');
+  }
+
+  // To create a new post
+  function handleNewPost() {
+    navigate('/newpost');
   }
 
   function handleActivityCR() {
@@ -47,13 +57,14 @@ export default function Navbar() {
             {/* </Link> */}
           </Button>
           <Button color="inherit" sx={{ color: 'black' }}>My History</Button>
-          <Button color="inherit" sx={{ color: '#0096FF' }}>Create Post</Button>
+          <Button color="inherit" sx={{ color: '#0096FF' }} onClick={handleNewPost}>Create Post</Button>
           <Button
             color="inherit"
             sx={{ color: 'white', backgroundColor: '#EA3C3C' }}
             style={{
               minWidth: '110px',
             }}
+            onClick={handleProfile}
           >
             My Profile
           </Button>

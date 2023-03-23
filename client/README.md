@@ -1,4 +1,4 @@
-# Steps to Run Penn Buddy
+cd cli# Steps to Run Penn Buddy
 
 - cd to client and run `npm start` ([http://localhost:3000](http://localhost:3000))
 - cd to json-server and run `json-server --watch db.json` (As per configuration, this will be on [http://localhost:3004](http://localhost:3004))
