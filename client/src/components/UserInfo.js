@@ -6,21 +6,23 @@ import {
 } from '@mui/material';
 
 export default function UserInfo({
-  userEmail, userName, userMajor, userVenmo, userBio,
+  userEmail, userName, userMajor, userVenmo, userYear, userNumber, userBio,
 }) {
   // implemented during Milestone 4, users will be able to edit their own profile
-  function editField(field) {
-    const textField = document.createElement('input');
-    const currentText = document.getElementById(`${field}-text`).textContent;
-    textField.value = currentText;
-    textField.addEventListener('blur', () => {
-      const updatedText = textField.value;
-      document.getElementById(`${field}-text`).textContent = updatedText;
-      textField.parentNode.replaceChild(document.createTextNode(updatedText), textField);
-    });
-    document.getElementById(`${field}-text`).parentNode.replaceChild(textField, document.getElementById(`${field}-text`));
-  }
+  // function editField(field) {
+  //  const textField = document.createElement('input');
+  //  const currentText = document.getElementById(`${field}-text`).textContent;
+  //  textField.value = currentText;
+  //  textField.addEventListener('blur', () => {
+  //    const updatedText = textField.value;
+  //    document.getElementById(`${field}-text`).textContent = updatedText;
+  //    textField.parentNode.replaceChild(document.createTextNode(updatedText), textField);
+  //  });
+  // eslint-disable-next-line max-len
+  //  document.getElementById(`${field}-text`).parentNode.replaceChild(textField, document.getElementById(`${field}-text`));
+  // }
 
+  // milestone 4 logistics
   const navigate = useNavigate();
   function handleSignOut() {
     navigate('/');
@@ -43,58 +45,46 @@ export default function UserInfo({
         src="/images/pfp.png"
       />
       <Typography variant="body1" sx={{ textAlign: 'left' }}>
-        <b>
-          username=
-          {userName}
-        </b>
+        <b>Username:</b>
+        {' '}
+        {userName}
+        {/* <button type="button" onClick={() => editField('email')}>Edit</button> */}
       </Typography>
       <Typography variant="body1" sx={{ textAlign: 'left' }}>
         <b>Email:</b>
         {' '}
-        email =
-        {' '}
         {userEmail}
-        <button type="button" onClick={() => editField('email')}>Edit</button>
+        {/* <button type="button" onClick={() => editField('email')}>Edit</button> */}
       </Typography>
-      {/* <Typography variant="body1" sx={{ textAlign: 'left' }}>
+      <Typography variant="body1" sx={{ textAlign: 'left' }}>
         <b>Number:</b>
         {' '}
-        value =
-        {' '}
         {userNumber}
-        <button type="button" onClick={() => editField('number')}>Edit</button>
-      </Typography> */}
-      {/* <Typography variant="body1" sx={{ textAlign: 'left' }}>
+        {/* <button type="button" onClick={() => editField('number')}>Edit</button> */}
+      </Typography>
+      <Typography variant="body1" sx={{ textAlign: 'left' }}>
         <b>Year:</b>
         {' '}
-        value =
-        {' '}
         {userYear}
-        <button type="button" onClick={() => editField('year')}>Edit</button>
-      </Typography> */}
-      {/* <Typography variant="body1" sx={{ textAlign: 'left' }}>
+        {/* <button type="button" onClick={() => editField('year')}>Edit</button> */}
+      </Typography>
+      <Typography variant="body1" sx={{ textAlign: 'left' }}>
         <b>Major:</b>
         {' '}
-        value =
-        {' '}
         {userMajor}
-        <button type="button" onClick={() => editField('major')}>Edit</button>
-      </Typography> */}
-      {/* <Typography variant="body1" sx={{ textAlign: 'left' }}>
+        {/* <button type="button" onClick={() => editField('major')}>Edit</button> */}
+      </Typography>
+      <Typography variant="body1" sx={{ textAlign: 'left' }}>
         <b>Venmo:</b>
         {' '}
-        value =
-        {' '}
         {userVenmo}
-        <button type="button" onClick={() => editField('venmo')}>Edit</button>
-      </Typography> */}
+        {/* <button type="button" onClick={() => editField('venmo')}>Edit</button> */}
+      </Typography>
       <Typography variant="body1" sx={{ textAlign: 'left' }}>
         <b>Bio:</b>
         {' '}
-        value =
-        {' '}
         {userBio}
-        <button type="button" onClick={() => editField('bio')}>Edit</button>
+        {/* <button type="button" onClick={() => editField('bio')}>Edit</button> */}
       </Typography>
       <Button
         onClick={() => handleSignOut()}
