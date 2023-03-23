@@ -57,3 +57,17 @@ test('test that Mode of Transportation is in the document', () => {
   // assert that the element is in the document
   expect(text).toBeInTheDocument();
 });
+
+describe('test that back button is in document', () => {
+  test('test that back button is in the document', async () => {
+    // render the component
+    const { getPost } = render(
+      <MemoryRouter initialEntries={[`/group/3`]}>
+        <Post name="Nicky" userId={null} />
+      </MemoryRouter>,
+    );
+    // assert that the element is in the document
+    const backButton = screen.getByText(/Loading/);
+    expect(backButton).toBeInTheDocument();
+  });
+});

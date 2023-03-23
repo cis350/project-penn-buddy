@@ -23,6 +23,8 @@ import ActivityFeed from './pages/ActivityFeed';
 import History from './pages/History';
 import ActivityFeedPost from './components/ActivityFeedPost';
 
+import Chatroom from './pages/Chatroom';
+
 function App() {
   const theme = createTheme({
     palette: {
@@ -76,7 +78,7 @@ function App() {
     // wrapper function
     async function getAllUsersWrapper() {
       const response = await getAllUsers();
-      // console.log('User login', response.filter((item) => item.name === name.current)[0]);
+      console.log('User login', response.filter((item) => item.name === name.current)[0]);
       setUserId(response.filter((item) => item.name === name.current)[0].id);
       // console.log('current userId', response.filter((item) => item.name === name.current)[0].id);
     }
@@ -166,13 +168,11 @@ function App() {
           <Route path="/History" element={<History userId={userId} />} />
           <Route path="" element={<UserInfo />} />
           <Route path="/activityfeed" element={<ActivityFeed />} />
+          <Route path="/chatroom" element={<Chatroom />} />
         </Routes>
       </ThemeProvider>
     </BrowserRouter>
-
   );
-
-  // );
 }
 
 export default App;

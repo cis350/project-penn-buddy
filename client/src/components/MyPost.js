@@ -1,8 +1,9 @@
+/* eslint-disable react/jsx-no-bind */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable import/no-named-as-default */
 
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   AppBar, Button, Container, Toolbar, Typography, Stack, Box, Avatar, IconButton,
 } from '@mui/material';
@@ -13,6 +14,10 @@ export default function MyPost({
   ownerId, location, departDate, modeTransport,
   departPlace, maxCapacity, currCapacity, currMemberIds, groupId, userId, group,
 }) {
+  const navigate = useNavigate();
+  function handleClickBack() {
+    navigate('/activityfeed');
+  }
   return (
     <div>
       <AppBar
@@ -29,7 +34,7 @@ export default function MyPost({
         <Toolbar>
           <ArrowBackIcon color="secondary" />
           <Box sx={{ flexGrow: 1 }}>
-            <Button variant="text" color="secondary" sx={{ flex: 1 }}>Back to Activity Feed</Button>
+            <Button variant="text" color="secondary" sx={{ flex: 1 }} onClick={handleClickBack}>Back to Activity Feed</Button>
           </Box>
           <Stack direction="row" spacing={3}>
             <Button variant="contained" color="warning">Delete Group</Button>

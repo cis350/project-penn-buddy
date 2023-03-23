@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-bind */
 import React from 'react';
 import {
   Container, Box, Avatar, Typography, Grid, Stack, Button,
@@ -6,15 +7,19 @@ import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import DirectionsCarFilledOutlinedIcon from '@mui/icons-material/DirectionsCarFilledOutlined';
 import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import { useNavigate } from 'react-router-dom';
 import MemberCard from './MemberCard';
 
 export default function ActivityFeedPost({
   ownerId, location, departDate, modeTransport, departPlace,
   maxCapacity, currCapacity, currMemberIds, groupId,
 }) {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const navigate = useNavigate();
+
+  function handleOpen() {
+    navigate(`/group/${groupId}`);
+  }
+
   return (
     <div>
       <Container maxWidth="sm">
