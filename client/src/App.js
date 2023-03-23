@@ -17,6 +17,8 @@ import NavbarLogin from './components/NavbarLogin';
 import Post from './pages/Post';
 import { getAllUsers } from './api/users';
 
+import Chatroom from './pages/Chatroom';
+
 function App() {
   const theme = createTheme({
     palette: {
@@ -60,7 +62,7 @@ function App() {
     // wrapper function
     async function getAllUsersWrapper() {
       const response = await getAllUsers();
-      // console.log('User login', response.filter((item) => item.name === name.current)[0]);
+      console.log('User login', response.filter((item) => item.name === name.current)[0]);
       setUserId(response.filter((item) => item.name === name.current)[0].id);
       // console.log('current userId', userId.current);
     }
@@ -99,6 +101,8 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage name={name.current} />} />
           <Route path="/group/:groupId" element={<Post name={name.current} userId={userId} />} />
+          <Route path="/chatroom" element={<Chatroom />} />
+          {/* Check if we need to use switch */}
         </Routes>
       </ThemeProvider>
     </BrowserRouter>
