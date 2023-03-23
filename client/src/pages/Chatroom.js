@@ -108,6 +108,9 @@ export default function Chatroom() {
 
   return (
     <ThemeProvider theme={theme}>
+      <div>
+        <h1 style={{ textAlign: 'center', color: '#0096FF' }}>Chat Room</h1>
+      </div>
       <AppBar
         className="postbar"
         position="static"

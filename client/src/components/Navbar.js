@@ -26,6 +26,10 @@ export default function Navbar() {
     navigate('/chatroom');
   }
 
+  function handleHistory() {
+    navigate('/History');
+  }
+
   return (
     <AppBar
       className="appbar"
@@ -52,11 +56,9 @@ export default function Navbar() {
         <Stack direction="row" spacing={6}>
           <Button color="inherit" sx={{ color: 'black' }} onClick={handleActivity}>Activity Feed</Button>
           <Button color="inherit" sx={{ color: 'black' }} onClick={handleActivityCR}>
-            {/* <Link to="/chatroom"> */}
             Chat Room
-            {/* </Link> */}
           </Button>
-          <Button color="inherit" sx={{ color: 'black' }}>My History</Button>
+          <Button color="inherit" sx={{ color: 'black' }} onClick={handleHistory}>My History</Button>
           <Button color="inherit" sx={{ color: '#0096FF' }} onClick={handleNewPost}>Create Post</Button>
           <Button
             color="inherit"

@@ -20,8 +20,9 @@ import UserInfo from './components/UserInfo';
 import CreatePost from './pages/CreatePost';
 import { getAllUsers } from './api/users';
 import ActivityFeed from './pages/ActivityFeed';
+import History from './pages/History';
 import ActivityFeedPost from './components/ActivityFeedPost';
-
+import AboutUs from './pages/AboutUs';
 import Chatroom from './pages/Chatroom';
 
 function App() {
@@ -61,13 +62,23 @@ function App() {
   const [login, setLogin] = useState(false);
   const name = useRef('');
   // Please change this part & useEffect later. Now, we obtain userId from the name user inputs in.
-  const [userId, setUserId] = useState(null);
+  const [userId, setUserId] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [pennId, setPennId] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // console.log(firstName, lastName, email, password);
+  };
 
   useEffect(() => {
     // wrapper function
     async function getAllUsersWrapper() {
       const response = await getAllUsers();
-      console.log('User login', response.filter((item) => item.name === name.current)[0]);
+      // console.log('User login', response.filter((item) => item.name === name.current)[0]);
       setUserId(response.filter((item) => item.name === name.current)[0].id);
       // console.log('current userId', response.filter((item) => item.name === name.current)[0].id);
     }
@@ -90,14 +101,64 @@ function App() {
           <CssBaseline />
           <NavbarLogin />
           <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>
-            <TextField id="standard-required" label="Name" variant="outlined" onChange={handleChangeName} />
-            <Button variant="contained" color="primary" onClick={handleClickLogin}>Login</Button>
+            <form onSubmit={handleSubmit}>
+              <TextField
+                label="First Name"
+                variant="filled"
+                required
+                data-testid="First Name"
+                onChange={handleChangeName}
+              />
+              <TextField
+                label="Last Name"
+                variant="filled"
+                required
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+              />
+              <TextField
+                label="Penn ID"
+                variant="filled"
+                required
+                value={pennId}
+                onChange={(e) => setPennId(e.target.value)}
+              />
+              <TextField
+                label="Email"
+                variant="filled"
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <TextField
+                label="Password"
+                variant="filled"
+                type="password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </form>
+            <div>
+              <Button type="submit" variant="contained" color="primary" onClick={handleClickLogin}>
+                Login
+              </Button>
+            </div>
+            <div>
+              <Button type="submit" variant="contained" color="primary" onClick={handleClickLogin}>
+                Register
+              </Button>
+            </div>
           </Stack>
+          <Routes>
+            <Route path="/aboutus" element={<AboutUs />} />
+          </Routes>
         </ThemeProvider>
       </BrowserRouter>
-
     );
   }
+
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
@@ -107,8 +168,9 @@ function App() {
           <Route path="/" element={<HomePage name={name.current} />} />
           <Route path="/group/:groupId" element={<Post name={name.current} userId={userId} />} />
           <Route path="/profile" element={<Profile userId={userId} />} />
+          <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/newpost" element={<CreatePost userId={userId} />} />
-          <Route path="" element={<UserInfo />} />
+          <Route path="/History" element={<History userId={userId} />} />
           <Route path="/activityfeed" element={<ActivityFeed />} />
           <Route path="/chatroom" element={<Chatroom />} />
         </Routes>
