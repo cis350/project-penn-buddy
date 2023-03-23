@@ -27,8 +27,7 @@
     "uitest": "json-server --watch src/json-server/db.json --port 3004 & jest uitests/* --coverage",
     "unittest": "jest unittests/* --coverage",
     "eject": "react-scripts eject",
-    "lint": "eslint \"**/*.{js,jsx}\" --ignore-pattern *.test.js --ignore-pattern *.test.jsx",
-    "json-server": "json-server --watch src/json-server/db.json --port 8000"
+    "lint": "eslint \"**/*.{js,jsx}\" --ignore-pattern *.test.js --ignore-pattern *.test.jsx"
   },
   "eslintConfig": {
     "extends": [
