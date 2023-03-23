@@ -58,9 +58,9 @@ function App() {
   });
 
   const [login, setLogin] = useState(false);
-  const name = useRef('1');
+  const name = useRef('');
   // Please change this part & useEffect later. Now, we obtain userId from the name user inputs in.
-  const [userId, setUserId] = useState(null);
+  const [userId, setUserId] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -104,8 +104,7 @@ function App() {
                 label="First Name"
                 variant="filled"
                 required
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
+                onChange={handleChangeName}
               />
               <TextField
                 label="Last Name"
@@ -160,11 +159,11 @@ function App() {
         <CssBaseline />
         <Navbar />
         <Routes>
-          <Route path="/" element={<HomePage name={firstName + lastName} />} />
+          <Route path="/" element={<HomePage name={name.current} />} />
           <Route path="/group/:groupId" element={<Post name={name.current} userId={userId} />} />
           <Route path="/profile" element={<Profile userId={userId} />} />
           <Route path="/newpost" element={<CreatePost userId={userId} />} />
-          <Route path="/History" element={<History id={name} />} />
+          <Route path="/History" element={<History userId={userId} />} />
           <Route path="" element={<UserInfo />} />
           <Route path="/activityfeed" element={<ActivityFeed />} />
         </Routes>
