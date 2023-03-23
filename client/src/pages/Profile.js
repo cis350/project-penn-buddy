@@ -24,6 +24,10 @@ function Profile({ userId }) {
       setUserName(response.name);
       setUserEmail(response.email);
       setUserVenmo(response.venmo);
+      setUserNumber(response.number);
+      setUserYear(response.year);
+      setUserBio(response.bio);
+      setUserMajor(response.major);
     }
     getProfileInfoWrapper();
   }, []);
