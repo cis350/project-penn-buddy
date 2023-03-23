@@ -12,9 +12,8 @@ import {
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SendIcon from '@mui/icons-material/Send';
 
-import { getChatroomById } from '../api/chat';
+import { getChatroomById, modifyText } from '../api/chat';
 import MyText from '../components/MyText';
-import { modifyText } from '../api/chat';
 
 // import SendMessage from './chat/SendMessage';
 // import { getAllChats } from '../api/chat';
@@ -50,29 +49,28 @@ export default function Chatroom() {
     // console.log('value', e.target.value);
   };
 
-  // I NEED TO GETCH id, and currentMembersIds array TOO 
-  // AND REPLACE THE WHOLE CHAT
-  const handleSendText = (e) => {
-    // update the login state
-    const modifiedTextData = [];
-    text.forEach(element => {
-      modifiedTextData.push(element);
-    })
-    // console.log('new message', message);
-    const modifiedData = {
-      senderId,
-      content: message.current,
-    }
-    modifiedTextData.push(modifiedData);
-    // console.log('modifiedTextData', modifiedTextData);
-    modifyTextOnServer(modifiedTextData, currentMembersIds);
-  };
-
   const modifyTextOnServer = async (textData, membersData) => {
     // console.log('text input', message);
     const response = await modifyText(1, textData, membersData);
   };
 
+  // I NEED TO GETCH id, and currentMembersIds array TOO
+  // AND REPLACE THE WHOLE CHAT
+  const handleSendText = (e) => {
+    // update the login state
+    const modifiedTextData = [];
+    text.forEach((element) => {
+      modifiedTextData.push(element);
+    });
+    // console.log('new message', message);
+    const modifiedData = {
+      senderId,
+      content: message.current,
+    };
+    modifiedTextData.push(modifiedData);
+    // console.log('modifiedTextData', modifiedTextData);
+    modifyTextOnServer(modifiedTextData, currentMembersIds);
+  };
 
   //   const classes = useStyles();
   const theme = createTheme({

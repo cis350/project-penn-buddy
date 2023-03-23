@@ -115,8 +115,6 @@ function App() {
       </ThemeProvider>
     </BrowserRouter>
   );
-
-  // );
 }
 
 export default App;

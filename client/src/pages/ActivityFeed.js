@@ -15,7 +15,7 @@ function ActivityFeed() {
       const response = await getAllGroups();
       // console.log('response', response);
       setGroups(response);
-      console.log('all groups', response);
+      // console.log('all groups', response);
       // setOwnerId(response.ownerId);
       // setLocation(response.location);
       // setDepartDate(response.departDate);
