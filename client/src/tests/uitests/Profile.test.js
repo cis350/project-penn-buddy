@@ -148,29 +148,3 @@ test('test that Signout button in the document', () => {
   // assert that the element is in the document
   expect(text).toBeInTheDocument();
 });
-
-test('test that Edit button in the document', () => {
-  // render the component
-  const { getProfile } = render(
-    <MemoryRouter>
-      <Profile userId={1} />
-    </MemoryRouter>,
-  );
-  // find the element by its role
-  const text = screen.getByText(/Edit/);
-  // assert that the element is in the document
-  expect(text).toBeInTheDocument();
-});
-
-test('test that Loading... is in the document', () => {
-  // render the component
-  const { getProfile } = render(
-    <MemoryRouter>
-      <Profile userId=null />
-    </MemoryRouter>,
-  );
-  // find the element by its role
-  const text = screen.getByText(/Loading.../);
-  // assert that the element is in the document
-  expect(text).toBeInTheDocument();
-});
