@@ -3,7 +3,7 @@ import React from 'react';
 import {
   AppBar, Button, Toolbar, Typography, Stack,
 } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -20,6 +20,10 @@ export default function Navbar() {
   // To create a new post
   function handleNewPost() {
     navigate('/newpost');
+  }
+
+  function handleActivityCR() {
+    navigate('/chatroom');
   }
 
   return (
@@ -47,7 +51,11 @@ export default function Navbar() {
         </Typography>
         <Stack direction="row" spacing={6}>
           <Button color="inherit" sx={{ color: 'black' }} onClick={handleActivity}>Activity Feed</Button>
-          <Button color="inherit" sx={{ color: 'black' }}>Chat Room</Button>
+          <Button color="inherit" sx={{ color: 'black' }} onClick={handleActivityCR}>
+            {/* <Link to="/chatroom"> */}
+            Chat Room
+            {/* </Link> */}
+          </Button>
           <Button color="inherit" sx={{ color: 'black' }}>My History</Button>
           <Button color="inherit" sx={{ color: '#0096FF' }} onClick={handleNewPost}>Create Post</Button>
           <Button

@@ -70,11 +70,12 @@
       "modeTransport": "Uber/Lyft XL",
       "departPlace": "The Radian",
       "maxCapacity": 4,
-      "currCapacity": 3,
+      "currCapacity": 4,
       "currMemberIds": [
         1,
         2,
-        3
+        3,
+        0
       ]
     },
     {
@@ -104,6 +105,47 @@
         2,
         3,
         1
+      ]
+    }
+  ],
+  "text": [
+    {
+      "senderId": 2,
+      "chatId": 1,
+      "content": "Hi Nicky! This is Grace and I am also traveling to Newark today. Would you like to join my group with another person?"
+    },
+    {
+      "senderId": 1,
+      "chatId": 1,
+      "content": "Sure! That sounds great, thanks"
+    },
+    {
+      "senderId": 1,
+      "chatId": 1,
+      "content": "When are we leaving?"
+    },
+    {
+      "senderId": 2,
+      "chatId": 1,
+      "content": "Let's leave at around 6.00pm"
+    }
+  ],
+  "Chatroom": [
+    {
+      "id": 1,
+      "texts": [
+        {
+          "senderId": 2,
+          "content": "hello"
+        },
+        {
+          "senderId": 1,
+          "content": "My name is Grace!"
+        }
+      ],
+      "currentMembersIds": [
+        1,
+        2
       ]
     }
   ]
