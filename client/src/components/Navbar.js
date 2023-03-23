@@ -22,6 +22,10 @@ export default function Navbar() {
     navigate('/newpost');
   }
 
+  function handleHistory() {
+    navigate('/History');
+  }
+
   return (
     <AppBar
       className="appbar"
@@ -48,7 +52,7 @@ export default function Navbar() {
         <Stack direction="row" spacing={6}>
           <Button color="inherit" sx={{ color: 'black' }} onClick={handleActivity}>Activity Feed</Button>
           <Button color="inherit" sx={{ color: 'black' }}>Chat Room</Button>
-          <Button color="inherit" sx={{ color: 'black' }}>My History</Button>
+          <Button color="inherit" sx={{ color: 'black' }} onClick={handleHistory}>My History</Button>
           <Button color="inherit" sx={{ color: '#0096FF' }} onClick={handleNewPost}>Create Post</Button>
           <Button
             color="inherit"

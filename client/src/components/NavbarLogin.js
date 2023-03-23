@@ -39,15 +39,6 @@ export default function NavbarLogin() {
           <Button color="inherit" sx={{ color: 'black' }} onClick={handleHome}>Home</Button>
           <Button color="inherit" sx={{ color: 'black' }}>About Us</Button>
           <Button color="inherit" sx={{ color: 'black' }}>How We Work</Button>
-          <Button
-            color="inherit"
-            sx={{ color: 'white', backgroundColor: '#EA3C3C' }}
-            style={{
-              minWidth: '110px',
-            }}
-          >
-            Register
-          </Button>
         </Stack>
       </Toolbar>
     </AppBar>
