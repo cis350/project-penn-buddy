@@ -1,5 +1,4 @@
 // HTTP client
-import { ContactsOutlined } from "@material-ui/icons";
 import axios from "axios";
 import { rootURL } from "../utils/utils";
 /**
