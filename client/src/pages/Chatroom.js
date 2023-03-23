@@ -32,7 +32,7 @@ export default function Chatroom() {
   useEffect(() => {
     async function getChatroomByIdWrapper() {
       const response = await getChatroomById(1);
-      console.log('Chat by id', response);
+      // console.log('Chat by id', response);
       setText(response.texts);
       setCurrentMembersIds(response.currentMembersIds);
       return response;
@@ -40,14 +40,14 @@ export default function Chatroom() {
     getChatroomByIdWrapper();
   });
 
-  console.log('currentext', text);
-  console.log('text length', text.length);
-  console.log('currentmems', currentMembersIds);
+  // console.log('currentext', text);
+  // console.log('text length', text.length);
+  // console.log('currentmems', currentMembersIds);
 
   // input change event handler
   const handleInputText = (e) => {
     message.current = e.target.value; // update the reference
-    console.log('value', e.target.value);
+    // console.log('value', e.target.value);
   };
 
   // I NEED TO GETCH id, and currentMembersIds array TOO 
@@ -58,18 +58,18 @@ export default function Chatroom() {
     text.forEach(element => {
       modifiedTextData.push(element);
     })
-    console.log('new message', message);
+    // console.log('new message', message);
     const modifiedData = {
       senderId,
       content: message.current,
     }
     modifiedTextData.push(modifiedData);
-    console.log('modifiedTextData', modifiedTextData);
+    // console.log('modifiedTextData', modifiedTextData);
     modifyTextOnServer(modifiedTextData, currentMembersIds);
   };
 
   const modifyTextOnServer = async (textData, membersData) => {
-    console.log('text input', message);
+    // console.log('text input', message);
     const response = await modifyText(1, textData, membersData);
   };
 

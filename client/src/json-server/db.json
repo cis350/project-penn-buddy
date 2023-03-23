@@ -120,27 +120,7 @@
         },
         {
           "senderId": 1,
-          "content": "how are you"
-        },
-        {
-          "senderId": 1,
-          "content": "hello my name is graceeeee"
-        },
-        {
-          "senderId": 1,
-          "content": "grace hihihihi"
-        },
-        {
-          "senderId": 1,
-          "content": "grace hihihihi"
-        },
-        {
-          "senderId": 1,
-          "content": "try"
-        },
-        {
-          "senderId": 1,
-          "content": "hi"
+          "content": "My name is Grace!"
         }
       ],
       "currentMembersIds": [

@@ -42,7 +42,7 @@ describe('test that all enter a message is in document', () => {
       </MemoryRouter>,
     );
     // assert that the element is in the document
-    const enter = screen.getByLabelText('Enter a message');
+    const enter = screen.getByLabelText('Enter a message...');
     expect(enter).toBeInTheDocument();
   });
 });

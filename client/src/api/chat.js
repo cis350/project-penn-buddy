@@ -20,9 +20,9 @@ export const getChatroomById = async (id) => {
  */
 export const modifyText = async (id, texts, currentMembersIds) => {
     try {
-      console.log('tried adding into chat', id);
-      console.log('tried adding text', texts);
-      console.log('tried adding currMembs', currentMembersIds);
+    //   console.log('tried adding into chat', id);
+    //   console.log('tried adding text', texts);
+    //   console.log('tried adding currMembs', currentMembersIds);
     //   this allows you to change Chatroom to ONLY include a text object -> WRONG
     //   const response = await axios.put(`${rootURL}/Chatroom/${id}`, newText);
       const response = await axios.put(`${rootURL}/Chatroom/${id}`, {id, texts, currentMembersIds});
@@ -30,7 +30,7 @@ export const modifyText = async (id, texts, currentMembersIds) => {
       // OR JUST REPLACE THE ARRAYYYY
       return response.data;
     } catch (err) {
-      console.log('error', err.message);
+    //   console.log('error', err.message);
     }
   };
   
