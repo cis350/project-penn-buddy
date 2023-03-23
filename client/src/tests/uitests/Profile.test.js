@@ -36,7 +36,7 @@ test('test that Welcome in the document 2', () => {
   // render the component
   const { getProfile } = render(
     <MemoryRouter>
-      <Profile />
+      <Profile userId={1} />
     </MemoryRouter>,
   );
   // find the element by its role
@@ -49,7 +49,7 @@ test('test that Username in the document', () => {
   // render the component
   const { getProfile } = render(
     <MemoryRouter>
-      <Profile />
+      <Profile userId={1} />
     </MemoryRouter>,
   );
   // find the element by its role
@@ -61,8 +61,8 @@ test('test that Username in the document', () => {
 test('test that Email in the document', () => {
   // render the component
   const { getProfile } = render(
-    <MemoryRouter initialEntries={[`/user/1`]}>
-      <Profile name="Nicky" userId={1} />
+    <MemoryRouter>
+      <Profile userId={1} />
     </MemoryRouter>,
   );
     // find the element by its role
@@ -74,8 +74,8 @@ test('test that Email in the document', () => {
 test('test that Number in the document', () => {
   // render the component
   const { getProfile } = render(
-    <MemoryRouter initialEntries={[`/user/1`]}>
-      <Profile name="Nicky" userId={1} />
+    <MemoryRouter>
+      <Profile userId={1} />
     </MemoryRouter>,
   );
     // find the element by its role
@@ -87,8 +87,8 @@ test('test that Number in the document', () => {
 test('test that Year in the document', () => {
   // render the component
   const { getProfile } = render(
-    <MemoryRouter initialEntries={[`/user/1`]}>
-      <Profile name="Nicky" userId={1} />
+    <MemoryRouter>
+      <Profile userId={1} />
     </MemoryRouter>,
   );
     // find the element by its role
@@ -100,8 +100,8 @@ test('test that Year in the document', () => {
 test('test that Major in the document', () => {
   // render the component
   const { getProfile } = render(
-    <MemoryRouter initialEntries={[`/user/1`]}>
-      <Profile name="Nicky" userId={1} />
+    <MemoryRouter>
+      <Profile userId={1} />
     </MemoryRouter>,
   );
     // find the element by its role
@@ -114,7 +114,7 @@ test('test that Venmo in the document', () => {
   // render the component
   const { getProfile } = render(
     <MemoryRouter>
-      <Profile />
+      <Profile userId={1} />
     </MemoryRouter>,
   );
     // find the element by its role
@@ -127,7 +127,7 @@ test('test that Bio in the document', () => {
   // render the component
   const { getProfile } = render(
     <MemoryRouter>
-      <Profile />
+      <Profile userId={1} />
     </MemoryRouter>,
   );
     // find the element by its role
@@ -140,7 +140,7 @@ test('test that Signout button in the document', () => {
   // render the component
   const { getProfile } = render(
     <MemoryRouter>
-      <Profile />
+      <Profile userId={1} />
     </MemoryRouter>,
   );
   // find the element by its role
@@ -153,7 +153,7 @@ test('test that Edit button in the document', () => {
   // render the component
   const { getProfile } = render(
     <MemoryRouter>
-      <Profile />
+      <Profile userId={1} />
     </MemoryRouter>,
   );
   // find the element by its role
@@ -165,8 +165,8 @@ test('test that Edit button in the document', () => {
 test('test that Loading... is in the document', () => {
   // render the component
   const { getProfile } = render(
-    <MemoryRouter initialEntries={[null]}>
-      <Profile />
+    <MemoryRouter>
+      <Profile userId=null />
     </MemoryRouter>,
   );
   // find the element by its role
