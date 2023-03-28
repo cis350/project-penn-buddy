@@ -1,18 +1,20 @@
 /* eslint-disable no-console */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import {
   AppBar, Button, Container, Toolbar, Typography, Stack, Box, Avatar, IconButton,
 } from '@mui/material';
-import MyPost from '../components/MyPost';
 import OtherPost from '../components/OtherPost';
-import { getGroupById, changeGroupMember } from '../api/groups';
+import MyPost from '../components/MyPost';
+import { getGroupById, changeGroup, deleteGroupById } from '../api/groups';
 
 export default function Post({ name, userId }) {
   if (userId === null) {
     return <div>Loading...</div>;
   }
+
+  const navigate = useNavigate();
 
   const { groupId } = useParams();
   const [ownerId, setOwnerId] = useState(0);
@@ -26,9 +28,18 @@ export default function Post({ name, userId }) {
   const [group, setGroup] = useState([]);
   const [membership, setMembership] = useState(currMemberIds.includes(userId));
 
-  const modifyGroupMemberOnServer = async (data) => {
+  const modifyGroupOnServer = async (data) => {
     // console.log('membership at modification', membership);
-    const response = await changeGroupMember(groupId, data);
+    const response = await changeGroup(groupId, data);
+  };
+
+  const deleteGroupOnServer = async () => {
+    const response = await deleteGroupById(groupId);
+    navigate('/activityfeed');
+  };
+
+  const handleDeleteGroup = (e) => {
+    deleteGroupOnServer();
   };
 
   const handleLeaveGroup = (e) => {
@@ -49,7 +60,7 @@ export default function Post({ name, userId }) {
     setCurrMemberIds(currMemberIds.filter((item) => item !== userId));
     setCurrCapacity(currCapacity - 1);
     // console.log('modifiedData', modifiedData);
-    modifyGroupMemberOnServer(modifiedData);
+    modifyGroupOnServer(modifiedData);
   };
 
   const handleJoinGroup = (e) => {
@@ -70,7 +81,7 @@ export default function Post({ name, userId }) {
     setCurrMemberIds([...currMemberIds, userId]);
     setCurrCapacity(currCapacity + 1);
     // console.log('modifiedData', modifiedData);
-    modifyGroupMemberOnServer(modifiedData);
+    modifyGroupOnServer(modifiedData);
   };
 
   useEffect(() => {
@@ -107,6 +118,7 @@ export default function Post({ name, userId }) {
         groupId={groupId}
         userId={userId}
         group={group}
+        handleDeleteGroup={handleDeleteGroup}
       />
     );
   }
@@ -128,6 +140,5 @@ export default function Post({ name, userId }) {
         handleJoinGroup={handleJoinGroup}
       />
     </div>
-
   );
 }
