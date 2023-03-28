@@ -22,26 +22,50 @@ test('test that New Post is in the document', () => {
   // render the component
   const { getNewPost } = render(
     <MemoryRouter initialEntries={[`/user/1`]}>
-      <CreatePost name="Nicky" userId={1} />
+      <CreatePost userId={1} />
     </MemoryRouter>,
   );
     // find the element by its role
-  const text = screen.getByText(/New Post/);
+  const text = screen.getByText(/Create Post/);
   // assert that the element is in the document
   expect(text).toBeInTheDocument();
 });
 
-test('test that statement is in the document', () => {
+test('test Find is in the document', () => {
   // render the component
   const { getNewPost } = render(
     <MemoryRouter initialEntries={[`/user/1`]}>
-      <CreatePost name="Nicky" userId={1} />
+      <CreatePost userId={1} />
     </MemoryRouter>,
   );
-  // find the element by its role
-  const text = screen.getByText(/Find your Travel Buddies!/);
+    // find the element by its role
+  const text = screen.getByText(/Find/);
   // assert that the element is in the document
   expect(text).toBeInTheDocument();
 });
 
-// do UI testing for text boxes
+test('test that Null is in the document', () => {
+  // render the component
+  const { getNewPost } = render(
+    <MemoryRouter initialEntries={[`/user/1`]}>
+      <CreatePost userId={null} />
+    </MemoryRouter>,
+  );
+    // find the element by its role
+  const text = screen.getByText(/Loading/);
+  // assert that the element is in the document
+  expect(text).toBeInTheDocument();
+});
+
+test('test that Form is in the document', () => {
+  // render the component
+  const { getNewPost } = render(
+    <MemoryRouter initialEntries={[`/user/1`]}>
+      <CreatePost userId={1} />
+    </MemoryRouter>,
+  );
+    // find the element by its role
+  const text = screen.getByTestId(/Form/);
+  // assert that the element is in the document
+  expect(text).toBeInTheDocument();
+});
