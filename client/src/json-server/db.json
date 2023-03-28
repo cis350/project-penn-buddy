@@ -38,16 +38,14 @@
   ],
   "user": [
     {
-      "id": 1,
-      "name": "Nicky",
-      "email": "nickywon@wharton.upenn.edu",
-      "number": "1234567891",
-      "year": "Junior",
-      "password": "nickypass123",
-      "major": "CIS",
-      "venmo": "Nicky_Wong",
-      "bio": "I love CIS350 !",
-      "rating": 5
+      "userName": "Nicky",
+      "userEmail": "nickywon@wharton.upenn.edu",
+      "userNumber": "1234567891",
+      "userYear": "Junior",
+      "userMajor": "CIS",
+      "userVenmo": "Nicky_Wong",
+      "userBio": "I love CIS350 !",
+      "id": 1
     },
     {
       "id": 2,
@@ -74,16 +72,15 @@
       "rating": 4.7
     },
     {
-      "id": 4,
       "name": "Linda",
       "email": "lshen7@sas.upenn.edu",
-      "number": "1234567891",
-      "year": "Sophomore",
-      "password": "linda777",
-      "major": "CIS",
-      "venmo": "Linda_Shen_7",
-      "bio": "I love CIS350 !",
-      "rating": 4.9
+      "number": "3155726114",
+      "year": "Juniorrrrrrrnskdnkaon",
+      "major": "Econ CIS",
+      "venmo": "@lindashen",
+      "bio": "bio bio bio love cis350 penn buddy yes!!!!",
+      "username": "LINDAAA SHENNNN",
+      "id": 4
     },
     {
       "id": 5,
@@ -122,10 +119,9 @@
       "modeTransport": "Uber/Lyft XL",
       "departPlace": "Lauder",
       "maxCapacity": 4,
-      "currCapacity": 2,
+      "currCapacity": 1,
       "currMemberIds": [
-        3,
-        4
+        3
       ]
     },
     {
@@ -177,6 +173,18 @@
         {
           "senderId": 1,
           "content": "My name is Grace!"
+        },
+        {
+          "senderId": 1,
+          "content": "Hello this is Linda :)"
+        },
+        {
+          "senderId": 1,
+          "content": "What's up!"
+        },
+        {
+          "senderId": 1,
+          "content": "hello"
         }
       ],
       "currentMembersIds": [

@@ -36,6 +36,7 @@ function Profile({ userId }) {
     <div>
       <h1 style={{ textAlign: 'center', color: '#0096FF' }}>Welcome to Your Profile!</h1>
       <UserInfo
+        userId={userId}
         userName={userName}
         userEmail={userEmail}
         userNumber={userNumber}

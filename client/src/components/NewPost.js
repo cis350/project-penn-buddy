@@ -14,12 +14,10 @@ function Post() {
   const [departure, setDeparture] = useState('');
   const [transportation, setTransportation] = useState('');
 
-  const handleNewPost = (e) => {
-    e.preventDefault();
-    // console.log(time, date, destination, departure, transportation);
-  };
-
   const navigate = useNavigate();
+  function handleNewPost() {
+    navigate('/activityfeed');
+  }
 
   return (
     <div>
