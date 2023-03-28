@@ -107,7 +107,7 @@
       "modeTransport": "Uber/Lyft XL",
       "departPlace": "The Radian",
       "maxCapacity": 4,
-      "currCapacity": 4,
+      "currCapacity": 3,
       "currMemberIds": [
         1,
         2,
