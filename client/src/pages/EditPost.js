@@ -7,7 +7,7 @@ import {
 } from '@mui/material';
 import MyPost from '../components/MyPost';
 import OtherPost from '../components/OtherPost';
-import { getGroupById, changeGroup, deleteGroupById } from '../api/groups';
+import { getGroupById, changeGroup } from '../api/groups';
 
 export default function EditPost({ userId }) {
   if (userId === null) {
@@ -79,7 +79,7 @@ export default function EditPost({ userId }) {
       >
         Edit Post
       </Typography>
-      <form onSubmit={handleSubmit}>
+      <form data-testid="Form" onSubmit={handleSubmit}>
         <div style={{
           display: 'flex',
           flexDirection: 'column',
@@ -122,7 +122,7 @@ export default function EditPost({ userId }) {
             required
             value={departPlace}
             onChange={(e) => setDepartPlace(e.target.value)}
-            data-testid="Departure"
+            data-testid="Depart Place"
             style={{ marginBottom: '16px', width: '400px' }}
           />
           <TextField
@@ -131,6 +131,7 @@ export default function EditPost({ userId }) {
             required
             value={maxCapacity}
             onChange={(e) => setMaxCapacity(e.target.value)}
+            data-testid="Max Capacity"
             style={{ marginBottom: '16px', width: '400px' }}
           />
           <Button
@@ -138,6 +139,7 @@ export default function EditPost({ userId }) {
             color="secondary"
             style={{ backgroundColor: '#EA3C3C', color: 'white', width: '200px' }}
             type="submit"
+            data-testid="Post Button"
             onClick={handleEditPost}
           >
             Post

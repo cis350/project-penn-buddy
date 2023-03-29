@@ -33,6 +33,18 @@ export const changeGroup = async (groupId, newGroup) => {
 };
 
 /**
+ * Create a group by groupId
+ */
+export const createGroup = async (newGroup) => {
+  try {
+    const response = await axios.post(`${rootURL}/group`, newGroup);
+    return response.data;
+  } catch (err) {
+    console.log('error', err.message);
+  }
+};
+
+/**
  * Get all groups
  */
 export const getAllGroups = async () => {
