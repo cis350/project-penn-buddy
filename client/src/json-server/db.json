@@ -43,11 +43,11 @@
       "email": "nickywon@wharton.upenn.edu",
       "number": "1234567891",
       "year": "Junior",
-      "password": "nickypass123",
       "major": "CIS",
       "venmo": "Nicky_Wong",
       "bio": "I love CIS350 !",
-      "rating": 5
+      "rating": 5,
+      "password": "nickypass123"
     },
     {
       "id": 2,
@@ -55,11 +55,11 @@
       "email": "grace@upenn.edu",
       "number": "1234567891",
       "year": "Sophomore",
-      "password": "grace555",
-      "major": "CIS",
-      "venmo": "Grace_grace",
-      "bio": "I love CIS350 !",
-      "rating": 4.8
+      "major": "Computer Science",
+      "venmo": "grace_venmoooo",
+      "bio": "I love CIS350 so so much!!!!",
+      "rating": 4.8,
+      "password": "grace555"
     },
     {
       "id": 3,
@@ -67,26 +67,14 @@
       "email": "iainli@gmail.com",
       "number": "1234567891",
       "year": "Sophomore",
-      "password": "iaianchenli",
       "major": "CIS",
       "venmo": "iain888",
       "bio": "I love CIS350 !",
-      "rating": 4.7
+      "rating": 4.7,
+      "password": "iaianchenli"
     },
     {
       "id": 4,
-      "name": "Linda",
-      "email": "lshen7@sas.upenn.edu",
-      "number": "1234567891",
-      "year": "Sophomore",
-      "password": "linda777",
-      "major": "CIS",
-      "venmo": "Linda_Shen_7",
-      "bio": "I love CIS350 !",
-      "rating": 4.9
-    },
-    {
-      "id": 5,
       "name": "Salam",
       "email": "salamk@sas.upenn.edu",
       "number": "1234567891",
@@ -96,6 +84,18 @@
       "venmo": "Salam-Kar",
       "bio": "I love CIS350 !",
       "rating": 4.2
+    },
+    {
+      "id": 5,
+      "name": "Linda",
+      "email": "lshen7@seas.upenn.edu",
+      "number": "1234567891",
+      "year": "Sophomore",
+      "major": "CIS/ECON",
+      "venmo": "linda-shen",
+      "bio": "I love CIS350 !",
+      "rating": 4,
+      "password": "lkalala"
     }
   ],
   "group": [
@@ -110,8 +110,8 @@
       "currCapacity": 3,
       "currMemberIds": [
         1,
-        2,
-        3
+        3,
+        4,
       ]
     },
     {
@@ -122,25 +122,11 @@
       "modeTransport": "Uber/Lyft XL",
       "departPlace": "Lauder",
       "maxCapacity": 4,
-      "currCapacity": 2,
-      "currMemberIds": [
-        3,
-        4
-      ]
-    },
-    {
-      "id": 3,
-      "ownerId": 2,
-      "location": "JFK Airport",
-      "departDate": "2023-03-14T15:00:00.001Z",
-      "modeTransport": "Uber/Lyft",
-      "departPlace": "Hill",
-      "maxCapacity": 3,
       "currCapacity": 3,
       "currMemberIds": [
-        2,
         3,
-        1
+        4,
+        2
       ]
     }
   ],
@@ -177,6 +163,10 @@
         {
           "senderId": 1,
           "content": "My name is Grace!"
+        },
+        {
+          "senderId": 1,
+          "content": "Let's carpool!"
         }
       ],
       "currentMembersIds": [

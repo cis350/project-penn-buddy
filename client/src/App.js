@@ -25,6 +25,7 @@ import ActivityFeedPost from './components/ActivityFeedPost';
 import AboutUs from './pages/AboutUs';
 import Chatroom from './pages/Chatroom';
 import EditPost from './pages/EditPost';
+import EditProfile from './pages/EditProfile';
 
 function App() {
   const theme = createTheme({
@@ -175,6 +176,7 @@ function App() {
           <Route path="/activityfeed" element={<ActivityFeed />} />
           <Route path="/chatroom" element={<Chatroom />} />
           <Route path="/editpost/:groupId" element={<EditPost userId={userId} />} />
+          <Route path="/editprofile" element={<EditProfile userId={userId} />} />
         </Routes>
       </ThemeProvider>
     </BrowserRouter>
