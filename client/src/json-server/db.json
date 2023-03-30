@@ -105,14 +105,13 @@
       "location": "PHL Airport",
       "departDate": "2023-08-29 09:12:00",
       "modeTransport": "Uber/Lyft XL",
-      "departPlace": "Harnwell",
-      "maxCapacity": "5",
-      "currCapacity": 4,
+      "departPlace": "The Radian",
+      "maxCapacity": "4",
+      "currCapacity": 3,
       "currMemberIds": [
         1,
         3,
         4,
-        2
       ]
     },
     {
