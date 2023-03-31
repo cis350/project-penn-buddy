@@ -32,21 +32,17 @@ export default function MyText({ text }) {
   // create a list of elements
   // consider using the student table
 
-  const makeTexts = () => {
-    const textArray = [];
-    console.log('make text', text);
-    text.forEach((element) => {
-      // textArray.push(<textRow props={element} />)
-      // text.push(textRow(element.content));
-      textArray.push(element.content);
-    });
-    console.log('text array', textArray);
-    return textArray;
-  };
+  // const makeTexts = () => {
+  //   const textArray = [];
+  //   console.log('make text', text);
+  //   text.forEach((element) => {
+  //     textArray.push(element.content);
+  //   });
+  //   console.log('text array', textArray);
+  //   return textArray;
+  // };
 
-  const texts = makeTexts();
-  console.log('line 46', texts);
-  console.log('norm text', text);
+  // const texts = makeTexts();
   return (
     <div>
       {

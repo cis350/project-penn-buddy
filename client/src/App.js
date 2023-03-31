@@ -172,7 +172,7 @@ function App() {
           <Route path="/newpost" element={<CreatePost userId={userId} />} />
           <Route path="/History" element={<History userId={userId} />} />
           <Route path="/activityfeed" element={<ActivityFeed />} />
-          <Route path="/chatroom" element={<Chatroom />} />
+          <Route path="/chatroom" element={<Chatroom userId={userId} name={name.current} lastName={lastName} />} />
         </Routes>
       </ThemeProvider>
     </BrowserRouter>

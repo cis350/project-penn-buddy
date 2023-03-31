@@ -12,37 +12,67 @@ import {
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SendIcon from '@mui/icons-material/Send';
 
-import { getChatroomById, modifyText } from '../api/chat';
+import { getChatroomById, modifyText, getAllChatroom } from '../api/chat';
 import MyText from '../components/MyText';
+import { getUserById } from '../api/users';
 
 // import SendMessage from './chat/SendMessage';
 // import { getAllChats } from '../api/chat';
 
-export default function Chatroom() {
+export default function Chatroom({ userId, name, lastName }) {
 // for backend mocking
   // try hardcoding chatId for now bc we only have one chat
   // const { chatId } = useParams();
-  const senderId = 1;
   const [text, setText] = useState([]);
+  const [chatrooms, setChatrooms] = useState([]);
   const [currentMembersIds, setCurrentMembersIds] = useState([]);
+  const [currMembersName, setCurrMembersName] = useState([]);
+
   const message = useRef('');
   const listNum = useRef(1);
+  const currChatId = useRef(1);
+  const fullName = name.concat(lastName);
+
+  // const [currChatId, setCurrChatId] = React.useState(1);
+
   // next time, I have to enter id as a prop, depending on where user clicks
   useEffect(() => {
-    async function getChatroomByIdWrapper() {
-      const response = await getChatroomById(1);
-      // console.log('Chat by id', response);
-      setText(response.texts);
-      setCurrentMembersIds(response.currentMembersIds);
-      return response;
+    async function getAllChatroomWrapper() {
+      const response = await getAllChatroom();
+      setChatrooms(response);
+      const r2 = await getChatroomById(currChatId.current);
+      // console.log('second response', r2);
+      setText(r2.texts);
+      setCurrentMembersIds(r2.currentMembersIds);
+      setCurrMembersName(r2.currentMembersIds);
+      // //   return response;
+      // console.log('text', text);
+      // console.log('current members id', currentMembersIds);
+      // console.log('all cr', response);
     }
-    getChatroomByIdWrapper();
+    // async function convertIdToName() {
+    //   console.log('curr mem id', currMembersName);
+    //   currentMembersIds.forEach((id) => {
+    //     const response = await getUserById(id);
+    //     // console.log('members name ', user.user.name);
+    //     console.log('user', user);
+    //     currMembersName.push(user.name);
+    //   });
+    //   console.log('group members', currMembersName);
+    // };
+    getAllChatroomWrapper();
+    // convertIdToName();
   });
 
-  // console.log('currentext', text);
-  // console.log('text length', text.length);
-  // console.log('currentmems', currentMembersIds);
+  const handleChangeChat = (c) => {
+    // console.log('chat id is ', c.c.id);
+    currChatId.current = c.c.id;
+  };
 
+  // when i click on the button, I want to get its chatId
+  // from there I fetch from the database all of the data
+
+  // display texts accordingly
   // input change event handler
   const handleInputText = (e) => {
     message.current = e.target.value; // update the reference
@@ -51,26 +81,31 @@ export default function Chatroom() {
 
   const modifyTextOnServer = async (textData, membersData) => {
     // console.log('text input', message);
-    const response = await modifyText(1, textData, membersData);
+    // console.log('mod text from ', currChatId);
+    const response = await modifyText(currChatId, textData, membersData);
   };
 
   // I NEED TO GETCH id, and currentMembersIds array TOO
   // AND REPLACE THE WHOLE CHAT
   const handleSendText = (e) => {
     // update the login state
+    // console.log('clicked');
     const modifiedTextData = [];
     text.forEach((element) => {
+      // console.log('add text', element);
       modifiedTextData.push(element);
     });
     // console.log('new message', message);
     const modifiedData = {
-      senderId,
+      userId,
       content: message.current,
     };
     modifiedTextData.push(modifiedData);
     // console.log('modifiedTextData', modifiedTextData);
     modifyTextOnServer(modifiedTextData, currentMembersIds);
   };
+
+  // convertIdToName();
 
   //   const classes = useStyles();
   const theme = createTheme({
@@ -150,10 +185,7 @@ export default function Chatroom() {
           container
           component={Paper}
           style={{
-            color: 'white',
-            backgroundColor: '#0096FF',
-            padding: '5px',
-            height: '780px',
+            color: 'white', backgroundColor: '#0096FF', padding: '5px', height: '780px',
           }}
         >
           <Grid item xs={3}>
@@ -162,9 +194,9 @@ export default function Chatroom() {
             <List style={{ color: 'white', backgroundColor: '#0096FF' }}>
               <ListItem button key="GraceThang">
                 <ListItemIcon>
-                  <Avatar alt="Grace Thang" src="chat/profileimg/grace.JPG" />
+                  <Avatar alt={fullName} src="chat/profileimg/grace.JPG" />
                 </ListItemIcon>
-                <ListItemText primary="Grace Thang" />
+                <ListItemText primary={fullName} />
               </ListItem>
             </List>
             <Divider />
@@ -173,32 +205,62 @@ export default function Chatroom() {
             </Grid>
             <Divider />
             {/* FOR CREATING THE CHAT LIST */}
+            {/* create a for loop to create the list */}
             <List style={{ color: 'white', backgroundColor: '#0096FF' }}>
-              <ListItem button key="NickyWong" style={{ color: 'white', backgroundColor: '#F0F0F0' }}>
+              {
+              chatrooms.map((c, index) => (
+                <ListItem
+                  button
+                  onClick={() => handleChangeChat({ c })}
+                >
+                  {c.id}
+                </ListItem>
+              ))
+            }
+              {/* <ListItemText>
+                {
+              currMembersName.map((n, index) => {
+                `${n},`;
+              })
+            }
+              </ListItemText> */}
+            </List>
+
+            {/* create a function that can fetch names of users
+            in the chat */}
+            {/* instead of manually saying grace, have it pop up name of userId */}
+
+            {/* <List style={{ color: 'white', backgroundColor: '#0096FF' }}>
+              <ListItem
+                button
+                id="1"
+                style={{ color: 'white', backgroundColor: '#F0F0F0' }}
+                onClick={handleChangeChat(id)}
+              >
                 <ListItemIcon>
                   <Avatar alt="Nicky Wong" src="/images/nick.jpeg" />
                 </ListItemIcon>
-                <ListItemText primary="Nicky Wong" style={{ color: 'black' }}>Nicky Wong</ListItemText>
+                <ListItemText primary="Nicky Wong" style={{ color: 'black' }}>
+                Nicky Wong</ListItemText>
                 <ListItemText secondary="online" align="right" />
               </ListItem>
-              <ListItem button key="Iain Li">
+              <ListItem button id="2">
                 <ListItemIcon>
                   <Avatar alt="Iain Li" src="chat/profileimg/iain.png" />
                 </ListItemIcon>
                 <ListItemText primary="Iain Li">Iain Li</ListItemText>
               </ListItem>
-              <ListItem button key="LindaShen">
+              <ListItem button od="3">
                 <ListItemIcon>
                   <Avatar alt="Linda Shen" src="chat/profileimg/linda.jpeg" />
                 </ListItemIcon>
                 <ListItemText primary="Linda Shen">Linda Shen</ListItemText>
               </ListItem>
             </List>
+          */}
           </Grid>
           <Grid item xs={9}>
-            {/* <List className={classes.messageArea}> */}
             <List style={{ color: 'white', backgroundColor: '#F0F0F0', height: '680px' }}>
-              {/* TEXT LIST OF TEXTS -> how do I make it retrievable instead? */}
               <MyText text={text} />
             </List>
             <Divider />

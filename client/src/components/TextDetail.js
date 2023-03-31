@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 
 import {
@@ -11,8 +11,7 @@ import {
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SendIcon from '@mui/icons-material/Send';
 
-export default function TextDetail({content}) {
-
+export default function TextDetail({ content }) {
   return (
     <div>
       <ListItem key="1">

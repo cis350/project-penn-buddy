@@ -171,17 +171,75 @@
       "id": 1,
       "texts": [
         {
-          "senderId": 2,
-          "content": "hello"
+          "senderId": 1,
+          "content": "hello how are you"
         },
         {
           "senderId": 1,
-          "content": "My name is Grace!"
+          "content": "bokoshipdo"
+        },
+        {
+          "userId": "",
+          "content": "hello my name is "
+        },
+        {
+          "userId": 2,
+          "content": "Hello im grace"
         }
       ],
       "currentMembersIds": [
         1,
         2
+      ]
+    },
+    {
+      "id": 2,
+      "texts": [
+        {
+          "senderId": 3,
+          "content": "welcome to chatroom 2"
+        },
+        {
+          "senderId": 1,
+          "content": "I like cis 3500!"
+        },
+        {
+          "senderId": 1,
+          "content": "hello"
+        },
+        {
+          "userId": 1,
+          "content": "where do we go"
+        }
+      ],
+      "currentMembersIds": [
+        1,
+        3
+      ]
+    },
+    {
+      "id": 3,
+      "texts": [
+        {
+          "senderId": 4,
+          "content": "welcome to chatroom 3"
+        },
+        {
+          "senderId": 1,
+          "content": "chat with Linda"
+        },
+        {
+          "senderId": 1,
+          "content": "hello i like eatibng"
+        },
+        {
+          "senderId": 1,
+          "content": "but bno it iw"
+        }
+      ],
+      "currentMembersIds": [
+        1,
+        4
       ]
     }
   ]
