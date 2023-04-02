@@ -8,6 +8,8 @@ import {
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import PostDetail from './PostDetail';
+import { createNewChatroom, getChatroomById } from '../api/chat';
+import { getGroupById } from '../api/groups';
 
 export default function OtherPost({
   ownerId, location, departDate, modeTransport,
@@ -15,6 +17,20 @@ export default function OtherPost({
   groupId, userId, group, handleLeaveGroup, handleJoinGroup,
 }) {
   const navigate = useNavigate();
+  const handleChatroom = async (e) => {
+    console.log('create chatroom clicks');
+    const newTextData = [];
+    // create currMembersId
+    const r1 = await getGroupById(groupId);
+    const memberIds = r1.currMemberIds;
+    console.log('group members in new chat', memberIds);
+    // check if the chatroom with said groupId already exists or not
+    const existChat = await getChatroomById(groupId);
+    if (typeof existChat === 'undefined') {
+      const response = await createNewChatroom(groupId, memberIds);
+    }
+    navigate('/chatroom');
+  };
   function handleClickBack() {
     navigate('/activityfeed');
   }
@@ -38,7 +54,12 @@ export default function OtherPost({
           </Box>
           <Stack direction="row" spacing={3}>
             {
-              (currMemberIds.includes(userId)) ? <Button variant="contained" color="warning" onClick={handleLeaveGroup}>Leave Group</Button>
+              (currMemberIds.includes(userId)) ? (
+                <Stack direction="row" spacing={3}>
+                  <Button variant="contained" color="warning" onClick={handleLeaveGroup}>Leave Group</Button>
+                  <Button variant="contained" color="secondary" onClick={handleChatroom}>Go to Chatroom</Button>
+                </Stack>
+              )
                 : ((currCapacity < maxCapacity) && <Button variant="contained" color="secondary" onClick={handleJoinGroup}>Join Group</Button>)
             }
           </Stack>

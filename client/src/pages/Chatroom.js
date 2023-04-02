@@ -92,17 +92,38 @@ export default function Chatroom({ userId, name, lastName }) {
     // console.log('clicked');
     const modifiedTextData = [];
     text.forEach((element) => {
-      // console.log('add text', element);
       modifiedTextData.push(element);
     });
-    // console.log('new message', message);
     const modifiedData = {
       userId,
       content: message.current,
     };
     modifiedTextData.push(modifiedData);
-    // console.log('modifiedTextData', modifiedTextData);
     modifyTextOnServer(modifiedTextData, currentMembersIds);
+  };
+
+  const handleExitChatroom = (e) => {
+    console.log('entered');
+    console.log('chatrooms', chatrooms);
+    const modifiedChatData = [];
+    console.log('curr chat room', currChatId);
+    chatrooms.forEach((element) => {
+      console.log('chat id', element.id);
+      if (element.id === currChatId) {
+        console.log('entered if');
+      }
+      console.log('false');
+      // console.log('add text', element);
+      // modifiedTextData.push(element);
+    });
+    // // console.log('new message', message);
+    // const modifiedData = {
+    //   userId,
+    //   content: message.current,
+    // };
+    // modifiedTextData.push(modifiedData);
+    // // console.log('modifiedTextData', modifiedTextData);
+    // modifyTextOnServer(modifiedTextData, currentMembersIds);
   };
 
   // convertIdToName();
@@ -174,10 +195,13 @@ export default function Chatroom({ userId, name, lastName }) {
             height: '100%',
           }}
         >
-          <Grid item xs={12}>
-            <Typography variant="h5" className="header-message" style={{ color: 'white' }}>
-              All Messages
-            </Typography>
+          <Grid item xs={10}>
+            <Stack direction="row" spacing={3}>
+              <Typography variant="h5" className="header-message" style={{ color: 'white' }}>
+                All Messages
+              </Typography>
+              <Button variant="contained" color="secondary" style={{ left: '100%' }} onClick={handleExitChatroom}>x</Button>
+            </Stack>
           </Grid>
         </Grid>
         {/* <Grid container component={Paper} className={classes.chatSection}> */}
@@ -192,7 +216,7 @@ export default function Chatroom({ userId, name, lastName }) {
             {/* FOR PROFILE OF USER */}
             {/* <Grid item xs={3} className={classes.borderRight500}> */}
             <List style={{ color: 'white', backgroundColor: '#0096FF' }}>
-              <ListItem button key="GraceThang">
+              <ListItem button key="user name">
                 <ListItemIcon>
                   <Avatar alt={fullName} src="chat/profileimg/grace.JPG" />
                 </ListItemIcon>

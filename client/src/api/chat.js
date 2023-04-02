@@ -35,3 +35,16 @@ export const modifyText = async (id, texts, currentMembersIds) => {
     //   console.log('error', err.message);
   }
 };
+
+export const createNewChatroom = async (id, membersId) => {
+  try {
+    const chatId = id;
+    const texts = [];
+    const currentMembersIds = membersId;
+    console.log('members id in chatjs', currentMembersIds);
+    const response = await axios.post(`${rootURL}/Chatroom`, { id, texts, currentMembersIds });
+    return response.data;
+  } catch (err) {
+    // console.log('error', err);
+  }
+};
