@@ -26,10 +26,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "set PORT=3000 && react-scripts start",
     "build": "react-scripts build",
     "test": "jest --coverage",
-    "uitest": "json-server --watch src/json-server/db.json --port 3004 & jest uitests/* --coverage",
+    "uitest": "json-server --watch src/json-server/db.json --port 3004 & jest uitests/* --coverage --coveragePathIgnorePatterns='src/api'",
     "unittest": "jest unittests/* --coverage",
     "eject": "react-scripts eject",
     "lint": "eslint \"**/*.{js,jsx}\" --ignore-pattern *.test.js --ignore-pattern *.test.jsx"

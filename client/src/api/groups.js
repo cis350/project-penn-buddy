@@ -21,11 +21,23 @@ export const getGroupById = async (groupId) => {
 };
 
 /**
- * Join/leave a group by userId
+ * Change a group by groupId
  */
-export const changeGroupMember = async (groupId, newGroup) => {
+export const changeGroup = async (groupId, newGroup) => {
   try {
     const response = await axios.put(`${rootURL}/group/${groupId}`, newGroup);
+    return response.data;
+  } catch (err) {
+    console.log('error', err.message);
+  }
+};
+
+/**
+ * Create a group by groupId
+ */
+export const createGroup = async (newGroup) => {
+  try {
+    const response = await axios.post(`${rootURL}/group`, newGroup);
     return response.data;
   } catch (err) {
     console.log('error', err.message);
@@ -38,6 +50,18 @@ export const changeGroupMember = async (groupId, newGroup) => {
 export const getAllGroups = async () => {
   try {
     const response = await axios.get(`${rootURL}/group`);
+    return response.data;
+  } catch (err) {
+    console.log('error', err.message);
+  }
+};
+
+/**
+ * Delete groups
+ */
+export const deleteGroupById = async (groupId) => {
+  try {
+    const response = await axios.delete(`${rootURL}/group/${groupId}`);
     return response.data;
   } catch (err) {
     console.log('error', err.message);

@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import React, { useState, useEffect } from 'react';
 import UserInfo from '../components/UserInfo';
-import { getUserById } from '../api/users';
+import { changeUser, getUserById } from '../api/users';
 
 function Profile({ userId }) {
   if (userId === null) {

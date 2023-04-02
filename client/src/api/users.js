@@ -28,3 +28,15 @@ export const getUserById = async (userId) => {
     console.log('error', err.message);
   }
 };
+
+/**
+ * Change a user by userId
+ */
+export const changeUser = async (userId, newUser) => {
+  try {
+    const response = await axios.put(`${rootURL}/user/${userId}`, newUser);
+    return response.data;
+  } catch (err) {
+    console.log('error', err.message);
+  }
+};

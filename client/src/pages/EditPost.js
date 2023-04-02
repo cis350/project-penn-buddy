@@ -1,16 +1,22 @@
+/* eslint-disable no-console */
+/* eslint-disable react/jsx-props-no-spreading */
+import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import {
   AppBar, Button, Container, Toolbar, Typography, Stack, Box, Avatar, IconButton, TextField,
 } from '@mui/material';
-import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
-import { createGroup } from '../api/groups';
+import MyPost from '../components/MyPost';
+import OtherPost from '../components/OtherPost';
+import { getGroupById, changeGroup } from '../api/groups';
 
-function CreatePost({ userId }) {
+export default function EditPost({ userId }) {
   if (userId === null) {
     return <div>Loading...</div>;
   }
 
   const navigate = useNavigate();
+
+  const { groupId } = useParams();
 
   const [ownerId, setOwnerId] = useState(0);
   const [location, setLocation] = useState('');
@@ -25,20 +31,40 @@ function CreatePost({ userId }) {
     e.preventDefault();
   };
 
-  const handleCreatePost = async (e) => {
+  const handleEditPost = async (e) => {
     const modifiedData = {
-      ownerId: userId,
+      id: groupId,
+      ownerId,
       location,
       departDate,
       modeTransport,
       departPlace,
       maxCapacity,
-      currCapacity: 1,
-      currMemberIds: [userId],
+      currCapacity,
+      currMemberIds,
     };
-    const response = await createGroup(modifiedData);
-    navigate(`/activityfeed`);
+    const response = await changeGroup(groupId, modifiedData);
+    navigate(`/group/${groupId}`);
   };
+
+  useEffect(() => {
+    // wrapper function
+    async function getGroupByIdWrapper() {
+      console.log('UserId in Post', userId);
+      const response = await getGroupById(groupId);
+      // console.log('response', response);
+      setOwnerId(response.ownerId);
+      setLocation(response.location);
+      setDepartDate(response.departDate);
+      setModeTransport(response.modeTransport);
+      setDepartPlace(response.departPlace);
+      setMaxCapacity(response.maxCapacity);
+      setCurrCapacity(response.currCapacity);
+      setCurrMemberIds(response.currMemberIds);
+    }
+    // run the wrapper function
+    getGroupByIdWrapper();
+  }, []);
 
   return (
     <div>
@@ -51,18 +77,7 @@ function CreatePost({ userId }) {
         color="secondary"
         align="center"
       >
-        New Post
-      </Typography>
-      <Typography
-        variant="h5"
-        component="div"
-        sx={{
-          flexGrow: 1, fontWeight: 800, fontSize: '1.8rem',
-        }}
-        color="secondary"
-        align="center"
-      >
-        Find your travel buddies!
+        Edit Post
       </Typography>
       <form data-testid="Form" onSubmit={handleSubmit}>
         <div style={{
@@ -107,14 +122,16 @@ function CreatePost({ userId }) {
             required
             value={departPlace}
             onChange={(e) => setDepartPlace(e.target.value)}
-            data-testid="Departure"
+            data-testid="Depart Place"
             style={{ marginBottom: '16px', width: '400px' }}
           />
           <TextField
             label="Max Capacity"
             variant="filled"
             required
+            value={maxCapacity}
             onChange={(e) => setMaxCapacity(e.target.value)}
+            data-testid="Max Capacity"
             style={{ marginBottom: '16px', width: '400px' }}
           />
           <Button
@@ -122,14 +139,13 @@ function CreatePost({ userId }) {
             color="secondary"
             style={{ backgroundColor: '#EA3C3C', color: 'white', width: '200px' }}
             type="submit"
-            onClick={handleCreatePost}
+            data-testid="Post Button"
+            onClick={handleEditPost}
           >
-            Create Post
+            Post
           </Button>
         </div>
       </form>
     </div>
-
   );
 }
-export default CreatePost;

@@ -13,11 +13,17 @@ import PostDetail from './PostDetail';
 export default function MyPost({
   ownerId, location, departDate, modeTransport,
   departPlace, maxCapacity, currCapacity, currMemberIds, groupId, userId, group,
+  handleDeleteGroup,
 }) {
   const navigate = useNavigate();
   function handleClickBack() {
     navigate('/activityfeed');
   }
+
+  function handleEditGroup() {
+    navigate(`/editpost/${groupId}`);
+  }
+
   return (
     <div>
       <AppBar
@@ -37,8 +43,8 @@ export default function MyPost({
             <Button variant="text" color="secondary" sx={{ flex: 1 }} onClick={handleClickBack}>Back to Activity Feed</Button>
           </Box>
           <Stack direction="row" spacing={3}>
-            <Button variant="contained" color="warning">Delete Group</Button>
-            <Button variant="contained" color="secondary">Edit Group</Button>
+            <Button variant="contained" color="warning" onClick={handleDeleteGroup}>Delete Group</Button>
+            <Button variant="contained" color="secondary" onClick={handleEditGroup}>Edit Group</Button>
           </Stack>
         </Toolbar>
       </AppBar>
