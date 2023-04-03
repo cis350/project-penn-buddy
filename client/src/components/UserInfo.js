@@ -6,7 +6,7 @@ import {
 } from '@mui/material';
 
 export default function UserInfo({
-  userEmail, userName, userMajor, userVenmo, userYear, userNumber, userBio,
+  userName, userPennId, userEmail, userMajor, userVenmo, userYear, userNumber, userBio,
 }) {
   // implemented during Milestone 4, users will be able to edit their own profile
   // function editField(field) {
@@ -25,7 +25,7 @@ export default function UserInfo({
   // milestone 4 logistics
   const navigate = useNavigate();
   function handleSignOut() {
-    navigate('/');
+    navigate('');
   }
 
   return (
@@ -49,6 +49,12 @@ export default function UserInfo({
         {' '}
         {userName}
         {/* <button type="button" onClick={() => editField('email')}>Edit</button> */}
+      </Typography>
+      <Typography variant="body1" sx={{ textAlign: 'left' }}>
+        <b>PennID:</b>
+        {' '}
+        {userPennId}
+        {/* <button type="button" onClick={() => editField('pennId')}>Edit</button> */}
       </Typography>
       <Typography variant="body1" sx={{ textAlign: 'left' }}>
         <b>Email:</b>
@@ -86,16 +92,6 @@ export default function UserInfo({
         {userBio}
         {/* <button type="button" onClick={() => editField('bio')}>Edit</button> */}
       </Typography>
-      <Button
-        onClick={() => handleSignOut()}
-        login={false}
-        variant="contained"
-        color="secondary"
-        style={{ backgroundColor: '#EA3C3C', color: 'white', width: '200px' }}
-        type="submit"
-      >
-        Sign Out
-      </Button>
     </Box>
   );
 }

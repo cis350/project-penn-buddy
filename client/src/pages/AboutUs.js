@@ -1,9 +1,12 @@
 import React from 'react';
+import NavbarLogin from '../components/NavbarLogin';
 
-export default function HomePage({ name }) {
+export default function AboutUs({ name }) {
   return (
     <div>
-      About Us
+      <div>
+        About Us
+      </div>
     </div>
   );
 }
