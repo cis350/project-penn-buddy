@@ -29,7 +29,7 @@ function Register({ setLogin, setUserId, setName }) {
   const [message, setMessage] = useState(''); */
 
   const handleClickregister = async (e) => {
-    console.log(name1);
+    // console.log(name1);
     const modifiedData = {
       name: name1,
       pennId,
@@ -42,7 +42,7 @@ function Register({ setLogin, setUserId, setName }) {
       bio: userBio,
       rating: null,
     };
-    console.log(modifiedData);
+    // console.log(modifiedData);
     const response = await createUser(modifiedData);
     navigate(`/`);
   };
