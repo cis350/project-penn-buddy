@@ -10,6 +10,8 @@ import { getAllGroups } from '../api/groups';
 function ActivityFeed() {
   const [groups, setGroups] = useState([]);
   const [selectedLocations, setSelectedLocations] = useState(new Set());
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [locationKeyword, setLocationKeyword] = useState(null);
 
   useEffect(() => {
     // wrapper function
@@ -29,6 +31,10 @@ function ActivityFeed() {
           sx={{ position: 'fixed', left: 0 }}
           selectedLocations={selectedLocations}
           setSelectedLocations={setSelectedLocations}
+          selectedDate={selectedDate}
+          setSelectedDate={setSelectedDate}
+          locationKeyword={locationKeyword}
+          setLocationKeyword={setLocationKeyword}
         />
         <Box sx={{ marginLeft: '10px' }}>
           {
@@ -36,6 +42,16 @@ function ActivityFeed() {
               .filter(
                 (group) => (selectedLocations.size === 0 || selectedLocations.has(group.location)),
               )
+              .filter((group) => {
+                if (!selectedDate) return true;
+
+                const groupDate = group.departDate.trim().split(' ')[0];
+                return groupDate === selectedDate;
+              })
+              .filter((group) => {
+                if (!locationKeyword) return true;
+                return group.location.toLowerCase().includes(locationKeyword.toLowerCase());
+              })
               .map(
                 (group) => (
                   <Box mb={4}>
