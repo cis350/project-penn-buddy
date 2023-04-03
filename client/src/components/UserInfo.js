@@ -8,24 +8,14 @@ import {
 export default function UserInfo({
   userName, userPennId, userEmail, userMajor, userVenmo, userYear, userNumber, userBio,
 }) {
-  // implemented during Milestone 4, users will be able to edit their own profile
-  // function editField(field) {
-  //  const textField = document.createElement('input');
-  //  const currentText = document.getElementById(`${field}-text`).textContent;
-  //  textField.value = currentText;
-  //  textField.addEventListener('blur', () => {
-  //    const updatedText = textField.value;
-  //    document.getElementById(`${field}-text`).textContent = updatedText;
-  //    textField.parentNode.replaceChild(document.createTextNode(updatedText), textField);
-  //  });
-  // eslint-disable-next-line max-len
-  //  document.getElementById(`${field}-text`).parentNode.replaceChild(textField, document.getElementById(`${field}-text`));
-  // }
-
   // milestone 4 logistics
   const navigate = useNavigate();
   function handleSignOut() {
     navigate('');
+  }
+
+  function handleEditProfile() {
+    navigate(`/editprofile`);
   }
 
   return (
@@ -42,13 +32,12 @@ export default function UserInfo({
     >
       <Avatar
         sx={{ width: 128, height: 128 }}
-        src="/images/pfp.png"
+        src="/images/logo192.png"
       />
       <Typography variant="body1" sx={{ textAlign: 'left' }}>
         <b>Username:</b>
         {' '}
         {userName}
-        {/* <button type="button" onClick={() => editField('email')}>Edit</button> */}
       </Typography>
       <Typography variant="body1" sx={{ textAlign: 'left' }}>
         <b>PennID:</b>
@@ -60,38 +49,51 @@ export default function UserInfo({
         <b>Email:</b>
         {' '}
         {userEmail}
-        {/* <button type="button" onClick={() => editField('email')}>Edit</button> */}
       </Typography>
       <Typography variant="body1" sx={{ textAlign: 'left' }}>
         <b>Number:</b>
         {' '}
         {userNumber}
-        {/* <button type="button" onClick={() => editField('number')}>Edit</button> */}
       </Typography>
       <Typography variant="body1" sx={{ textAlign: 'left' }}>
         <b>Year:</b>
         {' '}
         {userYear}
-        {/* <button type="button" onClick={() => editField('year')}>Edit</button> */}
       </Typography>
       <Typography variant="body1" sx={{ textAlign: 'left' }}>
         <b>Major:</b>
         {' '}
         {userMajor}
-        {/* <button type="button" onClick={() => editField('major')}>Edit</button> */}
       </Typography>
       <Typography variant="body1" sx={{ textAlign: 'left' }}>
         <b>Venmo:</b>
         {' '}
         {userVenmo}
-        {/* <button type="button" onClick={() => editField('venmo')}>Edit</button> */}
       </Typography>
       <Typography variant="body1" sx={{ textAlign: 'left' }}>
         <b>Bio:</b>
         {' '}
         {userBio}
-        {/* <button type="button" onClick={() => editField('bio')}>Edit</button> */}
       </Typography>
+      <Button
+        onClick={() => handleSignOut()}
+        login={false}
+        variant="contained"
+        color="secondary"
+        style={{ backgroundColor: '#EA3C3C', color: 'white', width: '200px' }}
+        type="submit"
+      >
+        Sign Out
+      </Button>
+      <Button
+        onClick={() => handleEditProfile()}
+        variant="contained"
+        color="secondary"
+        style={{ backgroundColor: '#0096FF', color: 'white', width: '200px' }}
+        type="submit"
+      >
+        Edit Profile
+      </Button>
     </Box>
   );
 }

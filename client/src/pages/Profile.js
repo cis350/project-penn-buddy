@@ -5,7 +5,7 @@ import {
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import UserInfo from '../components/UserInfo';
-import { getUserById } from '../api/users';
+import { changeUser, getUserById } from '../api/users';
 
 function Profile({ userId, setLogin }) {
   if (userId === null) {

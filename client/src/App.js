@@ -27,6 +27,7 @@ import Chatroom from './pages/Chatroom';
 import EditPost from './pages/EditPost';
 import Register from './pages/Register';
 import LoginDraft from './pages/LoginDraft';
+import EditProfile from './pages/EditProfile';
 
 function App() {
   const theme = createTheme({
@@ -145,6 +146,7 @@ function App() {
           <Route path="/activityfeed" element={<ActivityFeed />} />
           <Route path="/chatroom" element={<Chatroom />} />
           <Route path="/editpost/:groupId" element={<EditPost userId={userId} />} />
+          <Route path="/editprofile" element={<EditProfile userId={userId} />} />
         </Routes>
       </ThemeProvider>
     </BrowserRouter>
