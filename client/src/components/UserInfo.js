@@ -5,6 +5,7 @@ import {
   Button, Typography, Stack, Box, Avatar,
 } from '@mui/material';
 import { deleteUser } from '../api/users';
+import { deleteGroupsByOwnerId } from '../api/groups';
 
 export default function UserInfo({
   userId, userName, userPennId, userEmail, userMajor,
@@ -22,6 +23,7 @@ export default function UserInfo({
 
   async function handleDeleteUser() {
     await deleteUser(userId);
+    await deleteGroupsByOwnerId(userId);
     setLogin(false);
     navigate('/');
   }
