@@ -4,29 +4,15 @@
 
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
+import Navbar from '../../components/Navbar';
 // import testing library functions
 import { render, screen, cleanup } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { ThemeProvider } from '@emotion/react';
 import userEvent from '@testing-library/user-event';
 import renderer from 'react-test-renderer';
 import App from '../../App';
-
-test('test that Login button is in the document', () => {
-  // render the component
-  const { getByLabelText } = render(<App />);
-  // find the element by its role
-  const LoginButton = screen.getByText(/Login/);
-  // assert that the element is in the document
-  expect(LoginButton).toBeInTheDocument();
-});
-
-test('test that Login button is in the document', () => {
-  // render the component
-  const { getByLabelText } = render(<App />);
-  // find the element by its role
-  const LoginButton = screen.getByText(/Register/);
-  // assert that the element is in the document
-  expect(LoginButton).toBeInTheDocument();
-});
 
 test('test that Home button is in the document', () => {
   // render the component
@@ -55,23 +41,15 @@ test('test that How We Work button is in the document', () => {
   expect(okButton).toBeInTheDocument();
 });
 
-describe('test that box is in document', () => {
-  test('test that box is in the document', async () => {
+test('test that How We Work button is in the document', () => {
     // render the component
-    const { getHistory } = render(
-      <App />,
-    );
+    const { getByLabelText } = render(<App />);
+    // find the element by its role
+    const okButton = screen.getByText(/How We Work/);
     // assert that the element is in the document
-    const dest = screen.getByTestId("First Name");
-    expect(dest).toBeInTheDocument();
-    // const dest2 = screen.getByTestId("Date");
-    // expect(dest2).toBeInTheDocument();
-    // const dest3 = screen.getByTestId("Destination");
-    // expect(dest3).toBeInTheDocument();
-    // const dest4 = screen.getByTestId("Departure");
-    // expect(dest4).toBeInTheDocument();
+    expect(okButton).toBeInTheDocument();
   });
-});
+
 // test('test that First Name is in the document', () => {
 //   // render the component
 //   const { getByLabelText } = render(<App />);

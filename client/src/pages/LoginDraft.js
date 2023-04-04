@@ -16,10 +16,6 @@ function Login({ setLogin, setUserId, setName }) {
   const [error, setError] = useState(false);
   const [message, setMessage] = useState('');
 
-  function handleHome() {
-    navigate('/');
-  }
-
   const handleClickLogin = (e) => {
     // check username and password, if it's correct set login to true
     // if correct, setLogin to true, setUserId to userid
@@ -28,18 +24,11 @@ function Login({ setLogin, setUserId, setName }) {
     setLogin(true);
     navigate('/home');
   };
-  function handleUsername(e) {
-    setPennId(e.target.value);
-  }
 
   const handleName = (e) => {
     setName(e.target.value);
     setName1(e.target.value);
   };
-
-  function handlePassword(e) {
-    setPassword(e.target.value);
-  }
 
   useEffect(() => {
     // wrapper function
