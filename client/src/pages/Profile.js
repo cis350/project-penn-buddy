@@ -46,6 +46,7 @@ function Profile({ userId, setLogin }) {
     <div>
       <h1 style={{ textAlign: 'center', color: '#0096FF' }}>Welcome to Your Profile!</h1>
       <UserInfo
+        userId={userId}
         userName={userName}
         userPennId={userPennId}
         userEmail={userEmail}
