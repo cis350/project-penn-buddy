@@ -6,12 +6,13 @@ import {
 } from '@mui/material';
 
 export default function UserInfo({
-  userName, userPennId, userEmail, userMajor, userVenmo, userYear, userNumber, userBio,
+  userName, userPennId, userEmail, userMajor, userVenmo, userYear, userNumber, userBio, setLogin,
 }) {
   // milestone 4 logistics
   const navigate = useNavigate();
   function handleSignOut() {
-    navigate('');
+    setLogin(false);
+    navigate('/');
   }
 
   function handleEditProfile() {
