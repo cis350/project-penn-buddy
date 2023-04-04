@@ -67,3 +67,20 @@ export const deleteGroupById = async (groupId) => {
     console.log('error', err.message);
   }
 };
+
+/**
+ * Delete all groups for ownerId
+ */
+export const deleteGroupsByOwnerId = async (userId) => {
+  try {
+    const response = await axios.get(`${rootURL}/group`);
+    const allGroups = response.data;
+    const groupsToDelete = allGroups.filter((group) => group.ownerId === userId);
+
+    await Promise.all(groupsToDelete.map(async (group) => {
+      await axios.delete(`${rootURL}/group/${group.id}`);
+    }));
+  } catch (err) {
+    console.log('error', err.message);
+  }
+};

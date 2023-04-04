@@ -2,20 +2,30 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-  AppBar, Button, Container, Toolbar, Typography, Stack, Box, Avatar, IconButton, Grid, Modal,
+  Button, Typography, Stack, Box, Avatar,
 } from '@mui/material';
+import { deleteUser } from '../api/users';
+import { deleteGroupsByOwnerId } from '../api/groups';
 
 export default function UserInfo({
-  userId, userEmail, userName, userMajor, userVenmo, userYear, userNumber, userBio,
+  userId, userName, userPennId, userEmail, userMajor,
+  userVenmo, userYear, userNumber, userBio, setLogin,
 }) {
-  // milestone 4 logistics
   const navigate = useNavigate();
   function handleSignOut() {
-    navigate('/aboutus');
+    setLogin(false);
+    navigate('/');
   }
 
   function handleEditProfile() {
     navigate(`/editprofile`);
+  }
+
+  async function handleDeleteUser() {
+    await deleteUser(userId);
+    await deleteGroupsByOwnerId(userId);
+    setLogin(false);
+    navigate('/');
   }
 
   return (
@@ -38,6 +48,12 @@ export default function UserInfo({
         <b>Username:</b>
         {' '}
         {userName}
+      </Typography>
+      <Typography variant="body1" sx={{ textAlign: 'left' }}>
+        <b>PennID:</b>
+        {' '}
+        {userPennId}
+        {/* <button type="button" onClick={() => editField('pennId')}>Edit</button> */}
       </Typography>
       <Typography variant="body1" sx={{ textAlign: 'left' }}>
         <b>Email:</b>
@@ -69,16 +85,27 @@ export default function UserInfo({
         {' '}
         {userBio}
       </Typography>
-      <Button
-        onClick={() => handleSignOut()}
-        login={false}
-        variant="contained"
-        color="secondary"
-        style={{ backgroundColor: '#EA3C3C', color: 'white', width: '200px' }}
-        type="submit"
-      >
-        Sign Out
-      </Button>
+      <Stack direction="row" spacing={2}>
+        <Button
+          onClick={() => handleSignOut()}
+          login={false}
+          variant="contained"
+          color="secondary"
+          style={{ backgroundColor: '#EA3C3C', color: 'white', width: '200px' }}
+          type="submit"
+        >
+          Sign Out
+        </Button>
+        <Button
+          onClick={() => handleDeleteUser()}
+          variant="contained"
+          color="secondary"
+          style={{ backgroundColor: '#FF9900', color: 'white', width: '200px' }}
+          type="submit"
+        >
+          Delete User
+        </Button>
+      </Stack>
       <Button
         onClick={() => handleEditProfile()}
         variant="contained"
