@@ -141,7 +141,7 @@
       "departDate": "02-12-2022 12:23",
       "modeTransport": "Iain",
       "departPlace": "Nicky",
-      "maxCapacity": "23456",
+      "maxCapacity": "4",
       "currCapacity": 1,
       "currMemberIds": [
         1
