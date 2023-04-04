@@ -135,17 +135,17 @@
       ]
     },
     {
+      "id": 4,
       "ownerId": 1,
       "location": "Taipei",
-      "departDate": "22",
+      "departDate": "02-12-2022 12:23",
       "modeTransport": "Iain",
       "departPlace": "Nicky",
       "maxCapacity": "23456",
       "currCapacity": 1,
       "currMemberIds": [
         1
-      ],
-      "id": 4
+      ]
     }
   ],
   "text": [
