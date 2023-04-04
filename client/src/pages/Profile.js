@@ -23,10 +23,6 @@ function Profile({ userId, setLogin }) {
   const [userBio, setUserBio] = useState('');
 
   const navigate = useNavigate();
-  function handleSignOut() {
-    setLogin(false);
-    navigate('/');
-  }
 
   useEffect(() => {
     async function getProfileInfoWrapper() {
@@ -50,6 +46,7 @@ function Profile({ userId, setLogin }) {
     <div>
       <h1 style={{ textAlign: 'center', color: '#0096FF' }}>Welcome to Your Profile!</h1>
       <UserInfo
+        userId={userId}
         userName={userName}
         userPennId={userPennId}
         userEmail={userEmail}
@@ -58,17 +55,8 @@ function Profile({ userId, setLogin }) {
         userMajor={userMajor}
         userVenmo={userVenmo}
         userBio={userBio}
+        setLogin={setLogin}
       />
-      <Button
-        onClick={() => handleSignOut()}
-        login={false}
-        variant="contained"
-        color="secondary"
-        style={{ backgroundColor: '#EA3C3C', color: 'white', width: '200px' }}
-        type="submit"
-      >
-        Sign Out
-      </Button>
     </div>
   );
 }
