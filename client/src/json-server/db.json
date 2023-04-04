@@ -46,7 +46,7 @@
       "major": "CIS",
       "venmo": "Nicky_Wong",
       "bio": "I love CIS350 !",
-      "rating": 5,
+      "rating": [5, 1],
       "password": "nickypass123"
     },
     {
@@ -58,7 +58,7 @@
       "major": "Computer Science",
       "venmo": "grace_venmoooo",
       "bio": "I love CIS350 so so much!!!!",
-      "rating": 4.8,
+      "rating": [5, 4],
       "password": "grace555"
     },
     {
@@ -70,7 +70,7 @@
       "major": "CIS",
       "venmo": "iain888",
       "bio": "I love CIS350 !",
-      "rating": 4.7,
+      "rating": [2, 3, 4],
       "password": "iaianchenli"
     },
     {
@@ -83,7 +83,11 @@
       "major": "CIS",
       "venmo": "Salam-Kar",
       "bio": "I love CIS350 !",
-      "rating": 4.2
+      "rating": [
+        5,
+        4,
+        5
+      ]
     },
     {
       "id": 5,
@@ -94,7 +98,11 @@
       "major": "CIS/ECON",
       "venmo": "linda-shen",
       "bio": "I love CIS350 !",
-      "rating": 4,
+      "rating": [
+        2,
+        4,
+        3
+      ],
       "password": "lkalala"
     }
   ],
@@ -128,6 +136,19 @@
         4,
         2
       ]
+    },
+    {
+      "ownerId": 2,
+      "location": "Hello",
+      "departDate": "fkf",
+      "modeTransport": "fkf",
+      "departPlace": "fk",
+      "maxCapacity": "fk",
+      "currCapacity": 1,
+      "currMemberIds": [
+        2
+      ],
+      "id": 3
     }
   ],
   "text": [
@@ -157,7 +178,7 @@
       "id": 1,
       "texts": [
         {
-          "senderId": 1,
+          "userId": 1,
           "content": "hello how are you"
         },
         {
@@ -174,15 +195,15 @@
       "id": 2,
       "texts": [
         {
-          "senderId": 3,
+          "userId": 3,
           "content": "welcome to chatroom 2"
         },
         {
-          "senderId": 1,
+          "userId": 1,
           "content": "I like cis 3500!"
         },
         {
-          "senderId": 1,
+          "userId": 1,
           "content": "hello"
         },
         {
@@ -203,19 +224,19 @@
       "id": 3,
       "texts": [
         {
-          "senderId": 4,
+          "userId": 4,
           "content": "welcome to chatroom 3"
         },
         {
-          "senderId": 1,
+          "userId": 1,
           "content": "chat with Linda"
         },
         {
-          "senderId": 1,
+          "userId": 1,
           "content": "hello i like eatibng"
         },
         {
-          "senderId": 1,
+          "userId": 1,
           "content": "My name is Grace!"
         }
       ],

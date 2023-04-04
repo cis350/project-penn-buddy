@@ -2,13 +2,15 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
-  AppBar, Button, Container, Toolbar, Typography, Stack, Box, Avatar, IconButton, Grid, Modal,
+  AppBar, Button, Container, Toolbar, Typography, Stack, Box,
+  Avatar, IconButton, Grid, Modal,
 } from '@mui/material';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import DirectionsCarFilledOutlinedIcon from '@mui/icons-material/DirectionsCarFilledOutlined';
 import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import MemberCard from './MemberCard';
+import Rating from './Rating';
 
 export default function PostDetail({
   ownerId, location, departDate, modeTransport,
@@ -70,7 +72,10 @@ export default function PostDetail({
                     (currMemberId) => (
                       <div>
                         <Box key={currMemberId} sx={{ p: 1 }} />
-                        <MemberCard key={currMemberId} userId={currMemberId} />
+                        <Stack direction="row">
+                          <MemberCard key={currMemberId} userId={currMemberId} />
+                          <Rating userId={currMemberId} />
+                        </Stack>
                       </div>
                     ),
                   )

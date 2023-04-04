@@ -20,7 +20,8 @@ export default function EditProfile({ userId }) {
   const [major, setUserMajor] = useState('');
   const [venmo, setUserVenmo] = useState('');
   const [bio, setUserBio] = useState('');
-  const [rating, setUserRating] = useState('');
+  // CHANGED RATING TO ARRAY
+  const [rating, setUserRating] = useState([]);
   const [password, setUserPassword] = useState('');
 
   const handleSubmit = (e) => {

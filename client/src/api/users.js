@@ -40,3 +40,18 @@ export const changeUser = async (userId, newUser) => {
     console.log('error', err.message);
   }
 };
+
+/**
+ * Updates the rating array of a user
+ */
+// export const modifyRating = async (userId, newRating) => {
+//   try {
+//     // console.log('chat room id is', id);
+//     const response = await axios.put(`${rootURL}/user/${userId}`, { newRating });
+//     // OH, YOU HAVE TO INSERT A NEW TEXT ELEMENT
+//     // OR JUST REPLACE THE ARRAYYYY
+//     return response.data;
+//   } catch (err) {
+//     //   console.log('error', err.message);
+//   }
+// };

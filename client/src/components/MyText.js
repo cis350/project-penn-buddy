@@ -27,34 +27,79 @@ function textRow(props) {
   );
 }
 
-export default function MyText({ text }) {
-  // loop text.map, create the rows
-  // create a list of elements
-  // consider using the student table
+const rightText = (content, index) => (
+  <ListItem key={index}>
+    <Grid container>
+      <Grid item xs={12}>
+        <ListItemText align="right" primary={content} style={{ color: '#0096FF' }} />
+      </Grid>
+    </Grid>
+  </ListItem>
+);
 
-  // const makeTexts = () => {
-  //   const textArray = [];
-  //   console.log('make text', text);
-  //   text.forEach((element) => {
-  //     textArray.push(element.content);
-  //   });
-  //   console.log('text array', textArray);
-  //   return textArray;
-  // };
+const leftText = (content, index) => (
+  <ListItem key={index}>
+    <Grid container>
+      <Grid item xs={12}>
+        <ListItemText align="left" primary={content} style={{ color: '#0096FF' }} />
+      </Grid>
+    </Grid>
+  </ListItem>
+);
 
-  // const texts = makeTexts();
+const genText = (t, index, currUserId) => {
+  if (t.userId === currUserId) {
+    console.log('is user');
+    rightText(t.content, index);
+  } else {
+    console.log('is not user');
+    leftText(t.content, index);
+  }
+};
+
+export default function MyText({ text, currMembersId, userId }) {
   return (
     <div>
       {
-      text.map((t, index) => (
-        <ListItem key={index}>
-          <Grid container>
-            <Grid item xs={12}>
-              <ListItemText align="right" primary={t.content} style={{ color: '#0096FF' }} />
+      text
+        // .filter((t, index) => {
+        //   if (t.userId === userId) {
+        //     // .map((t, index) => (
+        //     <ListItem key={index}>
+        //       <Grid container>
+        //         <Grid item xs={12}>
+        //           <ListItemText align="right" primary={t.content} style={{ color: '#0096FF' }} />
+        //         </Grid>
+        //       </Grid>
+        //     </ListItem>;
+        //     // ))
+        //   } else {
+        //     // .map((t, index) => (
+        //     <ListItem key={index}>
+        //       <Grid container>
+        //         <Grid item xs={12}>
+        //           <ListItemText align="left" primary={t.content} style={{ color: '#0096FF' }} />
+        //         </Grid>
+        //       </Grid>
+        //     </ListItem>;
+        //     // ))
+        //   }
+        // })
+        .map((t, index) => (
+          // <div>
+          //   {genText(t, index, userId)}
+          // </div>
+          // to create the separate components depending on t.userId == currentUserId
+          // myText vs OtherText
+          <ListItem key={index}>
+            <Grid container>
+              <Grid item xs={12}>
+                <ListItemText align="right" style={{ color: 'black' }} primary={t.userId} />
+                <ListItemText align="right" primary={t.content} style={{ color: '#0096FF' }} />
+              </Grid>
             </Grid>
-          </Grid>
-        </ListItem>
-      ))
+          </ListItem>
+        ))
     }
     </div>
   );

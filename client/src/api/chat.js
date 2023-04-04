@@ -36,13 +36,24 @@ export const modifyText = async (id, texts, currentMembersIds) => {
   }
 };
 
-export const createNewChatroom = async (id, membersId) => {
+export const createNewChatroom = async (chatId, membersId) => {
   try {
-    const chatId = id;
+    const id = parseInt(chatId, 10);
     const texts = [];
     const currentMembersIds = membersId;
     console.log('members id in chatjs', currentMembersIds);
     const response = await axios.post(`${rootURL}/Chatroom`, { id, texts, currentMembersIds });
+    return response.data;
+  } catch (err) {
+    // console.log('error', err);
+  }
+};
+
+export const deleteChatroom = async (id) => {
+  try {
+    const chatId = id;
+    console.log('char id to be delete', chatId);
+    const response = await axios.delete(`${rootURL}/Chatroom/${chatId}`);
     return response.data;
   } catch (err) {
     // console.log('error', err);

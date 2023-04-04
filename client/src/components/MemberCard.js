@@ -3,7 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
-  AppBar, Button, Container, Toolbar, Typography, Stack, Box, Avatar, IconButton, Grid, Modal,
+  AppBar, Button, Container, Toolbar, Typography, Stack, Box,
+  Avatar, IconButton, Grid, Modal,
 } from '@mui/material';
 import { getUserById } from '../api/users';
 
@@ -51,6 +52,8 @@ export default function MemberCard({ userId }) {
     // wrapper function
     async function getUserByIdWrapper() {
       const response = await getUserById(userId);
+      console.log('responsde mc', response);
+      console.log('response mc name', response.name);
       setName(response.name);
     }
     // run the wrapper function

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 // import { makeStyles } from '@mui/styles';
 import {
@@ -12,9 +12,12 @@ import {
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SendIcon from '@mui/icons-material/Send';
 
-import { getChatroomById, modifyText, getAllChatroom } from '../api/chat';
+import {
+  getChatroomById, modifyText, getAllChatroom, deleteChatroom,
+} from '../api/chat';
 import MyText from '../components/MyText';
 import { getUserById } from '../api/users';
+import ChatName from '../components/ChatName';
 
 // import SendMessage from './chat/SendMessage';
 // import { getAllChats } from '../api/chat';
@@ -27,11 +30,18 @@ export default function Chatroom({ userId, name, lastName }) {
   const [chatrooms, setChatrooms] = useState([]);
   const [currentMembersIds, setCurrentMembersIds] = useState([]);
   const [currMembersName, setCurrMembersName] = useState([]);
+  // let memName be an array of array
+  // memName[i] has i-th chat's name of everyone
 
   const message = useRef('');
   const listNum = useRef(1);
   const currChatId = useRef(1);
   const fullName = name.concat(lastName);
+
+  const navigate = useNavigate();
+  function handleClickBack() {
+    navigate('/activityfeed');
+  }
 
   // const [currChatId, setCurrChatId] = React.useState(1);
 
@@ -40,37 +50,36 @@ export default function Chatroom({ userId, name, lastName }) {
     async function getAllChatroomWrapper() {
       const response = await getAllChatroom();
       setChatrooms(response);
+      console.log('total chatrooms', chatrooms);
+      // chatrooms.filter((cr) => cr.currMemberIds.includes(userId));
+      // console.log('filtered chatrooms', chatrooms);
       const r2 = await getChatroomById(currChatId.current);
-      // console.log('second response', r2);
       setText(r2.texts);
       setCurrentMembersIds(r2.currentMembersIds);
       setCurrMembersName(r2.currentMembersIds);
-      // //   return response;
-      // console.log('text', text);
-      // console.log('current members id', currentMembersIds);
-      // console.log('all cr', response);
+      console.log('curr mem id', currMembersName);
     }
-    // async function convertIdToName() {
-    //   console.log('curr mem id', currMembersName);
-    //   currentMembersIds.forEach((id) => {
-    //     const response = await getUserById(id);
-    //     // console.log('members name ', user.user.name);
-    //     console.log('user', user);
-    //     currMembersName.push(user.name);
-    //   });
-    //   console.log('group members', currMembersName);
-    // };
     getAllChatroomWrapper();
     // convertIdToName();
   });
 
+  // const idToNameFunction = (c) => {
+  //   currentMembersIds.forEach((id) => {
+  //     const r3 = getUserById(id);
+  //     // console.log('members name ', user.user.name);
+  //     console.log('user', user);
+  //     currMembersName.push(user.name);
+  //   });
+  //   console.log('group members', currMembersName);
+  // }
   const handleChangeChat = (c) => {
     // console.log('chat id is ', c.c.id);
     currChatId.current = c.c.id;
+    // console.log('click handle change chat');
+    // document.getElementById(toString(currChatId.current)).
+    // style.cssText = 'background-color:#b2b2ff; color:#000000; 
+    // border:1px solid #0c0800; font-size:22px;';
   };
-
-  // when i click on the button, I want to get its chatId
-  // from there I fetch from the database all of the data
 
   // display texts accordingly
   // input change event handler
@@ -103,30 +112,15 @@ export default function Chatroom({ userId, name, lastName }) {
   };
 
   const handleExitChatroom = (e) => {
-    console.log('entered');
-    console.log('chatrooms', chatrooms);
     const modifiedChatData = [];
-    console.log('curr chat room', currChatId);
     chatrooms.forEach((element) => {
-      console.log('chat id', element.id);
-      if (element.id === currChatId) {
-        console.log('entered if');
+      if (currChatId.current === element.id) {
+        deleteChatroom(currChatId.current);
+        // might have to fix this later
+        currChatId.current = 1;
       }
-      console.log('false');
-      // console.log('add text', element);
-      // modifiedTextData.push(element);
     });
-    // // console.log('new message', message);
-    // const modifiedData = {
-    //   userId,
-    //   content: message.current,
-    // };
-    // modifiedTextData.push(modifiedData);
-    // // console.log('modifiedTextData', modifiedTextData);
-    // modifyTextOnServer(modifiedTextData, currentMembersIds);
   };
-
-  // convertIdToName();
 
   //   const classes = useStyles();
   const theme = createTheme({
@@ -181,7 +175,7 @@ export default function Chatroom({ userId, name, lastName }) {
         <Toolbar>
           <ArrowBackIcon color="secondary" />
           <Box sx={{ flexGrow: 1 }}>
-            <Button variant="text" color="secondary" sx={{ flex: 1 }}>Back to Activity Feed</Button>
+            <Button variant="text" color="secondary" sx={{ flex: 1 }} onClick={handleClickBack}>Back to Activity Feed</Button>
           </Box>
         </Toolbar>
       </AppBar>
@@ -200,7 +194,7 @@ export default function Chatroom({ userId, name, lastName }) {
               <Typography variant="h5" className="header-message" style={{ color: 'white' }}>
                 All Messages
               </Typography>
-              <Button variant="contained" color="secondary" style={{ left: '100%' }} onClick={handleExitChatroom}>x</Button>
+              <Button variant="contained" color="secondary" style={{ left: '90%' }} onClick={handleExitChatroom}>Leave chatroom</Button>
             </Stack>
           </Grid>
         </Grid>
@@ -213,8 +207,6 @@ export default function Chatroom({ userId, name, lastName }) {
           }}
         >
           <Grid item xs={3}>
-            {/* FOR PROFILE OF USER */}
-            {/* <Grid item xs={3} className={classes.borderRight500}> */}
             <List style={{ color: 'white', backgroundColor: '#0096FF' }}>
               <ListItem button key="user name">
                 <ListItemIcon>
@@ -228,64 +220,23 @@ export default function Chatroom({ userId, name, lastName }) {
               <TextField id="outlined-basic-email" label="Search" variant="outlined" style={{ color: 'white', backgroundColor: '#D9D9D9', borderRadius: '5px' }} fullWidth />
             </Grid>
             <Divider />
-            {/* FOR CREATING THE CHAT LIST */}
-            {/* create a for loop to create the list */}
             <List style={{ color: 'white', backgroundColor: '#0096FF' }}>
               {
               chatrooms.map((c, index) => (
                 <ListItem
                   button
+                  id={c.id}
                   onClick={() => handleChangeChat({ c })}
                 >
                   {c.id}
                 </ListItem>
               ))
             }
-              {/* <ListItemText>
-                {
-              currMembersName.map((n, index) => {
-                `${n},`;
-              })
-            }
-              </ListItemText> */}
             </List>
-
-            {/* create a function that can fetch names of users
-            in the chat */}
-            {/* instead of manually saying grace, have it pop up name of userId */}
-
-            {/* <List style={{ color: 'white', backgroundColor: '#0096FF' }}>
-              <ListItem
-                button
-                id="1"
-                style={{ color: 'white', backgroundColor: '#F0F0F0' }}
-                onClick={handleChangeChat(id)}
-              >
-                <ListItemIcon>
-                  <Avatar alt="Nicky Wong" src="/images/nick.jpeg" />
-                </ListItemIcon>
-                <ListItemText primary="Nicky Wong" style={{ color: 'black' }}>
-                Nicky Wong</ListItemText>
-                <ListItemText secondary="online" align="right" />
-              </ListItem>
-              <ListItem button id="2">
-                <ListItemIcon>
-                  <Avatar alt="Iain Li" src="chat/profileimg/iain.png" />
-                </ListItemIcon>
-                <ListItemText primary="Iain Li">Iain Li</ListItemText>
-              </ListItem>
-              <ListItem button od="3">
-                <ListItemIcon>
-                  <Avatar alt="Linda Shen" src="chat/profileimg/linda.jpeg" />
-                </ListItemIcon>
-                <ListItemText primary="Linda Shen">Linda Shen</ListItemText>
-              </ListItem>
-            </List>
-          */}
           </Grid>
           <Grid item xs={9}>
             <List style={{ color: 'white', backgroundColor: '#F0F0F0', height: '680px' }}>
-              <MyText text={text} />
+              <MyText text={text} currMembersId={currentMembersIds} userId={userId} />
             </List>
             <Divider />
             <Grid container style={{ color: 'white', backgroundColor: '#D9D9D9', padding: '20px' }}>
