@@ -6,12 +6,12 @@ import {
 } from '@mui/material';
 
 export default function UserInfo({
-  userId, userEmail, userName, userMajor, userVenmo, userYear, userNumber, userBio,
+  userName, userPennId, userEmail, userMajor, userVenmo, userYear, userNumber, userBio,
 }) {
   // milestone 4 logistics
   const navigate = useNavigate();
   function handleSignOut() {
-    navigate('/aboutus');
+    navigate('');
   }
 
   function handleEditProfile() {
@@ -38,6 +38,12 @@ export default function UserInfo({
         <b>Username:</b>
         {' '}
         {userName}
+      </Typography>
+      <Typography variant="body1" sx={{ textAlign: 'left' }}>
+        <b>PennID:</b>
+        {' '}
+        {userPennId}
+        {/* <button type="button" onClick={() => editField('pennId')}>Edit</button> */}
       </Typography>
       <Typography variant="body1" sx={{ textAlign: 'left' }}>
         <b>Email:</b>

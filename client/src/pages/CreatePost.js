@@ -36,6 +36,7 @@ function CreatePost({ userId }) {
       currCapacity: 1,
       currMemberIds: [userId],
     };
+    // console.log('postGroupdara', modifiedData);
     const response = await createGroup(modifiedData);
     navigate(`/activityfeed`);
   };

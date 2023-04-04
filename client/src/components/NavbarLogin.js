@@ -12,6 +12,10 @@ export default function NavbarLogin() {
     navigate('/');
   }
 
+  function handleLogin() {
+    navigate('/login');
+  }
+
   function handleAboutUs() {
     navigate('/aboutus');
   }

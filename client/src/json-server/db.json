@@ -40,6 +40,7 @@
     {
       "id": 1,
       "name": "Nicky",
+      "pennId": "12345",
       "email": "nickywon@wharton.upenn.edu",
       "number": "1234567891",
       "year": "Junior",
@@ -52,6 +53,7 @@
     {
       "id": 2,
       "name": "Grace",
+      "pennId": "123456",
       "email": "grace@upenn.edu",
       "number": "1234567891",
       "year": "Sophomore",
@@ -64,6 +66,7 @@
     {
       "id": 3,
       "name": "Iain",
+      "pennId": "1234567",
       "email": "iainli@gmail.com",
       "number": "1234567891",
       "year": "Sophomore",
@@ -75,7 +78,21 @@
     },
     {
       "id": 4,
+      "name": "Linda",
+      "pennId": "12345678",
+      "email": "lshen7@sas.upenn.edu",
+      "number": "1234567891",
+      "year": "Sophomore",
+      "password": "linda777",
+      "major": "CIS",
+      "venmo": "Linda_Shen_7",
+      "bio": "I love CIS350 !",
+      "rating": 4.9
+    },
+    {
+      "id": 5,
       "name": "Salam",
+      "pennId": "123456789",
       "email": "salamk@sas.upenn.edu",
       "number": "1234567891",
       "year": "Junior",
@@ -84,18 +101,6 @@
       "venmo": "Salam-Kar",
       "bio": "I love CIS350 !",
       "rating": 4.2
-    },
-    {
-      "id": 5,
-      "name": "Linda",
-      "email": "lshen7@seas.upenn.edu",
-      "number": "1234567891",
-      "year": "Sophomore",
-      "major": "CIS/ECON",
-      "venmo": "linda-shen",
-      "bio": "I love CIS350 !",
-      "rating": 4,
-      "password": "lkalala"
     }
   ],
   "group": [
@@ -128,6 +133,19 @@
         4,
         2
       ]
+    },
+    {
+      "ownerId": 1,
+      "location": "Taipei",
+      "departDate": "22",
+      "modeTransport": "Iain",
+      "departPlace": "Nicky",
+      "maxCapacity": "23456",
+      "currCapacity": 1,
+      "currMemberIds": [
+        1
+      ],
+      "id": 4
     }
   ],
   "text": [
