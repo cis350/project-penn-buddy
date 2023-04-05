@@ -24,7 +24,7 @@ describe('test that all message field is in document', () => {
     // render the component
     const { getChatroom } = render(
       <MemoryRouter>
-        <Chatroom />
+        <Chatroom userId={1} name="Nicky" />
       </MemoryRouter>,
     );
     // assert that the element is in the document
@@ -38,7 +38,7 @@ describe('test that all enter a message is in document', () => {
     // render the component
     const { getChatroom } = render(
       <MemoryRouter>
-        <Chatroom />
+        <Chatroom userId={1} name="Nicky" />
       </MemoryRouter>,
     );
     // assert that the element is in the document
@@ -52,7 +52,7 @@ describe('test that user name is in document', () => {
     // render the component
     const { getChatroom } = render(
       <MemoryRouter>
-        <Chatroom />
+        <Chatroom userId={1} name="Nicky" />
       </MemoryRouter>,
     );
     // assert that the element is in the document
@@ -61,30 +61,93 @@ describe('test that user name is in document', () => {
   });
 });
 
-describe('test that Linda is in document', () => {
-  test('test that Linda is in document', async () => {
+describe('search is in document', () => {
+  test('search is in document', async () => {
     // render the component
     const { getChatroom } = render(
       <MemoryRouter>
-        <Chatroom />
+        <Chatroom userId={1} name="Nicky" />
       </MemoryRouter>,
     );
-    // assert that the element is in the document
-    const userL = screen.getByText(/Linda Shen/);
-    expect(userL).toBeInTheDocument();
+    const search = screen.getByLabelText(/Search/);
+    expect(search).toBeInTheDocument();
   });
 });
 
-describe('test that Iain is in document', () => {
-  test('test that Iain is in document', async () => {
+describe('send is in document', () => {
+  test('send is in document', async () => {
     // render the component
     const { getChatroom } = render(
       <MemoryRouter>
-        <Chatroom />
+        <Chatroom userId={1} name="Nicky" />
       </MemoryRouter>,
     );
-    // assert that the element is in the document
-    const userI = screen.getByText(/Iain Li/);
-    expect(userI).toBeInTheDocument();
+    const send = screen.getByTestId("send");
+    expect(send).toBeInTheDocument();
+  });
+});
+
+describe('chatNames is in document', () => {
+  test('chatNames is in document', async () => {
+    // render the component
+    const { getChatroom } = render(
+      <MemoryRouter>
+        <Chatroom userId={1} name="Nicky" />
+      </MemoryRouter>,
+    );
+    const chatn = screen.getByTestId(/chatNames/);
+    expect(chatn).toBeInTheDocument();
+  });
+});
+
+// describe('text is in document', () => {
+//   test('text is in document', async () => {
+//     // render the component
+//     const { getChatroom } = render(
+//       <MemoryRouter>
+//         <Chatroom userId={1} name="Nicky" />
+//       </MemoryRouter>,
+//     );
+//     const text = screen.getByTestId(/textData/);
+//     expect(text).toBeInTheDocument();
+//   });
+// });
+
+describe('Nicky is in document', () => {
+  test('Nicky is in document', async () => {
+    // render the component
+    const { getChatroom } = render(
+      <MemoryRouter>
+        <Chatroom userId={1} name="Nicky" />
+      </MemoryRouter>,
+    );
+    const chatn = screen.getByTestId(/chatNames/);
+    expect(chatn).toBeInTheDocument();
+  });
+});
+
+describe('text content is in document', () => {
+  test('text content is in document', async () => {
+    // render the component
+    const { getChatroom } = render(
+      <MemoryRouter>
+        <Chatroom userId={1} name="Nicky" />
+      </MemoryRouter>,
+    );
+    const n = screen.getByText(/Nicky/);
+    expect(n).toBeInTheDocument();
+  });
+});
+
+describe('sender info is in document', () => {
+  test('sender info is in document', async () => {
+    // render the component
+    const { getChatroom } = render(
+      <MemoryRouter>
+        <Chatroom userId={1} name="Nicky" />
+      </MemoryRouter>,
+    );
+    const senderId = screen.getByTextId(/sender/);
+    expect(senderId).toBeInTheDocument();
   });
 });

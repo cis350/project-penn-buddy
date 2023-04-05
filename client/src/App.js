@@ -144,7 +144,7 @@ function App() {
           <Route path="/newpost" element={<CreatePost userId={userId} />} />
           <Route path="/History" element={<History userId={userId} />} />
           <Route path="/activityfeed" element={<ActivityFeed />} />
-          <Route path="/chatroom" element={<Chatroom userId={userId} name={name.current} lastName={lastName} />} />
+          <Route path="/chatroom" element={<Chatroom userId={userId} name={name} />} />
           <Route path="/editpost/:groupId" element={<EditPost userId={userId} />} />
           <Route path="/editprofile" element={<EditProfile userId={userId} />} />
         </Routes>

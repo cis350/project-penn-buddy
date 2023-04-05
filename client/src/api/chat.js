@@ -25,8 +25,8 @@ export const getAllChatroom = async () => {
 };
 export const modifyText = async (id, texts, currentMembersIds) => {
   try {
-    // console.log('chat room id is', id);
-    const chatId = id.current;
+    console.log('chat room id is', id);
+    const chatId = id;
     const response = await axios.put(`${rootURL}/Chatroom/${chatId}`, { id, texts, currentMembersIds });
     // OH, YOU HAVE TO INSERT A NEW TEXT ELEMENT
     // OR JUST REPLACE THE ARRAYYYY

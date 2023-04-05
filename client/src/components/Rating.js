@@ -17,12 +17,12 @@ function Rating({ userId }) {
   // CHANGED RATING TO ARRAY
   const [password, setUserPassword] = useState('');
 
+  // keep chatroom tht can be a ref
+  // id of chatrooms by the state currchatud
+
   useEffect(() => {
     async function getUserByIdWrapper() {
-      console.log('userId', userId);
       const response = await getUserById(userId);
-      console.log('response', response);
-
       setUserName(response.name);
       setUserEmail(response.email);
       setUserNumber(response.number);
@@ -31,23 +31,11 @@ function Rating({ userId }) {
       setUserVenmo(response.venmo);
       setUserBio(response.bio);
       setUserPassword(response.password);
-
-      console.log('rating', response.rating);
       setUserRating(response.rating);
-      // const ratingArr = response.rating;
-      console.log('rating array', ratingScore);
-      // setUserRating(average(ratingArr));
-      // console.log('average rating', ratingScore);
     }
     // run the wrapper function
     getUserByIdWrapper();
   });
-
-  // const modifyRatingOnServer = async (id, modData) => {
-  //   // console.log('text input', message);
-  //   // console.log('mod text from ', currChatId);
-  //   const response = await changeUser(userId, modData);
-  // };
 
   const createNewUser = async (newRating) => {
     const modifiedData = {
@@ -66,37 +54,32 @@ function Rating({ userId }) {
   };
 
   const handleRating = () => {
-    // update the login state
-    // console.log('clicked');
-    console.log('clicked');
-    // it's successfully adding 1 now
-    // now, I need to find a way for it to read in the index of the star
-    console.log('score is set to', 1);
     setRating(1);
     const modRatingArr = [1];
     ratingScore.forEach((r) => {
       modRatingArr.push(r);
     });
-    console.log('modRatingarr', modRatingArr);
+    // console.log('modRatingarr', modRatingArr);
     createNewUser(modRatingArr);
   };
 
   return (
     <div>
-      <div className="star-rating">
+      <div className="star-rating" data-testid="rating">
         {[1, 2, 3, 4, 5].map((index) => {
           // index += 1
           const keyValue = index;
           return (
             <button
+              data-testid="star-button"
               type="button"
               key={keyValue}
               className={index <= (hover || rating) ? "on" : "off"}
-              onClick={handleRating}
+              onClick={handleRating(index)}
               onMouseEnter={() => setHover(index)}
-              onMouseLeave={() => setHover(rating)}
+              onMouseLeave={() => setRating(rating)}
             >
-              <span className="star">&#9733;</span>
+              <span className="star" data-testid="stars">&#9733;</span>
             </button>
           );
         })}

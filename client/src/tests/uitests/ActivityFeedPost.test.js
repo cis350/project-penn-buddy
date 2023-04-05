@@ -89,4 +89,5 @@ describe('test that Activity Feed is in document', () => {
       const postDetailsButton3 = screen.getByText(/PHL/);
       expect(postDetailsButton3).toBeInTheDocument();
     });
+  });
 });

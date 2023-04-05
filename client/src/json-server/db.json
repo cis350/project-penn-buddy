@@ -40,27 +40,51 @@
     {
       "id": 1,
       "name": "Nicky",
-      "pennId": "12345",
       "email": "nickywon@wharton.upenn.edu",
       "number": "1234567891",
       "year": "Junior",
       "major": "CIS",
       "venmo": "Nicky_Wong",
       "bio": "I love CIS350 !",
-      "rating": [5, 1],
+      "rating": [
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        5,
+        1
+      ],
       "password": "nickypass123"
     },
     {
       "id": 2,
       "name": "Grace",
-      "pennId": "123456",
       "email": "grace@upenn.edu",
       "number": "1234567891",
       "year": "Sophomore",
       "major": "Computer Science",
       "venmo": "grace_venmoooo",
       "bio": "I love CIS350 so so much!!!!",
-      "rating": [5, 4],
+      "rating": [
+        1,
+        1,
+        1,
+        5,
+        4
+      ],
       "password": "grace555"
     },
     {
@@ -73,7 +97,11 @@
       "major": "CIS",
       "venmo": "iain888",
       "bio": "I love CIS350 !",
-      "rating": [2, 3, 4],
+      "rating": [
+        2,
+        3,
+        4
+      ],
       "password": "iaianchenli"
     },
     {
@@ -87,7 +115,11 @@
       "major": "CIS",
       "venmo": "Linda_Shen_7",
       "bio": "I love CIS350 !",
-      "rating": 4.9
+      "rating": [
+        1,
+        2,
+        3
+      ]
     },
     {
       "id": 5,
@@ -100,19 +132,11 @@
       "major": "CIS",
       "venmo": "Salam-Kar",
       "bio": "I love CIS350 !",
-      "rating": 4.2
-    },
-    {
-      "id": 5,
-      "name": "Linda",
-      "email": "lshen7@seas.upenn.edu",
-      "number": "1234567891",
-      "year": "Sophomore",
-      "major": "CIS/ECON",
-      "venmo": "linda-shen",
-      "bio": "I love CIS350 !",
-      "rating": 4,
-      "password": "lkalala"
+      "rating": [
+        5,
+        4,
+        3
+      ]
     }
   ],
   "group": [
@@ -154,10 +178,24 @@
       "modeTransport": "Iain",
       "departPlace": "Nicky",
       "maxCapacity": "23456",
+      "currCapacity": 2,
+      "currMemberIds": [
+        1,
+        2
+      ]
+    },
+    {
+      "ownerId": 2,
+      "location": "Thailand",
+      "departDate": "",
+      "modeTransport": "",
+      "departPlace": "",
+      "maxCapacity": 0,
       "currCapacity": 1,
       "currMemberIds": [
-        1
-      ]
+        2
+      ],
+      "id": 5
     }
   ],
   "text": [
@@ -187,16 +225,39 @@
       "id": 1,
       "texts": [
         {
-          "userId": 1,
-          "content": "hello how are you"
+          "userId": 2,
+          "content": "welcome to chat 5"
         },
         {
           "userId": 2,
-          "content": "Hello im grace"
+          "content": "welcome to chat "
+        },
+        {
+          "userId": 2,
+          "content": "hello"
+        },
+        {
+          "userId": 2,
+          "content": "hello aain"
+        },
+        {
+          "userId": 2,
+          "content": "helloooo"
+        },
+        {
+          "userId": 2,
+          "content": "helloooooooo"
+        },
+        {
+          "userId": 2,
+          "content": "he"
+        },
+        {
+          "userId": 2,
+          "content": "chatroom 1"
         }
       ],
       "currentMembersIds": [
-        1,
         2
       ]
     },
@@ -230,28 +291,18 @@
       ]
     },
     {
-      "id": 3,
+      "id": 5,
       "texts": [
         {
-          "userId": 4,
-          "content": "welcome to chatroom 3"
+          "userId": 2,
+          "content": "hello chat room 5"
         },
         {
-          "userId": 1,
-          "content": "chat with Linda"
-        },
-        {
-          "userId": 1,
-          "content": "hello i like eatibng"
-        },
-        {
-          "userId": 1,
-          "content": "My name is Grace!"
+          "userId": 2,
+          "content": "chatroom 2"
         }
       ],
       "currentMembersIds": [
-        1,
-        3,
         2
       ]
     }

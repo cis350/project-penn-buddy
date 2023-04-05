@@ -32,7 +32,6 @@ export default function MyPost({
     // create currMembersId
     const r1 = await getGroupById(groupId);
     const memberIds = r1.currMemberIds;
-    // check if the chatroom with said groupId already exists or not
     const existChat = await getChatroomById(groupId);
     if (typeof existChat === 'undefined') {
       const response = await createNewChatroom(groupId, memberIds);

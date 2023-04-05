@@ -18,12 +18,10 @@ export default function OtherPost({
 }) {
   const navigate = useNavigate();
   const handleChatroom = async (e) => {
-    console.log('create chatroom clicks');
     const newTextData = [];
     // create currMembersId
     const r1 = await getGroupById(groupId);
     const memberIds = r1.currMemberIds;
-    console.log('group members in new chat', memberIds);
     // check if the chatroom with said groupId already exists or not
     const existChat = await getChatroomById(groupId);
     if (typeof existChat === 'undefined') {
