@@ -40,3 +40,15 @@ export const changeUser = async (userId, newUser) => {
     console.log('error', err.message);
   }
 };
+
+/**
+ * Delete a user by userId
+ */
+export const deleteUser = async (userId) => {
+  try {
+    const response = await axios.delete(`${rootURL}/user/${userId}`);
+    return response.data;
+  } catch (err) {
+    console.log('error', err.message);
+  }
+};
