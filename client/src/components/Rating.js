@@ -23,6 +23,8 @@ function Rating({ userId }) {
   useEffect(() => {
     async function getUserByIdWrapper() {
       const response = await getUserById(userId);
+      console.log('user', response);
+      console.log('rating', response.rating);
       setUserName(response.name);
       setUserEmail(response.email);
       setUserNumber(response.number);
@@ -59,7 +61,7 @@ function Rating({ userId }) {
     ratingScore.forEach((r) => {
       modRatingArr.push(r);
     });
-    // console.log('modRatingarr', modRatingArr);
+    console.log('modRatingarr', modRatingArr);
     createNewUser(modRatingArr);
   };
 
@@ -75,7 +77,7 @@ function Rating({ userId }) {
               type="button"
               key={keyValue}
               className={index <= (hover || rating) ? "on" : "off"}
-              onClick={handleRating(index)}
+              onClick={handleRating}
               onMouseEnter={() => setHover(index)}
               onMouseLeave={() => setRating(rating)}
             >

@@ -51,12 +51,9 @@ export default function Chatroom({ userId, name }) {
     async function getAllChatroomWrapper() {
       const response = await getAllChatroom();
       setChatrooms(response);
-      chatrooms.filter((cr) => {
-        if (cr.currentMembersIds.includes(userId)) {
-          filteredCr.push(cr);
-        }
-        return filteredCr;
-      });
+      setFiltered(chatrooms.filter(
+        (chat) => chat.currentMembersIds.includes(userId),
+      ));
       const r2 = await getChatroomById(currChatId.current);
       setCurrentMembersIds(r2.currentMembersIds);
       // setCurrMembersName(r2.currentMembersIds);
@@ -83,6 +80,9 @@ export default function Chatroom({ userId, name }) {
     chatrooms.forEach((element) => {
       if (currChatId.current === element.id) {
         deleteChatroom(currChatId.current);
+        setChatrooms(chatrooms.filter(
+          (chat) => (chat.id !== currChatId.current),
+        ));
         // might have to fix this later
         currChatId.current = 1;
       }

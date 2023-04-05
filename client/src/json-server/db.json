@@ -49,23 +49,7 @@
       "rating": [
         1,
         1,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        5,
-        1
+        5
       ],
       "password": "nickypass123"
     },
@@ -82,15 +66,19 @@
         1,
         1,
         1,
-        5,
-        4
+        1,
+        1,
+        1,
+        1,
+        1,
+        4,
+        5
       ],
       "password": "grace555"
     },
     {
       "id": 3,
       "name": "Iain",
-      "pennId": "1234567",
       "email": "iainli@gmail.com",
       "number": "1234567891",
       "year": "Sophomore",
@@ -98,33 +86,14 @@
       "venmo": "iain888",
       "bio": "I love CIS350 !",
       "rating": [
-        2,
-        3,
-        4
+        4,
+        5
       ],
       "password": "iaianchenli"
     },
     {
       "id": 4,
-      "name": "Linda",
-      "pennId": "12345678",
-      "email": "lshen7@sas.upenn.edu",
-      "number": "1234567891",
-      "year": "Sophomore",
-      "password": "linda777",
-      "major": "CIS",
-      "venmo": "Linda_Shen_7",
-      "bio": "I love CIS350 !",
-      "rating": [
-        1,
-        2,
-        3
-      ]
-    },
-    {
-      "id": 5,
       "name": "Salam",
-      "pennId": "123456789",
       "email": "salamk@sas.upenn.edu",
       "number": "1234567891",
       "year": "Junior",
@@ -133,10 +102,22 @@
       "venmo": "Salam-Kar",
       "bio": "I love CIS350 !",
       "rating": [
-        5,
-        4,
-        3
+        5
       ]
+    },
+    {
+      "id": 5,
+      "name": "Linda",
+      "email": "lshen7@seas.upenn.edu",
+      "number": "1234567891",
+      "year": "Sophomore",
+      "major": "CIS/ECON",
+      "venmo": "linda-shen",
+      "bio": "I love CIS350 !",
+      "rating": [
+        3
+      ],
+      "password": "lkalala"
     }
   ],
   "group": [
@@ -220,91 +201,5 @@
       "content": "Let's leave at around 6.00pm"
     }
   ],
-  "Chatroom": [
-    {
-      "id": 1,
-      "texts": [
-        {
-          "userId": 2,
-          "content": "welcome to chat 5"
-        },
-        {
-          "userId": 2,
-          "content": "welcome to chat "
-        },
-        {
-          "userId": 2,
-          "content": "hello"
-        },
-        {
-          "userId": 2,
-          "content": "hello aain"
-        },
-        {
-          "userId": 2,
-          "content": "helloooo"
-        },
-        {
-          "userId": 2,
-          "content": "helloooooooo"
-        },
-        {
-          "userId": 2,
-          "content": "he"
-        },
-        {
-          "userId": 2,
-          "content": "chatroom 1"
-        }
-      ],
-      "currentMembersIds": [
-        2
-      ]
-    },
-    {
-      "id": 2,
-      "texts": [
-        {
-          "userId": 3,
-          "content": "welcome to chatroom 2"
-        },
-        {
-          "userId": 1,
-          "content": "I like cis 3500!"
-        },
-        {
-          "userId": 1,
-          "content": "hello"
-        },
-        {
-          "userId": 1,
-          "content": "where do we go"
-        },
-        {
-          "userId": 4,
-          "content": "send message"
-        }
-      ],
-      "currentMembersIds": [
-        1,
-        3
-      ]
-    },
-    {
-      "id": 5,
-      "texts": [
-        {
-          "userId": 2,
-          "content": "hello chat room 5"
-        },
-        {
-          "userId": 2,
-          "content": "chatroom 2"
-        }
-      ],
-      "currentMembersIds": [
-        2
-      ]
-    }
-  ]
+  "Chatroom": []
 }
