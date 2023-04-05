@@ -47,6 +47,21 @@ describe('test that all enter a message is in document', () => {
   });
 });
 
+test('test navigation navbar login', async () => {
+  // render the component
+  const { getByLabelText } = render(
+    <MemoryRouter>
+      <Chatroom userId={1} name="Nicky" />
+    </MemoryRouter>,
+  );
+  // fire the user event
+  // find the textbox and type atlanta into it
+  // click on the OK button
+  await userEvent.click(screen.getByText(/Back to Activity Feed/));
+  // check that My Profile is now is the document
+  expect(screen.getByText(/Feed/)).toBeInTheDocument();
+});
+
 // describe('test that user name is in document', () => {
 //   test('test that user name is in document', async () => {
 //     // render the component

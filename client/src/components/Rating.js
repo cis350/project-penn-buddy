@@ -7,6 +7,7 @@ function Rating({ userId }) {
   const [ratingScore, setUserRating] = useState([]);
   const newScore = useRef(0);
 
+  const [pennId, setPennId] = useState(0);
   const [name, setUserName] = useState('');
   const [email, setUserEmail] = useState('');
   const [number, setUserNumber] = useState('');
@@ -23,9 +24,10 @@ function Rating({ userId }) {
   useEffect(() => {
     async function getUserByIdWrapper() {
       const response = await getUserById(userId);
-      console.log('user', response);
-      console.log('rating', response.rating);
+      // console.log('user', response);
+      // console.log('rating', response.rating);
       setUserName(response.name);
+      setPennId(response.pennId);
       setUserEmail(response.email);
       setUserNumber(response.number);
       setUserYear(response.year);
@@ -43,6 +45,7 @@ function Rating({ userId }) {
     const modifiedData = {
       id: userId,
       name,
+      pennId,
       email,
       number,
       year,
@@ -61,7 +64,7 @@ function Rating({ userId }) {
     ratingScore.forEach((r) => {
       modRatingArr.push(r);
     });
-    console.log('modRatingarr', modRatingArr);
+    // console.log('modRatingarr', modRatingArr);
     createNewUser(modRatingArr);
   };
 

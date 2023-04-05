@@ -46,7 +46,6 @@ export default function NavbarLogin() {
         <Stack direction="row" spacing={6}>
           <Button color="inherit" sx={{ color: 'black' }} onClick={handleHome}>Home</Button>
           <Button color="inherit" sx={{ color: 'black' }} onClick={handleAboutUs}>About Us</Button>
-          <Button color="inherit" sx={{ color: 'black' }}>How We Work</Button>
         </Stack>
       </Toolbar>
     </AppBar>

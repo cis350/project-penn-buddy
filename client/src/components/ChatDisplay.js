@@ -61,13 +61,11 @@ export default function ChatDisplay({ userId, chatId }) {
 
   const modifyTextOnServer = async (textData, membersData) => {
     // console.log('text input', message);
-    console.log('mod text from ', currChatId);
     const response = await modifyText(currChatId, textData, membersData);
   };
 
   const handleSendText = (e) => {
     // update the login state
-    console.log('clicked');
     // setRender(!render);
     const modifiedTextData = [];
     text.forEach((element) => {
@@ -78,7 +76,6 @@ export default function ChatDisplay({ userId, chatId }) {
       content: message.current,
     };
     modifiedTextData.push(modifiedData);
-    console.log('modText', modifiedData);
     modifyTextOnServer(modifiedTextData, currentMembersIds);
   };
 

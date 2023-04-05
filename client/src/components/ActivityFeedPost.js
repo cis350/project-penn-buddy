@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react/jsx-no-bind */
 import React, { useState, useEffect } from 'react';
 import {
@@ -24,20 +25,15 @@ export default function ActivityFeedPost({
   const [ratingScore, setUserRating] = useState([]);
 
   const average = (array) => {
-    console.log('array to av', array);
     const inter = array.reduce((a, b) => (a + b)) / (array.length);
     return inter;
-    // HOW TO MAKE IT ROUNDED?
   };
 
   useEffect(() => {
     async function getUserByIdWrapper() {
       const response = await getUserById(ownerId);
-      console.log('response', response);
-      console.log('rating', response.rating);
       const ratingArr = response.rating;
       setUserRating(average(ratingArr));
-      console.log('average rating', ratingScore);
     }
     // run the wrapper function
     getUserByIdWrapper();

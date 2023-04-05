@@ -4,14 +4,15 @@
 
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
-import Navbar from '../../components/Navbar';
 // import testing library functions
 import { render, screen, cleanup } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import {
+  MemoryRouter, BrowserRouter, Route, Routes,
+} from 'react-router-dom';
 import { ThemeProvider } from '@emotion/react';
 import userEvent from '@testing-library/user-event';
 import renderer from 'react-test-renderer';
+import Navbar from '../../components/Navbar';
 import App from '../../App';
 
 test('test that Home button is in the document', () => {
@@ -28,15 +29,6 @@ test('test that About Us button is in the document', () => {
   const { getByLabelText } = render(<App />);
   // find the element by its role
   const okButton = screen.getByText(/About Us/);
-  // assert that the element is in the document
-  expect(okButton).toBeInTheDocument();
-});
-
-test('test that How We Work button is in the document', () => {
-  // render the component
-  const { getByLabelText } = render(<App />);
-  // find the element by its role
-  const okButton = screen.getByText(/How We Work/);
   // assert that the element is in the document
   expect(okButton).toBeInTheDocument();
 });

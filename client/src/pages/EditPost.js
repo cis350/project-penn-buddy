@@ -130,7 +130,7 @@ export default function EditPost({ userId }) {
             variant="filled"
             required
             value={maxCapacity}
-            onChange={(e) => setMaxCapacity(e.target.value)}
+            onChange={(e) => setMaxCapacity(parseInt(e.target.value, 10))}
             data-testid="Max Capacity"
             style={{ marginBottom: '16px', width: '400px' }}
           />

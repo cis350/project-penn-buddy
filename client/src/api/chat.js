@@ -25,7 +25,6 @@ export const getAllChatroom = async () => {
 };
 export const modifyText = async (id, texts, currentMembersIds) => {
   try {
-    console.log('chat room id is', id);
     const chatId = id;
     const response = await axios.put(`${rootURL}/Chatroom/${chatId}`, { id, texts, currentMembersIds });
     // OH, YOU HAVE TO INSERT A NEW TEXT ELEMENT
@@ -41,7 +40,6 @@ export const createNewChatroom = async (chatId, membersId) => {
     const id = parseInt(chatId, 10);
     const texts = [];
     const currentMembersIds = membersId;
-    console.log('members id in chatjs', currentMembersIds);
     const response = await axios.post(`${rootURL}/Chatroom`, { id, texts, currentMembersIds });
     return response.data;
   } catch (err) {
@@ -52,7 +50,6 @@ export const createNewChatroom = async (chatId, membersId) => {
 export const deleteChatroom = async (id) => {
   try {
     const chatId = id;
-    console.log('char id to be delete', chatId);
     const response = await axios.delete(`${rootURL}/Chatroom/${chatId}`);
     return response.data;
   } catch (err) {

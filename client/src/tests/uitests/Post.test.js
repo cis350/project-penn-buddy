@@ -113,3 +113,31 @@ describe('test my post', () => {
     expect(backButton).toBeInTheDocument();
   });
 });
+
+test('test navigation navbar login', async () => {
+  // render the component
+  const { getByLabelText } = render(
+    <MemoryRouter>
+      <MyPost
+        ownerId={1}
+        location="hi"
+        departDate="hi"
+        modeTransport="hi"
+        departPlace={1}
+        maxCapacity={1}
+        currCapacity={1}
+        currMemberIds={[1, 2]}
+        groupId={2}
+        userId={2}
+        group={null}
+        handleDeleteGroup={null}
+      />
+    </MemoryRouter>,
+  );
+  // fire the user event
+  // find the textbox and type atlanta into it
+  // click on the OK button
+  await userEvent.click(screen.getByText(/Back to Activity Feed/));
+  // check that My Profile is now is the document
+  expect(screen.getByText(/Feed/)).toBeInTheDocument();
+});

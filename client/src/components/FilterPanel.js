@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable react/jsx-no-bind */
 import React, { useState } from 'react';
 import {

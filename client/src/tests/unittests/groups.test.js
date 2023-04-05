@@ -1,6 +1,8 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { getAllGroups, getGroupById } from '../../api/groups';
+import {
+  getAllGroups, getGroupById, deleteGroupById, changeGroup, createGroup,
+} from '../../api/groups';
 import { rootURL } from "../../utils/utils";
 
 // This sets the mock adapter on the default axios instance
@@ -61,10 +63,34 @@ describe('the api returned correct data of group 3', () => {
   });
 });
 
+describe('modify group', () => {
+  mockAxios.onPut(`${rootURL}/group/1`, { newGroup: "Hi" }).reply(200, 'Hi');
+  test('Grace is the returned user', async () => {
+    const data = await changeGroup("Hi");
+    expect(data).toBe(undefined);
+  });
+});
+
+describe('create group', () => {
+  mockAxios.onPost(`${rootURL}/group/1`, { newGroup: "Hi" }).reply(200, 'Hi');
+  test('Grace is the returned user', async () => {
+    const data = await createGroup("Hi");
+    expect(data).toBe(undefined);
+  });
+});
+
 describe('the api returned correct data of all groups', () => {
   mockAxios.onGet(`${rootURL}/group`).reply(200, allGroups);
   test('Group 3 is returned', async () => {
     const data = await getAllGroups();
     expect(data[0].location).toBe('PHL Airport');
+  });
+});
+
+describe('the api returned correct data of all groups', () => {
+  mockAxios.onDelete(`${rootURL}/group/1`).reply(200, 'Delete');
+  test('Group 1 is returned', async () => {
+    const data = await deleteGroupById(1);
+    expect(data).toBe('Delete');
   });
 });

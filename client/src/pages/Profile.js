@@ -11,7 +11,7 @@ function Profile({ userId, setLogin }) {
   if (userId === null) {
     return <div>Loading...</div>;
   }
-  console.log(userId);
+  // console.log(userId);
 
   const [userName, setUserName] = useState('');
   const [userPennId, setPennId] = useState('');
@@ -26,10 +26,10 @@ function Profile({ userId, setLogin }) {
 
   useEffect(() => {
     async function getProfileInfoWrapper() {
-      console.log('UserId in Profile', userId);
+      // console.log('UserId in Profile', userId);
       const response = await getUserById(userId);
-      console.log('Profile Info', response);
-      console.log('pennId', response.pennId);
+      // console.log('Profile Info', response);
+      // console.log('pennId', response.pennId);
       setUserName(response.name);
       setPennId(response.pennId);
       setUserEmail(response.email);

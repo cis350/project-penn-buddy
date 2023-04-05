@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-bind */
 // /* eslint-disable react/jsx-no-bind */
 // /* eslint-disable react/jsx-props-no-spreading */
 // /* eslint-disable import/no-named-as-default */
@@ -5,7 +6,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-  AppBar, Button, Container, Toolbar, Typography, Stack, Box, Avatar, 
+  AppBar, Button, Container, Toolbar, Typography, Stack, Box, Avatar,
   IconButton, Rating, List, ListItem,
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';

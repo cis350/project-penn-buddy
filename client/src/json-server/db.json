@@ -1,45 +1,9 @@
 {
-  "history": [
-    {
-      "id": 1,
-      "location": "JFK",
-      "departDate": "2023-07-03T17:22:00.001Z",
-      "modeTransport": "uber",
-      "departPlace": "Penn"
-    },
-    {
-      "id": 2,
-      "location": "LGA",
-      "departDate": "2023-03-14T15:00:00.001Z",
-      "modeTransport": "uber",
-      "departPlace": "Harnwell"
-    },
-    {
-      "id": 3,
-      "location": "PIA",
-      "departDate": "2023-02-25T16:20:00.001Z",
-      "modeTransport": "lyft",
-      "departPlace": "Radian"
-    },
-    {
-      "id": 4,
-      "location": "Fishtown",
-      "departDate": "2023-02-25T16:20:00.001Z",
-      "modeTransport": "uber",
-      "departPlace": "Bookstore"
-    },
-    {
-      "id": 5,
-      "location": "JFK",
-      "departDate": "2023-02-25T16:20:00.001Z",
-      "modeTransport": "private car",
-      "departPlace": "Hill"
-    }
-  ],
   "user": [
     {
       "id": 1,
       "name": "Nicky",
+      "pennId": "1234567",
       "email": "nickywon@wharton.upenn.edu",
       "number": "1234567891",
       "year": "Junior",
@@ -49,6 +13,7 @@
       "rating": [
         1,
         1,
+        1,
         5
       ],
       "password": "nickypass123"
@@ -56,6 +21,7 @@
     {
       "id": 2,
       "name": "Grace",
+      "pennId": "56565656",
       "email": "grace@upenn.edu",
       "number": "1234567891",
       "year": "Sophomore",
@@ -74,12 +40,11 @@
         4,
         5
       ],
-      "bio": "Hi! My name is Grace and I am a CIS major at Penn. Let's get to know each other!",
-      "rating": 4.8,
       "password": "grace555"
     },
     {
       "id": 3,
+      "pennId": "56565656",
       "name": "Iain",
       "email": "iainli@gmail.com",
       "number": "1234567891",
@@ -103,7 +68,9 @@
       "major": "CIS",
       "venmo": "lindashen",
       "bio": "I love CIS350 !",
-      "rating": 4,
+      "rating": [
+        4
+      ],
       "password": "lindalinda"
     },
     {
@@ -116,10 +83,13 @@
       "major": "CIS",
       "venmo": "Salam-Kar",
       "bio": "I love CIS350 !",
-      "rating": 4.2,
+      "rating": [
+        4
+      ],
       "password": "salam12345"
     },
     {
+      "id": 6,
       "name": "Tate",
       "pennId": "1234569182",
       "email": "tatepark@seas.upenn.edu",
@@ -129,8 +99,13 @@
       "major": "MEAM",
       "venmo": "tatepark",
       "bio": "Hi I am testing Penn Buddy. This is super cool.",
-      "rating": null,
-      "id": 6
+      "rating": [
+        1,
+        2,
+        3,
+        4,
+        4
+      ]
     }
   ],
   "group": [
@@ -142,7 +117,7 @@
       "modeTransport": "Uber/Lyft XL",
       "departPlace": "The Radian",
       "maxCapacity": 4,
-      "currCapacity": 2,
+      "currCapacity": 3,
       "currMemberIds": [
         1,
         3,
@@ -169,10 +144,10 @@
       "ownerId": 1,
       "location": "Taipei",
       "departDate": "02-12-2022 12:23",
-      "modeTransport": "Iain",
-      "departPlace": "Nicky",
-      "maxCapacity": "4",
-      "currCapacity": 1,
+      "modeTransport": "Private Jet",
+      "departPlace": "Iain's Clubhouse",
+      "maxCapacity": 6,
+      "currCapacity": 3,
       "currMemberIds": [
         1,
         3,
@@ -185,34 +160,38 @@
       "departDate": "04-10-2023",
       "modeTransport": "Uber/Lyft/Zipcar?",
       "departPlace": "Harrison College House",
-      "maxCapacity": "5",
+      "maxCapacity": 4,
       "currCapacity": 1,
       "currMemberIds": [
         3
       ],
       "id": 5
-    }
-  ],
-  "text": [
-    {
-      "senderId": 2,
-      "chatId": 1,
-      "content": "Hi Nicky! This is Grace and I am also traveling to Newark today. Would you like to join my group with another person?"
     },
     {
-      "senderId": 1,
-      "chatId": 1,
-      "content": "Sure! That sounds great, thanks"
+      "id": 6,
+      "ownerId": 1,
+      "location": "Phuket",
+      "departDate": "12-12-2023 09:00",
+      "modeTransport": "Helicopter",
+      "departPlace": "Huntsman",
+      "maxCapacity": "7",
+      "currCapacity": 1,
+      "currMemberIds": [
+        1
+      ]
     },
     {
-      "senderId": 1,
-      "chatId": 1,
-      "content": "When are we leaving?"
-    },
-    {
-      "senderId": 2,
-      "chatId": 1,
-      "content": "Let's leave at around 6.00pm"
+      "id": 7,
+      "ownerId": 1,
+      "location": "Hell",
+      "departDate": "02-02-2020",
+      "modeTransport": "Jump",
+      "departPlace": "Heaven",
+      "maxCapacity": 7,
+      "currCapacity": 1,
+      "currMemberIds": [
+        1
+      ]
     }
   ],
   "Chatroom": [
@@ -234,6 +213,14 @@
         {
           "senderId": 1,
           "content": "Yo"
+        },
+        {
+          "userId": 1,
+          "content": "hihi"
+        },
+        {
+          "userId": 1,
+          "content": "grace"
         }
       ],
       "currentMembersIds": [

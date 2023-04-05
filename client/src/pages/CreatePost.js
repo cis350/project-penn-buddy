@@ -115,7 +115,7 @@ function CreatePost({ userId }) {
             label="Max Capacity"
             variant="filled"
             required
-            onChange={(e) => setMaxCapacity(e.target.value)}
+            onChange={(e) => setMaxCapacity(parseInt(e.target.value, 10))}
             style={{ marginBottom: '16px', width: '400px' }}
           />
           <Button
