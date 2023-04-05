@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-bind */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
-  Container, Box, Avatar, Typography, Grid, Stack, Button,
+  Container, Box, Avatar, Typography, Grid, Stack, Button, Rating,
 } from '@mui/material';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import DirectionsCarFilledOutlinedIcon from '@mui/icons-material/DirectionsCarFilledOutlined';
@@ -9,16 +9,40 @@ import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import { useNavigate } from 'react-router-dom';
 import MemberCard from './MemberCard';
+import { getUserById } from '../api/users';
 
 export default function ActivityFeedPost({
   ownerId, location, departDate, modeTransport, departPlace,
-  maxCapacity, currCapacity, currMemberIds, groupId,
+  maxCapacity, currCapacity, currMemberIds, groupId, rating,
 }) {
   const navigate = useNavigate();
 
   function handleOpen() {
     navigate(`/group/${groupId}`);
   }
+
+  const [ratingScore, setUserRating] = useState([]);
+
+  const average = (array) => {
+    console.log('array to av', array);
+    const inter = array.reduce((a, b) => (a + b)) / (array.length);
+    return inter;
+    // HOW TO MAKE IT ROUNDED?
+  };
+
+  useEffect(() => {
+    async function getUserByIdWrapper() {
+      const response = await getUserById(ownerId);
+      console.log('response', response);
+      console.log('rating', response.rating);
+      const ratingArr = response.rating;
+      setUserRating(average(ratingArr));
+      console.log('average rating', ratingScore);
+    }
+    // run the wrapper function
+    getUserByIdWrapper();
+    // should add a dependency
+  });
 
   return (
     <div>
@@ -38,6 +62,12 @@ export default function ActivityFeedPost({
           <Grid container rowSpacing={3} columnSpacing={3}>
             <Grid item sx={{ flexGrow: 1 }}>
               <MemberCard key={ownerId} userId={ownerId} />
+              <br />
+              <div>
+                Rating:
+                {' '}
+                {ratingScore}
+              </div>
             </Grid>
             <Grid item xs={6} justify="flex-end">
               <Stack className="location" direction="row" spacing={3} alignItems="center">

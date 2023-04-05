@@ -15,50 +15,69 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SendIcon from '@mui/icons-material/Send';
 import { getChatroomById } from '../api/chat';
 
-function textRow(props) {
-  return (
-    <ListItem key="1">
-      <Grid container>
-        <Grid item xs={12}>
-          <ListItemText align="right" primary={props.texts.content} style={{ color: '#0096FF' }} />
-        </Grid>
-      </Grid>
-    </ListItem>
-  );
-}
+// function textRow(props) {
+//   return (
+//     <ListItem key="1">
+//       <Grid container>
+//         <Grid item xs={12}>
+//           <ListItemText align="right" primary={props.texts.content}
+// style={{ color: '#0096FF' }} />
+//         </Grid>
+//       </Grid>
+//     </ListItem>
+//   );
+// }
 
-export default function MyText({ text }) {
-  // loop text.map, create the rows
-  // create a list of elements
-  // consider using the student table
+// const rightText = (content, index) => (
+//   <ListItem key={index}>
+//     <Grid container>
+//       <Grid item xs={12}>
+//         <ListItemText align="right" primary={content} style={{ color: '#0096FF' }} />
+//       </Grid>
+//     </Grid>
+//   </ListItem>
+// );
 
-  const makeTexts = () => {
-    const textArray = [];
-    console.log('make text', text);
-    text.forEach((element) => {
-      // textArray.push(<textRow props={element} />)
-      // text.push(textRow(element.content));
-      textArray.push(element.content);
-    });
-    console.log('text array', textArray);
-    return textArray;
-  };
+// const leftText = (content, index) => (
+//   <ListItem key={index}>
+//     <Grid container>
+//       <Grid item xs={12}>
+//         <ListItemText align="left" primary={content} style={{ color: '#0096FF' }} />
+//       </Grid>
+//     </Grid>
+//   </ListItem>
+// );
 
-  const texts = makeTexts();
-  console.log('line 46', texts);
-  console.log('norm text', text);
+// const genText = (t, index, currUserId) => {
+//   if (t.userId === currUserId) {
+//     console.log('is user');
+//     rightText(t.content, index);
+//   } else {
+//     console.log('is not user');
+//     leftText(t.content, index);
+//   }
+// };
+
+export default function MyText({ text, currMembersId, userId }) {
   return (
     <div>
       {
-      text.map((t, index) => (
-        <ListItem key={index}>
-          <Grid container>
-            <Grid item xs={12}>
-              <ListItemText align="right" primary={t.content} style={{ color: '#0096FF' }} />
+      text
+        .map((t, index) => (
+          // <div>
+          //   {genText(t, index, userId)}
+          // </div>
+          // to create the separate components depending on t.userId == currentUserId
+          // myText vs OtherText
+          <ListItem key={index}>
+            <Grid container>
+              <Grid item xs={12}>
+                <ListItemText data-testid="text-content" align="right" style={{ color: 'black' }} primary={t.userId} />
+                <ListItemText data-testid="sender" align="right" primary={t.content} style={{ color: '#0096FF' }} />
+              </Grid>
             </Grid>
-          </Grid>
-        </ListItem>
-      ))
+          </ListItem>
+        ))
     }
     </div>
   );

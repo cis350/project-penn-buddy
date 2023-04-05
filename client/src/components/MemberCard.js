@@ -3,7 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
-  AppBar, Button, Container, Toolbar, Typography, Stack, Box, Avatar, IconButton, Grid, Modal,
+  AppBar, Button, Container, Toolbar, Typography, Stack, Box,
+  Avatar, IconButton, Grid, Modal,
 } from '@mui/material';
 import { getUserById } from '../api/users';
 

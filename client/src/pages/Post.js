@@ -8,6 +8,7 @@ import {
 import OtherPost from '../components/OtherPost';
 import MyPost from '../components/MyPost';
 import { getGroupById, changeGroup, deleteGroupById } from '../api/groups';
+import { deleteChatroom } from '../api/chat';
 
 export default function Post({ name, userId }) {
   if (userId === null) {
@@ -39,6 +40,8 @@ export default function Post({ name, userId }) {
   };
 
   const handleDeleteGroup = (e) => {
+    // MADE EDITS HERE: when you delete group, chat is deleted too
+    deleteChatroom(groupId);
     deleteGroupOnServer();
   };
 
