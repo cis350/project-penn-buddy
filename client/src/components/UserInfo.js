@@ -30,6 +30,7 @@ export default function UserInfo({
 
   return (
     <Box
+      data-testid="box"
       sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -53,7 +54,6 @@ export default function UserInfo({
         <b>PennID:</b>
         {' '}
         {userPennId}
-        {/* <button type="button" onClick={() => editField('pennId')}>Edit</button> */}
       </Typography>
       <Typography variant="body1" sx={{ textAlign: 'left' }}>
         <b>Email:</b>
