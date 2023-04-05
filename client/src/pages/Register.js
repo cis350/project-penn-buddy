@@ -47,18 +47,10 @@ function Register({ setLogin, setUserId, setName }) {
     navigate(`/`);
   };
 
-  function handleUsername(e) {
-    setPennId(e.target.value);
-  }
-
   const handleName = (e) => {
     setName(e.target.value);
     setName1(e.target.value);
   };
-
-  function handlePassword(e) {
-    setPassword(e.target.value);
-  }
 
   return (
     <div>

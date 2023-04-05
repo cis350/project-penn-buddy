@@ -1,7 +1,3 @@
-/* eslint-disable prefer-destructuring */
-/* eslint-disable no-console */
-/* eslint-disable import/no-named-as-default-member */
-/* eslint-disable import/no-named-as-default */
 import React, {
   useState, useRef, useEffect,
 } from 'react';
