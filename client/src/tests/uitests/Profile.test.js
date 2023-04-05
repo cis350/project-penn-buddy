@@ -23,7 +23,7 @@ test('test that Welcome is in the document', () => {
   // render the component
   const { getProfile } = render(
     <MemoryRouter>
-      <Profile />
+      <Profile userId={1} setLogin={true} />
     </MemoryRouter>,
   );
   // find the element by its role

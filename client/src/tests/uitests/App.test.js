@@ -41,15 +41,6 @@ test('test that How We Work button is in the document', () => {
   expect(okButton).toBeInTheDocument();
 });
 
-test('test that How We Work button is in the document', () => {
-    // render the component
-    const { getByLabelText } = render(<App />);
-    // find the element by its role
-    const okButton = screen.getByText(/How We Work/);
-    // assert that the element is in the document
-    expect(okButton).toBeInTheDocument();
-  });
-
 // test('test that First Name is in the document', () => {
 //   // render the component
 //   const { getByLabelText } = render(<App />);
