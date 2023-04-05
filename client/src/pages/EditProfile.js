@@ -15,6 +15,7 @@ export default function EditProfile({ userId }) {
   const navigate = useNavigate();
   const [name, setUserName] = useState('');
   const [email, setUserEmail] = useState('');
+  const [pennId, setPennID] = useState('');
   const [number, setUserNumber] = useState('');
   const [year, setUserYear] = useState('');
   const [major, setUserMajor] = useState('');
@@ -31,6 +32,7 @@ export default function EditProfile({ userId }) {
     const modifiedData = {
       id: userId,
       name,
+      pennId,
       email,
       number,
       year,
@@ -53,6 +55,7 @@ export default function EditProfile({ userId }) {
       // console.log('response', response);
       setUserName(response.name);
       setUserEmail(response.email);
+      setPennID(response.pennId);
       setUserNumber(response.number);
       setUserYear(response.year);
       setUserMajor(response.major);
@@ -78,7 +81,7 @@ export default function EditProfile({ userId }) {
       >
         Edit Profile
       </Typography>
-      <form onSubmit={handleSubmit}>
+      <form data-testid="Form" onSubmit={handleSubmit}>
         <div style={{
           display: 'flex',
           flexDirection: 'column',
@@ -92,6 +95,7 @@ export default function EditProfile({ userId }) {
             label="Username:"
             variant="filled"
             required
+            data-testid="username"
             value={name}
             onChange={(e) => setUserName(e.target.value)}
             style={{ marginBottom: '16px', width: '400px' }}
@@ -100,6 +104,7 @@ export default function EditProfile({ userId }) {
             label="Email:"
             variant="filled"
             required
+            data-testid="email"
             value={email}
             onChange={(e) => setUserEmail(e.target.value)}
             style={{ marginBottom: '16px', width: '400px' }}
@@ -108,6 +113,7 @@ export default function EditProfile({ userId }) {
             label="Number:"
             variant="filled"
             required
+            data-testid="number"
             value={number}
             onChange={(e) => setUserNumber(e.target.value)}
             style={{ marginBottom: '16px', width: '400px' }}
@@ -116,6 +122,7 @@ export default function EditProfile({ userId }) {
             label="Year:"
             variant="filled"
             required
+            data-testid="year"
             value={year}
             onChange={(e) => setUserYear(e.target.value)}
             style={{ marginBottom: '16px', width: '400px' }}
@@ -124,6 +131,7 @@ export default function EditProfile({ userId }) {
             label="Major"
             variant="filled"
             required
+            data-testid="major"
             value={major}
             onChange={(e) => setUserMajor(e.target.value)}
             style={{ marginBottom: '16px', width: '400px' }}
@@ -132,6 +140,7 @@ export default function EditProfile({ userId }) {
             label="Venmo"
             variant="filled"
             required
+            data-testid="venmo"
             value={venmo}
             onChange={(e) => setUserVenmo(e.target.value)}
             style={{ marginBottom: '16px', width: '400px' }}
@@ -140,6 +149,7 @@ export default function EditProfile({ userId }) {
             label="Bio"
             variant="filled"
             required
+            data-testid="bio"
             value={bio}
             onChange={(e) => setUserBio(e.target.value)}
             style={{ marginBottom: '16px', width: '400px' }}
