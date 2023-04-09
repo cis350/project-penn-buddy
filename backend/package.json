@@ -1,0 +1,27 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "The backend of Penn Buddy",
+  "main": "index.js",
+  "scripts": {
+    "start": "node DbOperations.js",
+    "test": "jest --coverage",
+    "lint": "eslint \"**/*.{js,jsx}\" --ignore-pattern *.test.js --ignore-pattern *.test.jsx"
+  },
+  "keywords": [
+    "backend",
+    "mongodb",
+    "express",
+    "nodejs"
+  ],
+  "author": "penn-buddy",
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^5.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.38.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5"
+  }
+}
