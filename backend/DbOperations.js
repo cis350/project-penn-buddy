@@ -59,7 +59,10 @@ const closeMongoDBConnection = async () => {
   await MongoConnection.close();
 };
 
-const getUsers = async () => {
+/**
+ * Get all users
+ */
+const getAllUsers = async () => {
   try {
     // get the db
     const db = await getDB();
@@ -72,9 +75,79 @@ const getUsers = async () => {
   }
 };
 
-getUsers();
+/**
+ * Get all groups
+ */
+const getAllGroups = async () => {
+  try {
+    // get the db
+    const db = await getDB();
+    const result = await db.collection('group').find({}).toArray();
+    // print the results
+    console.log(`Groups: ${JSON.stringify(result)}`);
+    return result;
+  } catch (err) {
+    console.log(`error: ${err.message}`);
+  }
+};
+
+/**
+ * Get group by ID
+ */
+const getGroupById = async (groupID) => {
+  try {
+    // get the db
+    const db = await getDB();
+    const result = await db.collection('group').findOne({ _id: new ObjectId(groupID) });
+    // print the result
+    console.log(`Group: ${JSON.stringify(result)}`);
+    return result;
+  } catch (err) {
+    console.log(`error: ${err.message}`);
+  }
+};
+
+/**
+ * Update group by passing in new student object
+ */
+const changeGroup = async (groupID, newGroup) => {
+  try {
+    // get the db
+    const db = await getDB();
+    const result = await db.collection('group').updateOne(
+      { _id: new ObjectId(groupID) },
+      { $set: newGroup },
+    );
+    return result;
+  } catch (err) {
+    console.log(`error: ${err.message}`);
+  }
+};
+
+/**
+ * Delete group by ID
+ */
+const deleteGroupById = async (groupID) => {
+  try {
+    // get the db
+    const db = await getDB();
+    const result = await db.collection('group').deleteOne(
+      { _id: new ObjectId(groupID) },
+    );
+    // print the result
+    console.log(`Deleted Group: ${JSON.stringify(result)}`);
+    return result;
+  } catch (err) {
+    console.log(`error: ${err.message}`);
+  }
+};
 
 module.exports = {
   connect,
   closeMongoDBConnection,
+  getAllUsers,
+  getAllGroups,
+  getGroupById,
+  changeGroup,
+  deleteGroupById,
 };
