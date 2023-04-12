@@ -76,6 +76,24 @@ const getAllUsers = async () => {
 };
 
 /**
+ * Delete user by ID
+ */
+ const deleteUser = async (userId) => {
+  try {
+    // get the db
+    const db = await getDB();
+    const result = await db.collection('user').deleteOne(
+      { _id: new ObjectId(userId) },
+    );
+    // print the result
+    console.log(`Deleted User: ${JSON.stringify(result)}`);
+    return result;
+  } catch (err) {
+    console.log(`error: ${err.message}`);
+  }
+};
+
+/**
  * Get all groups
  */
 const getAllGroups = async () => {

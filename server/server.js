@@ -129,5 +129,22 @@ webapp.delete('/group/:id', async (req, res) => {
   }
 });
 
+/**
+ * route implementation DELETE /user/:id
+ */
+ webapp.delete('/user/:id', async (req, res) => {
+  try {
+    const result = await dbLib.deleteUser(req.params.id);
+    if (result.deletedCount === 0) {
+      res.status(404).json({ error: 'user not in the system' });
+      return;
+    }
+    // send the response with the appropriate status code
+    res.status(200).json({ message: result });
+  } catch (err) {
+    res.status(400).json({ message: 'there was error' });
+  }
+});
+
 // export the webapp// export the webapp
 module.exports = webapp;
