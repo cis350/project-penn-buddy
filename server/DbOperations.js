@@ -78,7 +78,7 @@ const getAllUsers = async () => {
 /**
  * Delete user by ID
  */
- const deleteUser = async (userId) => {
+const deleteUser = async (userId) => {
   try {
     // get the db
     const db = await getDB();
