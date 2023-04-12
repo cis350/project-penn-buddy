@@ -168,4 +168,5 @@ module.exports = {
   getGroupById,
   changeGroup,
   deleteGroupById,
+  deleteUser,
 };

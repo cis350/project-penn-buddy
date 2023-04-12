@@ -59,3 +59,13 @@ test('Endpoint response: status code, type and content', async () => {
   const resp1 = await db.collection('group').findOne({ _id: new ObjectId(testGroupID) });
   expect(resp1).toBeNull();
 });
+
+test('DeleteUser - Endpoint response: status code, type and content', async () => {
+  // successful deletion returns 200 status code
+  const resp = await request(webapp).delete(`/user/${testUserID}`);
+  expect(resp.status).toEqual(200);
+  expect(resp.type).toBe('application/json');
+  // the user is not in the database
+  const resp1 = await db.collection('user').findOne({ _id: new ObjectId(testUserID) });
+  expect(resp1).toBeNull();
+});
