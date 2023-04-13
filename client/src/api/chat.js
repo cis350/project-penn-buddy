@@ -35,6 +35,16 @@ export const modifyText = async (id, texts, currentMembersIds) => {
   }
 };
 
+export const modifyChatMember = async (id, texts, currentMembersIds) => {
+  try {
+    const chatId = id;
+    const response = await axios.put(`${rootURL}/Chatroom/${chatId}`, { id, texts, currentMembersIds });
+    return response.data;
+  } catch (err) {
+    //   console.log('error', err.message);
+  }
+};
+
 export const createNewChatroom = async (chatId, membersId) => {
   try {
     const id = parseInt(chatId, 10);
