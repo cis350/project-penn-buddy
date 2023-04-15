@@ -11,7 +11,8 @@ import { rootURL } from "../utils/utils";
 export const getAllUsers = async () => {
   try {
     const response = await axios.get(`${rootURL}/user`);
-    return response.data;
+    console.log('GetAllUsers response:', response.data.data);
+    return response.data.data;
   } catch (err) {
     console.log('error', err.message);
   }
@@ -23,7 +24,7 @@ export const getAllUsers = async () => {
 export const getUserById = async (userId) => {
   try {
     const response = await axios.get(`${rootURL}/user/${userId}`);
-    return response.data;
+    return response.data.data;
   } catch (err) {
     console.log('error', err.message);
   }
@@ -35,7 +36,7 @@ export const getUserById = async (userId) => {
 export const changeUser = async (userId, newUser) => {
   try {
     const response = await axios.put(`${rootURL}/user/${userId}`, newUser);
-    return response.data;
+    return response.data.data;
   } catch (err) {
     console.log('error', err.message);
   }
@@ -47,7 +48,7 @@ export const changeUser = async (userId, newUser) => {
 export const deleteUser = async (userId) => {
   try {
     const response = await axios.delete(`${rootURL}/user/${userId}`);
-    return response.data;
+    return response.data.data;
   } catch (err) {
     console.log('error', err.message);
   }

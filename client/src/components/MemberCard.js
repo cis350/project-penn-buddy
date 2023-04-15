@@ -52,6 +52,7 @@ export default function MemberCard({ userId }) {
     // wrapper function
     async function getUserByIdWrapper() {
       const response = await getUserById(userId);
+      console.log('Response in MemberCard', response);
       setName(response.name);
     }
     // run the wrapper function

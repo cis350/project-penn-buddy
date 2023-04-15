@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react';
 // eslint-disable-next-line import/no-named-as-default,import/no-named-as-default-member
 import {
@@ -64,7 +65,7 @@ function ActivityFeed() {
                       maxCapacity={group.maxCapacity}
                       currCapacity={group.currCapacity}
                       currMemberIds={group.currMemberIds}
-                      groupId={group.id}
+                      groupId={group._id.toString()}
                     />
                   </Box>
                 ),
