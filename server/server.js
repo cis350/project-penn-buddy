@@ -51,6 +51,26 @@ webapp.get('/user', async (req, resp) => {
 });
 
 /**
+ * route implementation GET /user/:id
+ * TESTING NOT DONE!!!
+ */
+webapp.get('/user/:id', async (req, res) => {
+  console.log('GET a user by ID');
+  try {
+    // get the data from the db
+    const results = await dbLib.getUserById(req.params.id);
+    if (results === undefined) {
+      res.status(404).json({ error: 'unknown user' });
+      return;
+    }
+    // send the response with the appropriate status code
+    res.status(200).json({ data: results });
+  } catch (err) {
+    res.status(404).json({ message: 'there was error' });
+  }
+});
+
+/**
  * route implementation GET /group
  * Testing done
  */
@@ -132,7 +152,7 @@ webapp.delete('/group/:id', async (req, res) => {
 /**
  * route implementation DELETE /user/:id
  */
- webapp.delete('/user/:id', async (req, res) => {
+webapp.delete('/user/:id', async (req, res) => {
   try {
     const result = await dbLib.deleteUser(req.params.id);
     if (result.deletedCount === 0) {

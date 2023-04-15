@@ -14,7 +14,8 @@ import { rootURL } from "../utils/utils";
 export const getGroupById = async (groupId) => {
   try {
     const response = await axios.get(`${rootURL}/group/${groupId}`);
-    return response.data;
+    console.log('getGroupById response:', response.data.data);
+    return response.data.data;
   } catch (err) {
     console.log('error', err.message);
   }
@@ -26,7 +27,7 @@ export const getGroupById = async (groupId) => {
 export const changeGroup = async (groupId, newGroup) => {
   try {
     const response = await axios.put(`${rootURL}/group/${groupId}`, newGroup);
-    return response.data;
+    return response.data.data;
   } catch (err) {
     console.log('error', err.message);
   }
@@ -38,7 +39,7 @@ export const changeGroup = async (groupId, newGroup) => {
 export const createGroup = async (newGroup) => {
   try {
     const response = await axios.post(`${rootURL}/group`, newGroup);
-    return response.data;
+    return response.data.data;
   } catch (err) {
     console.log('error', err.message);
   }
@@ -50,7 +51,8 @@ export const createGroup = async (newGroup) => {
 export const getAllGroups = async () => {
   try {
     const response = await axios.get(`${rootURL}/group`);
-    return response.data;
+    console.log('getAllGroups response:', response.data.data);
+    return response.data.data;
   } catch (err) {
     console.log('error', err.message);
   }
@@ -62,7 +64,7 @@ export const getAllGroups = async () => {
 export const deleteGroupById = async (groupId) => {
   try {
     const response = await axios.delete(`${rootURL}/group/${groupId}`);
-    return response.data;
+    return response.data.data;
   } catch (err) {
     console.log('error', err.message);
   }
@@ -74,7 +76,7 @@ export const deleteGroupById = async (groupId) => {
 export const deleteGroupsByOwnerId = async (userId) => {
   try {
     const response = await axios.get(`${rootURL}/group`);
-    const allGroups = response.data;
+    const allGroups = response.data.data;
     const groupsToDelete = allGroups.filter((group) => group.ownerId === userId);
 
     await Promise.all(groupsToDelete.map(async (group) => {

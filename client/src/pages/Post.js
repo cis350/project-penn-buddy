@@ -91,6 +91,7 @@ export default function Post({ name, userId }) {
     // wrapper function
     async function getGroupByIdWrapper() {
       console.log('UserId in Post', userId);
+      console.log('GroupId in Post', groupId);
       const response = await getGroupById(groupId);
       // console.log('response', response);
       setGroup(response);

@@ -76,6 +76,22 @@ const getAllUsers = async () => {
 };
 
 /**
+ * Get user by ID
+ */
+const getUserById = async (userID) => {
+  try {
+    // get the db
+    const db = await getDB();
+    const result = await db.collection('user').findOne({ _id: new ObjectId(userID) });
+    // print the result
+    console.log(`User: ${JSON.stringify(result)}`);
+    return result;
+  } catch (err) {
+    console.log(`error: ${err.message}`);
+  }
+};
+
+/**
  * Delete user by ID
  */
 const deleteUser = async (userId) => {
@@ -164,6 +180,7 @@ module.exports = {
   connect,
   closeMongoDBConnection,
   getAllUsers,
+  getUserById,
   getAllGroups,
   getGroupById,
   changeGroup,
