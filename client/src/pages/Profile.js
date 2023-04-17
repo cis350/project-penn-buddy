@@ -28,8 +28,8 @@ function Profile({ userId, setLogin }) {
     async function getProfileInfoWrapper() {
       // console.log('UserId in Profile', userId);
       const response = await getUserById(userId);
-      // console.log('Profile Info', response);
-      // console.log('pennId', response.pennId);
+      console.log('Profile Info', response);
+      console.log('pennId', response.pennId);
       setUserName(response.name);
       setPennId(response.pennId);
       setUserEmail(response.email);

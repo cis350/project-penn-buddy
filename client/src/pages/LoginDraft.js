@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-console */
 import React, { useState, useEffect } from 'react';
 import {
   Container, FormGroup, FormControl, FormLabel, Grid, Stack, Button, ListItem, TextField,
@@ -34,10 +36,9 @@ function Login({ setLogin, setUserId, setName }) {
     // wrapper function
     async function getAllUsersWrapper() {
       const response = await getAllUsers();
-      // console.log('name1:', name1);
-      // console.log('User login', response);
-      setUserId(response.filter((item) => item.name === name1)[0].id);
-      // console.log('current userId', response.filter((item) => item.name === name.current)[0].id);
+      console.log('name1:', name1);
+      console.log('User login', response.filter((item) => item.name === name1)[0]._id.toString());
+      setUserId(response.filter((item) => item.name === name1)[0]._id.toString());
     }
     // run the wrapper function
     getAllUsersWrapper();
