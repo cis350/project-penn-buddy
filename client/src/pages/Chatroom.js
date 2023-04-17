@@ -48,13 +48,29 @@ export default function Chatroom({ userId, name }) {
 
   // next time, I have to enter id as a prop, depending on where user clicks
 
-  // use timeOut 
+  // use timeOut
   // call the backend after a set amount of time (100 or 1000 millisecond)
-   
+
+  // async function getAllChatroomWrapper() {
+  //   const response = await getAllChatroom();
+  //   setChatrooms(response);
+  //   setFiltered(chatrooms.filter(
+  //     (chat) => chat.currentMembersIds.includes(userId),
+  //   ));
+  //   const r2 = await getChatroomById(currChatId.current);
+  //   setCurrentMembersIds(r2.currentMembersIds);
+  //   // setCurrMembersName(r2.currentMembersIds);
+  // }
 
   useEffect(() => {
-    
-
+    // use setINterval to call it every x seconds
+    // refresh your UI component -> useEffect
+    // need a callback, the value change
+    // const interval = setInterval(() => {
+    //   console.log('This will run every second!');
+    //   getAllChatroomWrapper();
+    // }, 1000);
+    // return () => clearInterval(interval);
     async function getAllChatroomWrapper() {
       const response = await getAllChatroom();
       setChatrooms(response);
