@@ -146,5 +146,84 @@ webapp.delete('/group/:id', async (req, res) => {
   }
 });
 
+// methods for dealing with chatroom's backend
+
+/**
+ * route implementation POST /Chatroom
+ * testing NOT DONE
+ */
+webapp.post('/Chatroom', async (req, resp) =>{
+  // parse the body
+  // do I need an if method to instantiate the creation of chatroom?
+  try{
+      // create the new student object
+      const newChatroom = {
+          texts: req.body.texts,
+          currentMembersIds: req.body.currentMembersIds,
+      }
+      const result = await dbLib.addChatroom(newChatroom);
+      resp.status(201).json({data: {id: result}});
+
+  }catch(err){
+      resp.status(400).json({message: 'There was an error'});
+  }
+
+});
+
+/**
+ * route implementation GET /chat
+ * Testing NOT DONE
+ */
+webapp.get('/Chatroom', async (req, resp) => {
+  try {
+    // get the data from the DB
+    const chats = await dbLib.getAllChatrooms();
+    // send response
+    resp.status(200).json({ data: chats });
+  } catch (err) {
+    // send the error code
+    resp.status(400).json({ message: 'There was an error' });
+  }
+});
+
+/**
+ * route implementation GET /group/:id
+ * Testing NOT done
+ */
+webapp.get('/Chatroom/:id', async (req, res) => {
+  console.log('GET a chatroom by ID');
+  try {
+    // get the data from the db
+    const results = await dbLib.getChatroomById(req.params.id);
+    if (results === undefined) {
+      res.status(404).json({ error: 'unknown chatroom' });
+      return;
+    }
+    // send the response with the appropriate status code
+    res.status(200).json({ data: results });
+  } catch (err) {
+    res.status(404).json({ message: 'there was error' });
+  }
+});
+
+/**
+ * route implementation DELETE /Chatroom/:id
+ * testing NOT done
+ */
+webapp.delete('/Chatroom/:id', async (req, res) => {
+  try {
+    const result = await dbLib.deleteChatroomById(req.params.id);
+    if (result.deletedCount === 0) {
+      res.status(404).json({ error: 'chat not in the system' });
+      return;
+    }
+    // send the response with the appropriate status code
+    res.status(200).json({ message: result });
+  } catch (err) {
+    res.status(400).json({ message: 'there was error' });
+  }
+});
+
+
 // export the webapp// export the webapp
 module.exports = webapp;

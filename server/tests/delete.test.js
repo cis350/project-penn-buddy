@@ -12,7 +12,7 @@ const webapp = require('../server');
 // import test utilities function
 const {
   isInArray, testUser, insertTestDataToDB, deleteTestDataFromDB,
-  testGroup,
+  testGroup, testChatroom,
 } = require('./testUtils');
 
 let mongo;
@@ -20,6 +20,7 @@ let db;
 // leep track of id of test user
 let testUserID;
 let testGroupID;
+let testChatroomID;
 
 /**
      *  Make sure that the data is in the DB before running
@@ -32,6 +33,7 @@ beforeAll(async () => {
   // add test user to mongodb
   testUserID = await insertTestDataToDB(db, testUser, 'user');
   testGroupID = await insertTestDataToDB(db, testGroup, 'group');
+  testChatID = await insertTestDataToDB(db, testChatroom, 'Chatroom');
   console.log('testGroupID', testGroupID);
 });
 
@@ -42,6 +44,7 @@ beforeAll(async () => {
 afterAll(async () => {
   await deleteTestDataFromDB(db, 'testUser', 'user');
   await deleteTestDataFromDB(db, 'testGroup', 'group');
+  await deleteTestDataFromDB(d, 'testChatroom', 'Chatroom');
   try {
     await mongo.close();
     await closeMongoDBConnection(); // mongo client started when running express.
@@ -67,5 +70,15 @@ test('DeleteUser - Endpoint response: status code, type and content', async () =
   expect(resp.type).toBe('application/json');
   // the user is not in the database
   const resp1 = await db.collection('user').findOne({ _id: new ObjectId(testUserID) });
+  expect(resp1).toBeNull();
+});
+
+test('DeleteChatroom - Endpoint response: status code, type and content', async () => {
+  // successful deletion returns 200 status code
+  const resp = await request(webapp).delete(`/Chatroom/${testChatroomID}`);
+  expect(resp.status).toEqual(200);
+  expect(resp.type).toBe('application/json');
+  // the user is not in the database
+  const resp1 = await db.collection('Chatroom').findOne({ _id: new ObjectId(testChatroomID) });
   expect(resp1).toBeNull();
 });

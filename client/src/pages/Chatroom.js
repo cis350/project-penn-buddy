@@ -47,7 +47,14 @@ export default function Chatroom({ userId, name }) {
   // const [currChatId, setCurrChatId] = React.useState(1);
 
   // next time, I have to enter id as a prop, depending on where user clicks
+
+  // use timeOut 
+  // call the backend after a set amount of time (100 or 1000 millisecond)
+   
+
   useEffect(() => {
+    
+
     async function getAllChatroomWrapper() {
       const response = await getAllChatroom();
       setChatrooms(response);

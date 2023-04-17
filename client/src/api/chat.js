@@ -6,6 +6,9 @@ import { rootURL } from "../utils/utils";
  * This module contains HTTP calls to the backend
  */
 
+// change rootURL to 8080
+// useEffect after useEffect plus the timer
+
 export const getChatroomById = async (id) => {
   try {
     const response = await axios.get(`${rootURL}/Chatroom/${id}`);

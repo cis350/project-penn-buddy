@@ -160,6 +160,92 @@ const deleteGroupById = async (groupID) => {
   }
 };
 
+// functions to deal with chatroom
+
+/**
+ * Get all chatrooms
+ */
+const getAllChatrooms = async () => {
+  try {
+    // get the db
+    const db = await getDB();
+    const result = await db.collection('Chatroom').find({}).toArray();
+    // print the results
+    console.log(`Chatroom: ${JSON.stringify(result)}`);
+    return result;
+  } catch (err) {
+    console.log(`error: ${err.message}`);
+  }
+};
+
+/**
+ * Get group by ID
+ */
+const getChatroomById = async (chatId) => {
+  try {
+    // get the db
+    const db = await getDB();
+    const result = await db.collection('Chatroom').findOne({ _id: new ObjectId(chatId) });
+    // print the result
+    console.log(`Group: ${JSON.stringify(result)}`);
+    return result;
+  } catch (err) {
+    console.log(`error: ${err.message}`);
+  }
+};
+
+/**
+ * Update chatroom by passing in new chatroom object
+ */
+// might have to update how I originally update it
+// now would have to update text when I create newChat
+
+const changeChatroom = async (chatId, newChat) => {
+  try {
+    // get the db
+    const db = await getDB();
+    const result = await db.collection('Chatroom').updateOne(
+      { _id: new ObjectId(chatId) },
+      { $set: newChat },
+    );
+    return result;
+  } catch (err) {
+    console.log(`error: ${err.message}`);
+  }
+};
+
+/**
+ * Delete chatroom by ID
+ */
+const deleteChatroomById = async (chatId) => {
+  try {
+    // get the db
+    const db = await getDB();
+    const result = await db.collection('Chatroom').deleteOne(
+      { _id: new ObjectId(chatId) },
+    );
+    // print the result
+    console.log(`Deleted Group: ${JSON.stringify(result)}`);
+    return result;
+  } catch (err) {
+    console.log(`error: ${err.message}`);
+  }
+};
+
+/**
+ * CREATE a new student (HTTP POST /student)
+ * https://app.swaggerhub.com/apis/ericfouh/StudentsRoster_App/1.0.0#/students/addStudent
+ * @param {newChatroom}   the new student object
+ * @returns the id of the new student
+ */
+const addChatroom = async (newChatroom) => {
+  // get the db
+  const db = await getDB();
+  const result = await db.collection('Chatroom').insertOne(newChatroom);
+  return result.insertedId;
+}
+
+
 module.exports = {
   connect,
   closeMongoDBConnection,
@@ -169,4 +255,9 @@ module.exports = {
   changeGroup,
   deleteGroupById,
   deleteUser,
+  getAllChatrooms,
+  getChatroomById,
+  changeChatroom,
+  deleteChatroomById,
+  addChatroom,
 };
