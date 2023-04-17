@@ -170,6 +170,24 @@ webapp.post('/Chatroom', async (req, resp) =>{
 
 });
 
+let messages = [];
+
+webapp.post('/messages', (req, resp) =>{
+  //check the body
+  if(!req.body.from || !req.body.to || !req.body.content){
+      resp.status(400).json({error: 'missing message field(s)'});
+      return;
+  }
+  //add the message to the list 
+  messages.push({
+      from: req.body.from,
+      to:req.body.to,
+      content:req.body.content,
+  });
+  resp.status(201).json({receipt: 'ok'});
+});
+
+
 /**
  * route implementation GET /chat
  * Testing NOT DONE
