@@ -92,6 +92,23 @@ const getUserById = async (userID) => {
 };
 
 /**
+ * UPDATE a student (PUT /student/:id)
+ */
+const changeUser = async (userID, newUser) => {
+  try {
+    // get the db
+    const db = await getDB();
+    const result = await db.collection('user').updateOne(
+      { _id: new ObjectId(userID) },
+      { $set: newUser },
+    );
+    return result;
+  } catch (err) {
+    console.log(`error: ${err.message}`);
+  }
+};
+
+/**
  * Delete user by ID
  */
 const deleteUser = async (userId) => {
@@ -142,6 +159,21 @@ const getGroupById = async (groupID) => {
 };
 
 /**
+ * Create a new group / POST
+ */
+const createGroup = async (newGroup) => {
+  try {
+    // get the db
+    const db = await getDB();
+    const result = await db.collection('group').insertOne(newGroup);
+    console.log(`Created Group: ${JSON.stringify(result)}`);
+    return result;
+  } catch (err) {
+    console.log(`error: ${err.message}`);
+  }
+};
+
+/**
  * Update group by passing in new student object
  */
 const changeGroup = async (groupID, newGroup) => {
@@ -181,9 +213,11 @@ module.exports = {
   closeMongoDBConnection,
   getAllUsers,
   getUserById,
+  changeUser,
   getAllGroups,
   getGroupById,
   changeGroup,
+  createGroup,
   deleteGroupById,
   deleteUser,
 };

@@ -38,7 +38,7 @@ export default function ActivityFeedPost({
     // run the wrapper function
     getUserByIdWrapper();
     // should add a dependency
-  });
+  }, [ownerId]);
 
   return (
     <div>

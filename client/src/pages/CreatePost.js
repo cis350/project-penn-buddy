@@ -21,9 +21,9 @@ function CreatePost({ userId }) {
   const [currCapacity, setCurrCapacity] = useState(0);
   const [currMemberIds, setCurrMemberIds] = useState([]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  // };
 
   const handleCreatePost = async (e) => {
     const modifiedData = {
@@ -39,6 +39,11 @@ function CreatePost({ userId }) {
     // console.log('postGroupdara', modifiedData);
     const response = await createGroup(modifiedData);
     navigate(`/activityfeed`);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleCreatePost();
   };
 
   return (
