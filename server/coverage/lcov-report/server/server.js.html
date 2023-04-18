@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">70.45% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>93/132</span>
+                <span class='fraction'>99/132</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">83.33% </span>
+                <span class="strong">88.88% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>15/18</span>
+                <span class='fraction'>16/18</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">70.45% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>93/132</span>
+                <span class='fraction'>99/132</span>
             </div>
         
             
@@ -565,8 +565,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -604,8 +604,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -617,11 +617,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -988,9 +988,9 @@ webapp.post('/api/login', async (req, resp) =&gt; {
 /**
  * route implementation add user signup
  */
- webapp.post('/user', <span class="fstat-no" title="function not covered" >as</span>ync (req, res) =&gt; {
-<span class="cstat-no" title="statement not covered" >  console.log('POST a acc');</span>
-<span class="cstat-no" title="statement not covered" >  console.log('POST register req body print:', req.body);</span>
+ webapp.post('/user', async (req, res) =&gt; {
+  console.log('POST a acc');
+  console.log('POST register req body print:', req.body);
   /*
   if (!req.body.pennId || req.body.pennId.length === 0) {
     resp.status(401).json({ error: 'pennId not provided' });
@@ -1028,8 +1028,8 @@ webapp.post('/api/login', async (req, resp) =&gt; {
     resp.status(401).json({ error: 'bio not provided' });
     return;
   } */
-<span class="cstat-no" title="statement not covered" >  try {</span>
-    const newUser = <span class="cstat-no" title="statement not covered" >{</span>
+  try {
+    const newUser = {
       name: req.body.name,
       pennId: req.body.pennId,
       email: req.body.email,
@@ -1041,11 +1041,11 @@ webapp.post('/api/login', async (req, resp) =&gt; {
       rating: null,
       password: req.body.password,
     };
-    const result = <span class="cstat-no" title="statement not covered" >await dbLib.createUser(newUser);</span>
+    const result = await dbLib.createUser(newUser);
     // req.session.pennid = result.pennid;
     // req.session.firstname = result.firstname;
     // req.session.lastname = result.lastname;
-<span class="cstat-no" title="statement not covered" >    res.status(201).json({ message: 'successfully added user', data: result });</span>
+    res.status(201).json({ message: 'successfully added user', data: result });
   } catch (err) {
 <span class="cstat-no" title="statement not covered" >    res.status(400).json({ error: 'could not add user' });</span>
   }
@@ -1342,7 +1342,7 @@ module.exports = webapp;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-04-18T20:20:51.379Z
+                at 2023-04-18T20:54:01.191Z
             </div>
         <script src="../prettify.js"></script>
         <script>
