@@ -59,6 +59,9 @@ import { getChatroomById } from '../api/chat';
 // };
 
 export default function MyText({ text, currMembersId, userId }) {
+  console.log('text mytext', text);
+  console.log('currmembersid mytext', currMembersId);
+  console.log('userId mytext', userId);
   return (
     <div>
       {

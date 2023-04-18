@@ -172,50 +172,65 @@ webapp.delete('/user/:id', async (req, res) => {
  * route implementation POST /Chatroom
  * testing NOT DONE
  */
-webapp.post('/Chatroom', async (req, resp) =>{
-  // parse the body
-  // do I need an if method to instantiate the creation of chatroom?
-  try{
-      // create the new student object
-      const newChatroom = {
-          texts: req.body.texts,
-          currentMembersIds: req.body.currentMembersIds,
-      }
-      const result = await dbLib.addChatroom(newChatroom);
-      resp.status(201).json({data: {id: result}});
+webapp.post('/Chatroom', async (req, resp) => {
+  // if (!req.body.id || !req.body.texts || !req.body.currentMembersIds) {
+  //   resp.status(404).json({ message: 'missing info' });
+  //   return;
+  // }
+  try {
+    // create the new student object
+    console.log('req id', req.body.id);
+    console.log('req texts', req.body.texts);
+    console.log('req members', req.body.currentMembersIds);
 
-  }catch(err){
-      resp.status(400).json({message: 'There was an error'});
+    const newChatroom = {
+      _id: new ObjectId(req.body.id),
+      texts: req.body.texts,
+      currentMembersIds: req.body.currentMembersIds,
+    };
+
+    console.log('new chat s', newChatroom);
+    const result = await dbLib.createNewChatroom(newChatroom);
+    // const result = await dbLib.addChatroom(newChatroom);
+    resp.status(201).json({ data: { id: result } });
+  } catch (err) {
+    resp.status(400).json({ message: 'There was an error' });
   }
-
 });
 
-let messages = [];
-
-webapp.post('/messages', (req, resp) =>{
-  //check the body
-  if(!req.body.from || !req.body.to || !req.body.content){
-      resp.status(400).json({error: 'missing message field(s)'});
-      return;
+/**
+ * route implementation PUT /group/:id
+ * Testing done
+ */
+// isn't being ran
+webapp.put('/Chatroom/:id', async (req, res) => {
+  console.log('UPDATE a chatroom');
+  console.log('PUT chatroom/id req body print:', req.body);
+  const updatedChat = {
+    _id: new ObjectId(req.body.chatId),
+    texts: req.body.texts,
+    currentMembersIds: req.body.currentMembersIds,
+  };
+  console.log('updated chat obj', updatedChat);
+  try {
+    const result = await dbLib.changeChatroom(req.params.id, updatedChat);
+    // send the response with the appropriate status code
+    res.status(200).json({ message: result });
+  } catch (err) {
+    res.status(404).json({ message: 'there was error' });
   }
-  //add the message to the list 
-  messages.push({
-      from: req.body.from,
-      to:req.body.to,
-      content:req.body.content,
-  });
-  resp.status(201).json({receipt: 'ok'});
 });
-
 
 /**
  * route implementation GET /chat
  * Testing NOT DONE
  */
 webapp.get('/Chatroom', async (req, resp) => {
+  console.log('entered');
   try {
     // get the data from the DB
     const chats = await dbLib.getAllChatrooms();
+    console.log('chats from server', chats);
     // send response
     resp.status(200).json({ data: chats });
   } catch (err) {
@@ -250,7 +265,7 @@ webapp.get('/Chatroom/:id', async (req, res) => {
  */
 webapp.delete('/Chatroom/:id', async (req, res) => {
   try {
-    const result = await dbLib.deleteChatroomById(req.params.id);
+    const result = await dbLib.deleteChatroom(req.params.id);
     if (result.deletedCount === 0) {
       res.status(404).json({ error: 'chat not in the system' });
       return;
@@ -261,7 +276,6 @@ webapp.delete('/Chatroom/:id', async (req, res) => {
     res.status(400).json({ message: 'there was error' });
   }
 });
-
 
 // export the webapp// export the webapp
 module.exports = webapp;

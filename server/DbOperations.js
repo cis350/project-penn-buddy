@@ -220,6 +220,8 @@ const changeChatroom = async (chatId, newChat) => {
   try {
     // get the db
     const db = await getDB();
+    console.log('chatid db', chatId);
+    console.log('new chat db', newChat);
     const result = await db.collection('Chatroom').updateOne(
       { _id: new ObjectId(chatId) },
       { $set: newChat },
@@ -233,7 +235,7 @@ const changeChatroom = async (chatId, newChat) => {
 /**
  * Delete chatroom by ID
  */
-const deleteChatroomById = async (chatId) => {
+const deleteChatroom = async (chatId) => {
   try {
     // get the db
     const db = await getDB();
@@ -254,13 +256,18 @@ const deleteChatroomById = async (chatId) => {
  * @param {newChatroom}   the new student object
  * @returns the id of the new student
  */
-const addChatroom = async (newChatroom) => {
+const createNewChatroom = async (newChatroom) => {
   // get the db
-  const db = await getDB();
-  const result = await db.collection('Chatroom').insertOne(newChatroom);
-  return result.insertedId;
-}
-
+  try {
+    console.log('new chatroom', newChatroom);
+    const db = await getDB();
+    const result = await db.collection('Chatroom').insertOne(newChatroom);
+    console.log(`Created chatroom: ${JSON.stringify(result)}`);
+    return result;
+  } catch (err) {
+    console.log(`error: ${err.message}`);
+  }
+};
 
 module.exports = {
   connect,
@@ -275,6 +282,6 @@ module.exports = {
   getAllChatrooms,
   getChatroomById,
   changeChatroom,
-  deleteChatroomById,
-  addChatroom,
+  deleteChatroom,
+  createNewChatroom,
 };

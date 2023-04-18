@@ -44,7 +44,7 @@ beforeAll(async () => {
 afterAll(async () => {
   await deleteTestDataFromDB(db, 'testUser', 'user');
   await deleteTestDataFromDB(db, 'testGroup', 'group');
-  await deleteTestDataFromDB(d, 'testChatroom', 'Chatroom');
+  await deleteTestDataFromDB(db, 'testChatroom', 'Chatroom');
   try {
     await mongo.close();
     await closeMongoDBConnection(); // mongo client started when running express.
