@@ -12,7 +12,7 @@ const webapp = require('../server');
 // import test utilities function
 const {
   isInArray, testUser, insertTestDataToDB, deleteTestDataFromDB, deleteGroupTestDataFromDB,
-  testGroup, testChatroom,
+  testGroup, testChatroom, deleteChatTestDataFromDB,
 } = require('./testUtils');
 
 let mongo;
@@ -45,8 +45,8 @@ beforeEach(async () => {
  */
 afterEach(async () => {
   await deleteTestDataFromDB(db, 'testUser', 'user');
-  await deleteTestDataFromDB(db, 'testGroup', 'group');
-  await deleteTestDataFromDB(db, 'testChatroom', 'Chatroom');
+  await deleteGroupTestDataFromDB(db, 'testLocation', 'group');
+  await deleteChatTestDataFromDB(db, [1, 2, 3], 'Chatroom');
 
   try {
     await mongo.close();

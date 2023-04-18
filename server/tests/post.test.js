@@ -40,6 +40,7 @@ test('the status code is 201 and response type', async () => {
   const result = await db.collection('group').deleteMany({ location: 'testLocation' });
 });
 
+// FAILING
 /**
  * Status code and response type
  */
