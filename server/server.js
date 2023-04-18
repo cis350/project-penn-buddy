@@ -51,6 +51,93 @@ webapp.get('/user', async (req, resp) => {
 });
 
 /**
+ * route implementation add user Login
+ 
+webapp.post('/api/login', async (req, resp) => {
+  if (!req.body.name || req.body.name.length === 0) {
+    resp.status(401).json({ error: 'pennKey not provided' });
+    return;
+  }
+  if (!req.body.password || req.body.password.length === 0) {
+    resp.status(401).json({ error: 'password not provided' });
+    return;
+  }
+  try {
+    const result = await dbLib.getUserById(req.params.id);
+    // req.session.name = result.name;
+    resp.status(200).json({ message: 'successfully logged in', data: result });
+  } catch (err) {
+    resp.status(401).json({ error: 'could not find user' });
+  }
+});
+*/
+
+/**
+ * route implementation add user signup
+ */
+ webapp.post('/user', async (req, res) => {
+  console.log('POST a acc');
+  console.log('POST register req body print:', req.body);
+  /*
+  if (!req.body.pennId || req.body.pennId.length === 0) {
+    resp.status(401).json({ error: 'pennId not provided' });
+    return;
+  }
+  if (!req.body.password || req.body.password.length === 0) {
+    resp.status(401).json({ error: 'password not provided' });
+    return;
+  }
+  if (!req.body.name || req.body.name.length === 0) {
+    resp.status(401).json({ error: 'name not provided' });
+    return;
+  }
+  if (!req.body.email || req.body.email.length === 0) {
+    resp.status(401).json({ error: 'email not provided' });
+    return;
+  }
+  if (!req.body.number || req.body.number.length === 0) {
+    resp.status(401).json({ error: 'number not provided' });
+    return;
+  }
+  if (!req.body.year || req.body.year.length === 0) {
+    resp.status(401).json({ error: 'year not provided' });
+    return;
+  }
+  if (!req.body.major || req.body.major.length === 0) {
+    resp.status(401).json({ error: 'major not provided' });
+    return;
+  }
+  if (!req.body.venmo || req.body.venmo.length === 0) {
+    resp.status(401).json({ error: 'venmo not provided' });
+    return;
+  }
+  if (!req.body.bio || req.body.bio.length === 0) {
+    resp.status(401).json({ error: 'bio not provided' });
+    return;
+  } */
+  try {
+    const newUser = {
+      name: req.body.name,
+      pennId: req.body.pennId,
+      email: req.body.email,
+      number: req.body.number,
+      year: req.body.year,
+      major: req.body.major,
+      venmo: req.body.venmo,
+      bio: req.body.bio,
+      rating: null,
+      password: req.body.password,
+    };
+    const result = await dbLib.createUser(newUser);
+    // req.session.pennid = result.pennid;
+    // req.session.firstname = result.firstname;
+    // req.session.lastname = result.lastname;
+    res.status(201).json({ message: 'successfully added user', data: result });
+  } catch (err) {
+    res.status(400).json({ error: 'could not add user' });
+  }
+});
+/**
  * route implementation GET /user/:id
  * TESTING NOT DONE!!!
  */
