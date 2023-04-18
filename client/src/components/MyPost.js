@@ -35,7 +35,7 @@ export default function MyPost({
     // create currMembersId
     const r1 = await getGroupById(groupId);
     const memberIds = r1.currMemberIds;
-    const existChat = await getChatroomById(groupId);
+    const existChat = await getChatroomById(groupId.toString());
     if (existChat == null) {
       const response = await createNewChatroom(groupId, memberIds);
     // }
