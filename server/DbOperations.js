@@ -105,7 +105,8 @@ const createUser = async(newUser) => {
   }
 };
 
-/* UPDATE a student (PUT /student/:id)
+/*
+* UPDATE a student (PUT /student/:id)
  */
 const changeUser = async (userID, newUser) => {
   try {
