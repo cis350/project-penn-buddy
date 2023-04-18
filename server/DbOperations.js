@@ -103,7 +103,23 @@ const createUser = async(newUser) => {
   } catch (err) {
     console.log(`error: ${err.message}`);
   }
-}
+};
+
+* UPDATE a student (PUT /student/:id)
+ */
+const changeUser = async (userID, newUser) => {
+  try {
+    // get the db
+    const db = await getDB();
+    const result = await db.collection('user').updateOne(
+      { _id: new ObjectId(userID) },
+      { $set: newUser },
+    );
+    return result;
+  } catch (err) {
+    console.log(`error: ${err.message}`);
+  }
+};
 
 /**
  * Check if user exists in Login
@@ -118,8 +134,7 @@ const usernameExists =  async(db, newUser) => {
   } catch (err) {
     throw new Error('failed checking username');
   }
-}
-
+};
 
 /**
  * Delete user by ID
@@ -172,6 +187,21 @@ const getGroupById = async (groupID) => {
 };
 
 /**
+ * Create a new group / POST
+ */
+const createGroup = async (newGroup) => {
+  try {
+    // get the db
+    const db = await getDB();
+    const result = await db.collection('group').insertOne(newGroup);
+    console.log(`Created Group: ${JSON.stringify(result)}`);
+    return result;
+  } catch (err) {
+    console.log(`error: ${err.message}`);
+  }
+};
+
+/**
  * Update group by passing in new student object
  */
 const changeGroup = async (groupID, newGroup) => {
@@ -182,6 +212,7 @@ const changeGroup = async (groupID, newGroup) => {
       { _id: new ObjectId(groupID) },
       { $set: newGroup },
     );
+    console.log('post-changeGroup group', db.collection('group').find({}).toArray());
     return result;
   } catch (err) {
     console.log(`error: ${err.message}`);
@@ -212,9 +243,11 @@ module.exports = {
   getAllUsers,
   getUserById,
   createUser,
+  changeUser,
   getAllGroups,
   getGroupById,
   changeGroup,
+  createGroup,
   deleteGroupById,
   deleteUser,
 };
