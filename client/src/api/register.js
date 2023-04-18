@@ -14,8 +14,9 @@ import { rootURL } from "../utils/utils";
 export const createUser = async (newUser) => {
   try {
     const response = await axios.post(`${rootURL}/user`, newUser);
-    return response.data;
+    return response.data.data;
   } catch (err) {
+    // console.log(newUser);
     console.log('error', err.message);
   }
 };

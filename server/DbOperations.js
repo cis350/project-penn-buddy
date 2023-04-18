@@ -92,7 +92,20 @@ const getUserById = async (userID) => {
 };
 
 /**
- * UPDATE a student (PUT /student/:id)
+ * Add user when register
+ */
+const createUser = async(newUser) => {
+  try {
+    const db = await getDB();
+    const result = db.collection('user').insertOne(newUser);
+    console.log(`Created User: ${JSON.stringify(result)}`);
+    return result;
+  } catch (err) {
+    console.log(`error: ${err.message}`);
+  }
+};
+
+* UPDATE a student (PUT /student/:id)
  */
 const changeUser = async (userID, newUser) => {
   try {
@@ -105,6 +118,21 @@ const changeUser = async (userID, newUser) => {
     return result;
   } catch (err) {
     console.log(`error: ${err.message}`);
+  }
+};
+
+/**
+ * Check if user exists in Login
+ */
+const usernameExists =  async(db, newUser) => {
+  try {
+    const result = await db.collection('user').findOne({ pennid: newUser.pennid });
+    if (!result) {
+      return false;
+    }
+    return true;
+  } catch (err) {
+    throw new Error('failed checking username');
   }
 };
 
@@ -184,6 +212,7 @@ const changeGroup = async (groupID, newGroup) => {
       { _id: new ObjectId(groupID) },
       { $set: newGroup },
     );
+    console.log('post-changeGroup group', db.collection('group').find({}).toArray());
     return result;
   } catch (err) {
     console.log(`error: ${err.message}`);
@@ -306,6 +335,7 @@ module.exports = {
   closeMongoDBConnection,
   getAllUsers,
   getUserById,
+  createUser,
   changeUser,
   getAllGroups,
   getGroupById,

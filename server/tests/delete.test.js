@@ -11,7 +11,7 @@ const webapp = require('../server');
 
 // import test utilities function
 const {
-  isInArray, testUser, insertTestDataToDB, deleteTestDataFromDB,
+  isInArray, testUser, insertTestDataToDB, deleteTestDataFromDB, deleteGroupTestDataFromDB,
   testGroup, testChatroom,
 } = require('./testUtils');
 
@@ -27,13 +27,12 @@ let testChatroomID;
      * any test
      * connect to the DB
      */
-beforeAll(async () => {
+beforeEach(async () => {
   mongo = await connect();
   db = mongo.db();
   // add test user to mongodb
   testUserID = await insertTestDataToDB(db, testUser, 'user');
   testGroupID = await insertTestDataToDB(db, testGroup, 'group');
-  testChatID = await insertTestDataToDB(db, testChatroom, 'Chatroom');
   console.log('testGroupID', testGroupID);
 });
 
@@ -41,9 +40,9 @@ beforeAll(async () => {
  * Delete all test data from the DB
  * Close all open connections
  */
-afterAll(async () => {
+afterEach(async () => {
   await deleteTestDataFromDB(db, 'testUser', 'user');
-  await deleteTestDataFromDB(db, 'testGroup', 'group');
+  await deleteGroupTestDataFromDB(db, 'testLocation', 'group');
   await deleteTestDataFromDB(db, 'testChatroom', 'Chatroom');
   try {
     await mongo.close();

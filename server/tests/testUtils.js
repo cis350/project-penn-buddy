@@ -44,6 +44,20 @@ const deleteTestDataFromDB = async (db, testData, collection) => {
   }
 };
 
+const deleteGroupTestDataFromDB = async (db, testlocation, collection) => {
+  try {
+    const result = await db.collection(collection).deleteMany({ location: testlocation });
+    const { deletedCount } = result;
+    if (deletedCount === 1) {
+      console.log('info', 'Successfully deleted test data');
+    } else {
+      console.log('warning', 'test data was not deleted');
+    }
+  } catch (err) {
+    console.log('error', err.message);
+  }
+};
+
 // test user
 // define the test user
 const testUser = {
@@ -68,8 +82,7 @@ const testUser = {
 // the add/deleteToDB function with testUser
 const testGroup = {
   ownerId: 1,
-  name: "testGroup",
-  location: "Phuket",
+  location: "testLocation",
   departDate: "12-12-2023 09:00",
   modeTransport: "Helicopter",
   departPlace: "Huntsman",
@@ -125,6 +138,7 @@ const isInArray = (arr, val) => {
 module.exports = {
   insertTestDataToDB,
   deleteTestDataFromDB,
+  deleteGroupTestDataFromDB,
   testUser,
   testGroup,
   isInArray,
