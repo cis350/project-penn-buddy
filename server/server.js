@@ -167,7 +167,6 @@ webapp.put('/user/:id', async (req, res) => {
   console.log('UPDATE a user');
   console.log('PUT user/id req body print:', req.body);
   const updatedUser = {
-    _id: new ObjectId(req.body.id),
     name: req.body.name,
     email: req.body.email,
     number: req.body.number,
