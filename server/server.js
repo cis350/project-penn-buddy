@@ -52,7 +52,6 @@ webapp.get('/user', async (req, resp) => {
 
 /**
  * route implementation add user Login
- 
 webapp.post('/api/login', async (req, resp) => {
   if (!req.body.name || req.body.name.length === 0) {
     resp.status(401).json({ error: 'pennKey not provided' });
@@ -75,7 +74,7 @@ webapp.post('/api/login', async (req, resp) => {
 /**
  * route implementation add user signup
  */
- webapp.post('/user', async (req, res) => {
+webapp.post('/user', async (req, res) => {
   console.log('POST a acc');
   console.log('POST register req body print:', req.body);
   /*

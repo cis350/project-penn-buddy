@@ -94,7 +94,7 @@ const getUserById = async (userID) => {
 /**
  * Add user when register
  */
-const createUser = async(newUser) => {
+const createUser = async (newUser) => {
   try {
     const db = await getDB();
     const result = db.collection('user').insertOne(newUser);
@@ -125,7 +125,7 @@ const changeUser = async (userID, newUser) => {
 /**
  * Check if user exists in Login
  */
-const usernameExists =  async(db, newUser) => {
+const usernameExists = async (db, newUser) => {
   try {
     const result = await db.collection('user').findOne({ pennid: newUser.pennid });
     if (!result) {
