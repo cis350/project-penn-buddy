@@ -92,6 +92,36 @@ const getUserById = async (userID) => {
 };
 
 /**
+ * Add user when register
+ */
+const createUser = async(newUser) => {
+  try {
+    const db = await getDB();
+    const result = db.collection('user').insertOne(newUser);
+    console.log(`Created User: ${JSON.stringify(result)}`);
+    return result;
+  } catch (err) {
+    console.log(`error: ${err.message}`);
+  }
+}
+
+/**
+ * Check if user exists in Login
+ */
+const usernameExists =  async(db, newUser) => {
+  try {
+    const result = await db.collection('user').findOne({ pennid: newUser.pennid });
+    if (!result) {
+      return false;
+    }
+    return true;
+  } catch (err) {
+    throw new Error('failed checking username');
+  }
+}
+
+
+/**
  * Delete user by ID
  */
 const deleteUser = async (userId) => {
@@ -181,6 +211,7 @@ module.exports = {
   closeMongoDBConnection,
   getAllUsers,
   getUserById,
+  createUser,
   getAllGroups,
   getGroupById,
   changeGroup,

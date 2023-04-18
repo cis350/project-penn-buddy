@@ -60,16 +60,6 @@ function Login({ setLogin, setUserId, setName }) {
         <br />
         <FormGroup>
           <TextField
-            label="Penn ID"
-            variant="filled"
-            required
-            value={pennId}
-            onChange={(e) => setPennId(e.target.value)}
-          />
-        </FormGroup>
-        <br />
-        <FormGroup>
-          <TextField
             label="Password"
             variant="filled"
             required
