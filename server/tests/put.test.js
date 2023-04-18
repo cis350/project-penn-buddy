@@ -33,7 +33,7 @@ beforeEach(async () => {
   // add test user to mongodb
   testUserID = await insertTestDataToDB(db, testUser, 'user');
   testGroupID = await insertTestDataToDB(db, testGroup, 'group');
-  testChatroomID = await insertTestDataToDB(df, testChatroom, 'Chatroom');
+  testChatroomID = await insertTestDataToDB(db, testChatroom, 'Chatroom');
   console.log('testUserID', testUserID);
   console.log('testGroupID', testGroupID);
   console.log('testChatroomID', testChatroomID);
@@ -111,19 +111,20 @@ test('PUT /user/:id - Endpoint status code and response async/await', async () =
   expect(updatedUser.password).toEqual('test-password');
 });
 
+// EDIT this
 test('PUT chatroom - Endpoint status code and response async/await', async () => {
   const res = await request(webapp).put(`/Chatroom/${testChatroomID}`)
     .send(
       {
         // do I need id? "6348acd2e1a47ca32e79f46f",
-        texts: [{userId: "6348acd2e1a47ca32e79f46f", content: "Hello"}],
+        texts: [{ userId: "6348acd2e1a47ca32e79f46f", content: "Hello" }],
         currentMembersIds: ["6348acd2e1a47ca32e79f46f"],
       },
     );
   expect(res.status).toEqual(200);
   expect(res.type).toBe('application/json');
   // the database was updated
-  const updatedUser = await db.collection('Chatroom').findOne({ _id: new ObjectId(testChatroomID) });
+  const updatedChatroom = await db.collection('Chatroom').findOne({ _id: new ObjectId(testChatroomID) });
   console.log('updatedChatroom', JSON.stringify(updatedChatroom));
   // modify this to match chatrooms
   // expect(updatedUser.location).toEqual('test');

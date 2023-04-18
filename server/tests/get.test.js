@@ -46,6 +46,8 @@ beforeEach(async () => {
 afterEach(async () => {
   await deleteTestDataFromDB(db, 'testUser', 'user');
   await deleteTestDataFromDB(db, 'testGroup', 'group');
+  await deleteTestDataFromDB(db, 'testChatroom', 'Chatroom');
+
   try {
     await mongo.close();
     await closeMongoDBConnection(); // mongo client that started server.

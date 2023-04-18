@@ -102,11 +102,11 @@ const testChatroom = {
     },
     {
       userId: 2,
-      content: "Hi, I'm 2!",
+      content: "Hi",
     },
     {
       userId: 3,
-      content: "Hi, I'm 3!",
+      content: "Hey",
     },
   ],
   currentMembersIds: [
