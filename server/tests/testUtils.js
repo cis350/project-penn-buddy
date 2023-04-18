@@ -80,6 +80,29 @@ const testGroup = {
   ],
 };
 
+const testChatroom = {
+  _id: 75859560,
+  texts: [
+    {
+      userId: 1,
+      content: "Hello",
+    },
+    {
+      userId: 2,
+      content: "Hi, I'm 2!",
+    },
+    {
+      userId: 3,
+      content: "Hi, I'm 3!",
+    },
+  ],
+  currentMembersIds: [
+    1,
+    2,
+    3,
+  ],
+};
+
 /**
  * utility function to test if the id
  * of the test student is in the response (array)

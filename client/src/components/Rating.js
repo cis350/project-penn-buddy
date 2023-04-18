@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 // import PropTypes from "prop-types";
 import { getUserById, changeUser } from "../api/users";
-import { getUserById } from "../../../server/DbOperations";
 
 function Rating({ userId }) {
   const [rating, setRating] = useState(5);
@@ -22,9 +21,9 @@ function Rating({ userId }) {
 
   useEffect(() => {
     async function getUserByIdWrapper() {
+      // console.log('user id', userId);
       const response = await getUserById(userId);
       // console.log('user', response);
-      // console.log('rating', response.rating);
       setUserName(response.name);
       setPennId(response.pennId);
       setUserEmail(response.email);
@@ -54,6 +53,8 @@ function Rating({ userId }) {
       rating: newRating,
       password,
     };
+    console.log('modified rating user', modifiedData);
+    console.log('user id to cu', userId);
     const response = await changeUser(userId, modifiedData);
   };
 
@@ -64,7 +65,7 @@ function Rating({ userId }) {
     ratingScore.forEach((r) => {
       modRatingArr.push(r);
     });
-    // console.log('modRatingarr', modRatingArr);
+    console.log('modRatingarr', modRatingArr);
     createNewUser(modRatingArr);
   };
 

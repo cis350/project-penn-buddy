@@ -23,6 +23,7 @@ export default function OtherPost({
     const newTextData = [];
     const r1 = await getGroupById(groupId);
     const memberIds = r1.currMemberIds;
+    // add a separate field in the chatroom that adds a groupId
     console.log('this is group id', groupId);
     const existChat = await getChatroomById(groupId.toString());
     if (existChat == null) {

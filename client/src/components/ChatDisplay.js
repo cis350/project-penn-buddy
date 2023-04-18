@@ -68,6 +68,13 @@ export default function ChatDisplay({ userId, chatId }) {
     message.current = e.target.value; // update the reference
   };
 
+  // debug using breakpoints
+  // currently put request is not writing things in the database
+  // returning undefined
+
+  // test for backend without using frontend
+  // postman? software for texting api (decouple software and backend)
+
   // seems correct -> check changeChatroom
   const modifyTextOnServer = async (textData, membersData) => {
     // console.log('text input', message);
@@ -75,10 +82,11 @@ export default function ChatDisplay({ userId, chatId }) {
     console.log('chat id to be changed', currChatId);
     console.log('members data', membersData);
     const response = await changeChatroom(currChatId, textData, membersData);
+    console.log('response in mod text', response);
   };
 
   // correct
-  const handleSendText = (e) => {
+  const handleSendText = async (e) => {
     // update the login state
     // setRender(!render);
     const modifiedTextData = [];
@@ -93,7 +101,7 @@ export default function ChatDisplay({ userId, chatId }) {
     };
     modifiedTextData.push(modifiedData);
     console.log('new text data', modifiedTextData);
-    modifyTextOnServer(modifiedTextData, currentMembersIds);
+    await modifyTextOnServer(modifiedTextData, currentMembersIds);
   };
 
   return (

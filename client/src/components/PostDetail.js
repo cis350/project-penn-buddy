@@ -74,7 +74,6 @@ export default function PostDetail({
                         <Box key={currMemberId} sx={{ p: 1 }} />
                         <Stack direction="row">
                           <MemberCard key={currMemberId} userId={currMemberId} />
-                          {/* <Rating userId={currMemberId} /> */}
                           <Rating userId={currMemberId} />
                         </Stack>
                       </div>

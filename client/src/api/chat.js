@@ -33,8 +33,8 @@ export const changeChatroom = async (id, texts, currentMembersIds) => {
     const chatId = id;
     console.log('chatId cc', chatId);
     const response = await axios.put(`${rootURL}/Chatroom/${chatId}`, { id, texts, currentMembersIds });
-    console.log('r cc', response);
-    return response.data.data;
+    console.log('r message cc', response);
+    return response.data.message;
   } catch (err) {
     //   console.log('error', err.message);
   }

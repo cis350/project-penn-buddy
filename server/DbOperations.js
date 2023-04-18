@@ -32,7 +32,7 @@ const connect = async () => {
       { useNewUrlParser: true, useUnifiedTopology: true },
     )); // we return the entire connection, not just the DB
     // check that we are connected to the db
-    console.log(`connected to db: ${MongoConnection.db().databaseName}`);
+    // console.log(`connected to db: ${MongoConnection.db().databaseName}`);
     return MongoConnection;
   } catch (err) {
     console.log('Error', err.message);
@@ -68,7 +68,7 @@ const getAllUsers = async () => {
     const db = await getDB();
     const result = await db.collection('user').find({}).toArray();
     // print the results
-    console.log(`Users: ${JSON.stringify(result)}`);
+    // console.log(`Users: ${JSON.stringify(result)}`);
     return result;
   } catch (err) {
     console.log(`error: ${err.message}`);
@@ -151,7 +151,7 @@ const getGroupById = async (groupID) => {
     const db = await getDB();
     const result = await db.collection('group').findOne({ _id: new ObjectId(groupID) });
     // print the result
-    console.log(`Group: ${JSON.stringify(result)}`);
+    // console.log(`Group: ${JSON.stringify(result)}`);
     return result;
   } catch (err) {
     console.log(`error: ${err.message}`);
@@ -235,7 +235,7 @@ const getChatroomById = async (chatId) => {
     const db = await getDB();
     const result = await db.collection('Chatroom').findOne({ _id: new ObjectId(chatId) });
     // print the result
-    console.log(`Group: ${JSON.stringify(result)}`);
+    // console.log(`Group: ${JSON.stringify(result)}`);
     return result;
   } catch (err) {
     console.log(`error: ${err.message}`);

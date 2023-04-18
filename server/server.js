@@ -91,7 +91,7 @@ webapp.get('/group', async (req, resp) => {
  * Testing done
  */
 webapp.get('/group/:id', async (req, res) => {
-  console.log('GET a group by ID');
+  // console.log('GET a group by ID');
   try {
     // get the data from the db
     const results = await dbLib.getGroupById(req.params.id);
@@ -111,7 +111,7 @@ webapp.get('/group/:id', async (req, res) => {
  * Testing done
  */
 webapp.put('/group/:id', async (req, res) => {
-  console.log('UPDATE a group');
+  // console.log('UPDATE a group');
   console.log('PUT group/id req body print:', req.body);
   const updatedGroup = {
     ownerId: new ObjectId(req.body.ownerId),
@@ -262,7 +262,7 @@ webapp.put('/Chatroom/:id', async (req, res) => {
   console.log('UPDATE a chatroom');
   console.log('PUT chatroom/id req body print:', req.body);
   const updatedChat = {
-    _id: new ObjectId(req.body.chatId),
+    // _id: new ObjectId(req.body.chatId),
     texts: req.body.texts,
     currentMembersIds: req.body.currentMembersIds,
   };
@@ -270,6 +270,7 @@ webapp.put('/Chatroom/:id', async (req, res) => {
   try {
     const result = await dbLib.changeChatroom(req.params.id, updatedChat);
     // send the response with the appropriate status code
+    console.log('UPDATE message', result);
     res.status(200).json({ message: result });
   } catch (err) {
     res.status(404).json({ message: 'there was error' });
@@ -299,7 +300,7 @@ webapp.get('/Chatroom', async (req, resp) => {
  * Testing NOT done
  */
 webapp.get('/Chatroom/:id', async (req, res) => {
-  console.log('GET a chatroom by ID');
+  // console.log('GET a chatroom by ID');
   try {
     // get the data from the db
     const results = await dbLib.getChatroomById(req.params.id);
