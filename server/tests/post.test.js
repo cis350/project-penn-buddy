@@ -37,3 +37,17 @@ test('the status code is 201 and response type', async () => {
   expect(insertedGroup.location).toEqual('testLocation');
   const result = await db.collection('group').deleteMany({ location: 'testLocation' });
 });
+
+/**
+ * test creat user 
+ */
+ test('the status code for create User is 201 and response type', async () => {
+  mongo = await connect();
+  db = mongo.db();
+  const response = await request(webapp).post('/user').send(testUser);
+  expect(response.status).toBe(201); // status code
+  const insertedUser = await db.collection('user').findOne({ name: 'testUser' });
+  console.log('inserted user:', insertedUser);
+  expect(insertedUser.name).toEqual('testUser');
+  const result = await db.collection('user').deleteMany({ name: 'testUser' });
+});
