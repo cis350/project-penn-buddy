@@ -133,6 +133,61 @@ webapp.put('/group/:id', async (req, res) => {
 });
 
 /**
+ * route implementation POST /group
+ * TESTING NOT DONE
+ */
+webapp.post('/group', async (req, res) => {
+  console.log('CREATE a group');
+  console.log('POST group req body print:', req.body);
+  try {
+    const newGroup = {
+      ownerId: new ObjectId(req.body.ownerId),
+      location: req.body.location,
+      departDate: req.body.departDate,
+      modeTransport: req.body.modeTransport,
+      departPlace: req.body.departPlace,
+      maxCapacity: req.body.maxCapacity,
+      currCapacity: req.body.currCapacity,
+      currMemberIds: req.body.currMemberIds.map((x) => new ObjectId(x)),
+    };
+    const result = await dbLib.createGroup(newGroup);
+    // send the response with the appropriate status code
+    res.status(201).json({ message: result });
+  } catch (err) {
+    res.status(400).json({ message: 'there was error' });
+  }
+});
+
+/**
+ * route implementation PUT /user/:id
+ * Testing NOT DONE!!
+ */
+webapp.put('/user/:id', async (req, res) => {
+  console.log('UPDATE a user');
+  console.log('PUT user/id req body print:', req.body);
+  const updatedUser = {
+    _id: new ObjectId(req.body.id),
+    name: req.body.name,
+    email: req.body.email,
+    number: req.body.number,
+    year: req.body.year,
+    major: req.body.major,
+    bio: req.body.bio,
+    venmo: req.body.venmo,
+    pennId: req.body.pennId,
+    rating: req.body.rating,
+    password: req.body.password,
+  };
+  try {
+    const result = await dbLib.changeUser(req.params.id, updatedUser);
+    // send the response with the appropriate status code
+    res.status(200).json({ message: result });
+  } catch (err) {
+    res.status(404).json({ message: 'there was error' });
+  }
+});
+
+/**
  * route implementation DELETE /student/:id
  */
 webapp.delete('/group/:id', async (req, res) => {
