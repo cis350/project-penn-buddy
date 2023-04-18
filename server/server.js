@@ -125,6 +125,7 @@ webapp.put('/group/:id', async (req, res) => {
   };
   try {
     const result = await dbLib.changeGroup(req.params.id, updatedGroup);
+    console.log('changeGroup result', result);
     // send the response with the appropriate status code
     res.status(200).json({ message: result });
   } catch (err) {

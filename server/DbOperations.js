@@ -184,6 +184,7 @@ const changeGroup = async (groupID, newGroup) => {
       { _id: new ObjectId(groupID) },
       { $set: newGroup },
     );
+    console.log('post-changeGroup group', db.collection('group').find({}).toArray());
     return result;
   } catch (err) {
     console.log(`error: ${err.message}`);

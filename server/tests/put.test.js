@@ -1,7 +1,7 @@
 /* eslint-disable consistent-return */
 /* eslint-disable no-console */
 /**
- * GET method test module
+ * PUT method test module
  */
 const request = require('supertest');
 const { ObjectId } = require('mongodb');
@@ -12,7 +12,7 @@ const webapp = require('../server');
 // import test utilities function
 const {
   isInArray, testUser, testGroup, insertTestDataToDB,
-  deleteTestDataFromDB,
+  deleteTestDataFromDB, deleteGroupTestDataFromDB,
 } = require('./testUtils');
 
 let mongo;
@@ -26,7 +26,7 @@ let testGroupID;
      * any test
      * connect to the DB
      */
-beforeAll(async () => {
+beforeEach(async () => {
   mongo = await connect();
   db = mongo.db();
   // add test user to mongodb
@@ -40,9 +40,9 @@ beforeAll(async () => {
  * Delete all test data from the DB
  * Close all open connections
  */
-afterAll(async () => {
+afterEach(async () => {
   await deleteTestDataFromDB(db, 'testUser', 'user');
-  await deleteTestDataFromDB(db, 'testGroup', 'group');
+  await deleteGroupTestDataFromDB(db, 'testLocation', 'group');
   try {
     await mongo.close();
     await closeMongoDBConnection(); // mongo client that started server.
@@ -56,7 +56,7 @@ test('Endpoint status code and response async/await', async () => {
     .send(
       {
         ownerId: "6348acd2e1a47ca32e79f46f",
-        location: "test",
+        location: "testLocation",
         departDate: "test",
         modeTransport: "test",
         departPlace: "test",
@@ -70,5 +70,5 @@ test('Endpoint status code and response async/await', async () => {
   // the database was updated
   const updatedUser = await db.collection('group').findOne({ _id: new ObjectId(testGroupID) });
   console.log('updatedUser', JSON.stringify(updatedUser));
-  expect(updatedUser.location).toEqual('test');
+  expect(updatedUser.location).toEqual('testLocation');
 });
