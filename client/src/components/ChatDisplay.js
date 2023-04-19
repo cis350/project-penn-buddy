@@ -47,11 +47,11 @@ export default function ChatDisplay({ userId, chatId }) {
   useEffect(() => {
     async function getAllTextsWrapper() {
       if (currChatId !== 0) {
-        console.log('current id', currChatId);
+        // console.log('current id', currChatId);
         const r2 = await getChatroomById(currChatId);
-        console.log('chat by id', r2);
+        // console.log('chat by id', r2);
         setText(r2.texts);
-        console.log('text chatdisplay', r2.texts);
+        // console.log('text chatdisplay', r2.texts);
         setCurrentMembersIds(r2.currentMembersIds);
         setCurrMembersName(r2.currentMembersIds);
       } else {
@@ -78,11 +78,11 @@ export default function ChatDisplay({ userId, chatId }) {
   // seems correct -> check changeChatroom
   const modifyTextOnServer = async (textData, membersData) => {
     // console.log('text input', message);
-    console.log('mod text');
-    console.log('chat id to be changed', currChatId);
-    console.log('members data', membersData);
+    // console.log('mod text');
+    // console.log('chat id to be changed', currChatId);
+    // console.log('members data', membersData);
     const response = await changeChatroom(currChatId, textData, membersData);
-    console.log('response in mod text', response);
+    // console.log('response in mod text', response);
   };
 
   // correct
@@ -93,14 +93,14 @@ export default function ChatDisplay({ userId, chatId }) {
     text.forEach((element) => {
       modifiedTextData.push(element);
     });
-    console.log('user id of sender:', userId);
-    console.log('message sent', message.current);
+    // console.log('user id of sender:', userId);
+    // console.log('message sent', message.current);
     const modifiedData = {
       userId,
       content: message.current,
     };
     modifiedTextData.push(modifiedData);
-    console.log('new text data', modifiedTextData);
+    // console.log('new text data', modifiedTextData);
     await modifyTextOnServer(modifiedTextData, currentMembersIds);
   };
 

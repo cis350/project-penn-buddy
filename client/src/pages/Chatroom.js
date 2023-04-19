@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
@@ -64,17 +65,17 @@ export default function Chatroom({ userId, name }) {
 
     async function getAllChatroomWrapper() {
       const response = await getAllChatrooms();
-      console.log('all chatrooms', response);
+      // console.log('all chatrooms', response);
       setChatrooms(response);
-      console.log('cr', chatrooms);
+      // console.log('cr', chatrooms);
       setFiltered(chatrooms.filter(
         (chat) => chat.currentMembersIds.includes(userId),
       ));
       // console.log('userId', userId.toString());
-      console.log('chat user is in', filteredCr);
-      console.log('currChat id', currChatId.current);
+      // console.log('chat user is in', filteredCr);
+      // console.log('currChat id', currChatId.current);
       if (currChatId.current !== 0) {
-        console.log('nonzero');
+        // console.log('nonzero');
         const r2 = await getChatroomById(currChatId.current);
         setCurrentMembersIds(r2.currentMembersIds);
       }
@@ -83,11 +84,11 @@ export default function Chatroom({ userId, name }) {
     getAllChatroomWrapper();
     // convertIdToName();
   }, [chatrooms.length]);
-  
+
   const handleChangeChat = (c) => {
-    console.log('hcc', c.c._id);
+    // console.log('hcc', c.c._id);
     currChatId.current = c.c._id;
-    console.log('hcc chatid', currChatId);
+    // console.log('hcc chatid', currChatId);
   };
 
   const handleExitChatroom = (e) => {
