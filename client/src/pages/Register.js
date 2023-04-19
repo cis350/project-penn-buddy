@@ -19,6 +19,7 @@ function Register({ setLogin, setUserId, setName }) {
   const [userBio, setUserBio] = useState('');
   const navigate = useNavigate();
   const [password, setPassword] = useState('');
+  const registerDefault = [];
 
   /*
   const [name1, setName1] = useState('');
@@ -40,7 +41,7 @@ function Register({ setLogin, setUserId, setName }) {
       major: userMajor,
       venmo: userVenmo,
       bio: userBio,
-      rating: null,
+      rating: registerDefault,
     };
     // console.log(modifiedData);
     const response = await createUser(modifiedData);

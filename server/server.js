@@ -124,7 +124,7 @@ webapp.post('/user', async (req, res) => {
       major: req.body.major,
       venmo: req.body.venmo,
       bio: req.body.bio,
-      rating: null,
+      rating: req.body.rating,
       password: req.body.password,
     };
     const result = await dbLib.createUser(newUser);
