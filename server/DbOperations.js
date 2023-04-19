@@ -32,7 +32,7 @@ const connect = async () => {
       { useNewUrlParser: true, useUnifiedTopology: true },
     )); // we return the entire connection, not just the DB
     // check that we are connected to the db
-    console.log(`connected to db: ${MongoConnection.db().databaseName}`);
+    // console.log(`connected to db: ${MongoConnection.db().databaseName}`);
     return MongoConnection;
   } catch (err) {
     console.log('Error', err.message);
@@ -68,7 +68,7 @@ const getAllUsers = async () => {
     const db = await getDB();
     const result = await db.collection('user').find({}).toArray();
     // print the results
-    console.log(`Users: ${JSON.stringify(result)}`);
+    // console.log(`Users: ${JSON.stringify(result)}`);
     return result;
   } catch (err) {
     console.log(`error: ${err.message}`);
@@ -180,7 +180,7 @@ const getGroupById = async (groupID) => {
     const db = await getDB();
     const result = await db.collection('group').findOne({ _id: new ObjectId(groupID) });
     // print the result
-    console.log(`Group: ${JSON.stringify(result)}`);
+    // console.log(`Group: ${JSON.stringify(result)}`);
     return result;
   } catch (err) {
     console.log(`error: ${err.message}`);
@@ -238,6 +238,99 @@ const deleteGroupById = async (groupID) => {
   }
 };
 
+// functions to deal with chatroom
+
+/**
+ * Get all chatrooms
+ */
+const getAllChatrooms = async () => {
+  try {
+    // get the db
+    const db = await getDB();
+    const result = await db.collection('Chatroom').find({}).toArray();
+    // print the results
+    console.log(`Chatroom: ${JSON.stringify(result)}`);
+    return result;
+  } catch (err) {
+    console.log(`error: ${err.message}`);
+  }
+};
+
+/**
+ * Get group by ID
+ */
+const getChatroomById = async (chatId) => {
+  try {
+    // get the db
+    const db = await getDB();
+    const result = await db.collection('Chatroom').findOne({ _id: new ObjectId(chatId) });
+    // print the result
+    // console.log(`Group: ${JSON.stringify(result)}`);
+    return result;
+  } catch (err) {
+    console.log(`error: ${err.message}`);
+  }
+};
+
+/**
+ * Update chatroom by passing in new chatroom object
+ */
+// might have to update how I originally update it
+// now would have to update text when I create newChat
+
+const changeChatroom = async (chatId, newChat) => {
+  try {
+    // get the db
+    const db = await getDB();
+    console.log('chatid db', chatId);
+    console.log('new chat db', newChat);
+    const result = await db.collection('Chatroom').updateOne(
+      { _id: new ObjectId(chatId) },
+      { $set: newChat },
+    );
+    return result;
+  } catch (err) {
+    console.log(`error: ${err.message}`);
+  }
+};
+
+/**
+ * Delete chatroom by ID
+ */
+const deleteChatroom = async (chatId) => {
+  try {
+    // get the db
+    const db = await getDB();
+    const result = await db.collection('Chatroom').deleteOne(
+      { _id: new ObjectId(chatId) },
+    );
+    // print the result
+    console.log(`Deleted Group: ${JSON.stringify(result)}`);
+    return result;
+  } catch (err) {
+    console.log(`error: ${err.message}`);
+  }
+};
+
+/**
+ * CREATE a new student (HTTP POST /student)
+ * https://app.swaggerhub.com/apis/ericfouh/StudentsRoster_App/1.0.0#/students/addStudent
+ * @param {newChatroom}   the new student object
+ * @returns the id of the new student
+ */
+const createNewChatroom = async (newChatroom) => {
+  // get the db
+  try {
+    console.log('new chatroom', newChatroom);
+    const db = await getDB();
+    const result = await db.collection('Chatroom').insertOne(newChatroom);
+    console.log(`Created chatroom: ${JSON.stringify(result)}`);
+    return result;
+  } catch (err) {
+    console.log(`error: ${err.message}`);
+  }
+};
+
 module.exports = {
   connect,
   closeMongoDBConnection,
@@ -251,4 +344,9 @@ module.exports = {
   createGroup,
   deleteGroupById,
   deleteUser,
+  getAllChatrooms,
+  getChatroomById,
+  changeChatroom,
+  deleteChatroom,
+  createNewChatroom,
 };

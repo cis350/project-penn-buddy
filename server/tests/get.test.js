@@ -12,7 +12,7 @@ const webapp = require('../server');
 // import test utilities function
 const {
   isInArray, testUser, insertTestDataToDB, deleteTestDataFromDB, deleteGroupTestDataFromDB,
-  testGroup,
+  testGroup, testChatroom, deleteChatTestDataFromDB,
 } = require('./testUtils');
 
 let mongo;
@@ -20,6 +20,7 @@ let db;
 // leep track of id of test user
 let testUserID;
 let testGroupID;
+let testChatroomID;
 
 /**
      * Make sure that the data is in the DB before running
@@ -32,8 +33,10 @@ beforeEach(async () => {
   // add test user to mongodb
   testUserID = await insertTestDataToDB(db, testUser, 'user');
   testGroupID = await insertTestDataToDB(db, testGroup, 'group');
+  testChatroomID = await insertTestDataToDB(db, testChatroom, 'Chatroom');
   console.log('testUserID', testUserID);
   console.log('testGroupID', testGroupID);
+  console.log('testChatroomID', testChatroomID);
 });
 
 /**
@@ -43,6 +46,8 @@ beforeEach(async () => {
 afterEach(async () => {
   await deleteTestDataFromDB(db, 'testUser', 'user');
   await deleteGroupTestDataFromDB(db, 'testLocation', 'group');
+  await deleteChatTestDataFromDB(db, [1, 2, 3], 'Chatroom');
+
   try {
     await mongo.close();
     await closeMongoDBConnection(); // mongo client that started server.
@@ -79,4 +84,28 @@ test('Get a group endpoint status code and data', async () => {
   // testStudent is in the response
   console.log('Expected groupID', testGroupID);
   expect(JSON.stringify(studArr)).toBe(JSON.stringify({ _id: testGroupID, ...testGroup }));
+});
+
+// test GET all chatrooms
+
+test('Get all chats endpoint status code and data', async () => {
+  const resp = await request(webapp).get('/Chatroom');
+  expect(resp.status).toEqual(200);
+  expect(resp.type).toBe('application/json');
+  const chatArr = JSON.parse(resp.text).data;
+  // testStudent is in the response
+  console.log('isInArray--->', isInArray(chatArr, testChatroomID));
+  expect(isInArray(chatArr, testChatroomID)).toBe(true);
+});
+
+// test GET chatroom with specific ID
+
+test('Get a chat by ID endpoint status code and data', async () => {
+  const resp = await request(webapp).get(`/Chatroom/${testChatroomID}`);
+  expect(resp.status).toEqual(200);
+  expect(resp.type).toBe('application/json');
+  const chatArr = JSON.parse(resp.text).data;
+  // testStudent is in the response
+  console.log('Expected chatroomID', testChatroomID);
+  expect(JSON.stringify(chatArr)).toBe(JSON.stringify({ _id: testChatroomID, ...testChatroom }));
 });

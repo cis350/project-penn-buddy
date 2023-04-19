@@ -11,7 +11,7 @@ const webapp = require('../server');
 
 // import test utilities function
 const {
-  isInArray, testUser, testGroup, insertTestDataToDB,
+  isInArray, testUser, testGroup, insertTestDataToDB, testChatroom,
   deleteTestDataFromDB,
 } = require('./testUtils');
 
@@ -20,9 +20,11 @@ let db;
 // leep track of id of test user
 let testUserID;
 let testGroupID;
+let testChatroomID;
 
 let groupResponse;
 let userResponse;
+let chatResponse;
 
 /**
  * Status code and response type
@@ -38,10 +40,25 @@ test('the status code is 201 and response type', async () => {
   const result = await db.collection('group').deleteMany({ location: 'testLocation' });
 });
 
+// FAILING
 /**
- * test creat user 
+ * Status code and response type
  */
- test('the status code for create User is 201 and response type', async () => {
+test('Chatroom - the status code is 201 and response type', async () => {
+  mongo = await connect();
+  db = mongo.db();
+  const response = await request(webapp).post('/Chatroom').send(testChatroom);
+  expect(response.status).toBe(201); // status code
+  const insertedChatroom = await db.collection('Chatroom').findOne({ currentMembersIds: [1, 2, 3] });
+  console.log('inserted chatroom:', insertedChatroom);
+  expect(insertedChatroom.currentMembersIds).toEqual([1, 2, 3]);
+  const result = await db.collection('Chatroom').deleteMany({ currentMembersIds: [1, 2, 3] });
+});
+
+/**
+ * test creat user
+ */
+test('the status code for create User is 201 and response type', async () => {
   mongo = await connect();
   db = mongo.db();
   const response = await request(webapp).post('/user').send(testUser);
