@@ -12,11 +12,5 @@ module.exports = {
     ecmaVersion: 'latest',
   },
   rules: {
-    'global-require': 0,
-    'import/no-dynamic-require': 0,
-    'no-unused-vars': 0,
-    camelcase: 'off',
-    quotes: "off",
-    "react/prop-types": "off",
   },
 };

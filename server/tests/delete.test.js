@@ -11,7 +11,7 @@ const webapp = require('../server');
 
 // import test utilities function
 const {
-  isInArray, testUser, insertTestDataToDB, deleteTestDataFromDB, deleteGroupTestDataFromDB,
+  testUser, insertTestDataToDB, deleteTestDataFromDB, deleteGroupTestDataFromDB,
   deleteChatTestDataFromDB, testGroup, testChatroom,
 } = require('./testUtils');
 

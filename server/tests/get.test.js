@@ -4,7 +4,6 @@
  * GET method test module
  */
 const request = require('supertest');
-const { ObjectId } = require('mongodb');
 const { closeMongoDBConnection, connect } = require('../DbOperations');
 const webapp = require('../server');
 // import ObjectID

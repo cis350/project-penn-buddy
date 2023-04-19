@@ -6,8 +6,6 @@
  * utility functions for testing
  */
 
-const { ObjectId } = require("mongodb");
-
 /**
  * Adds a test student to the DB
  * @param {*} testData - the test data
@@ -81,31 +79,31 @@ const deleteChatTestDataFromDB = async (db, testMembers, collection) => {
 // test user
 // define the test user
 const testUser = {
-  name: "testUser",
-  pennId: "1234567",
-  email: "nickywon@wharton.upenn.edu",
-  number: "1234567891",
-  year: "Junior",
-  major: "CIS",
-  venmo: "Nicky_Wong",
-  bio: "I love CIS350 !",
+  name: 'testUser',
+  pennId: '1234567',
+  email: 'nickywon@wharton.upenn.edu',
+  number: '1234567891',
+  year: 'Junior',
+  major: 'CIS',
+  venmo: 'Nicky_Wong',
+  bio: 'I love CIS350 !',
   rating: [
     1,
     1,
     1,
     5,
   ],
-  password: "nickypass123",
+  password: 'nickypass123',
 };
 
 // Intentionally add name to testGroup so that we can share
 // the add/deleteToDB function with testUser
 const testGroup = {
   ownerId: 1,
-  location: "testLocation",
-  departDate: "12-12-2023 09:00",
-  modeTransport: "Helicopter",
-  departPlace: "Huntsman",
+  location: 'testLocation',
+  departDate: '12-12-2023 09:00',
+  modeTransport: 'Helicopter',
+  departPlace: 'Huntsman',
   maxCapacity: 7,
   currCapacity: 1,
   currMemberIds: [
@@ -117,15 +115,15 @@ const testChatroom = {
   texts: [
     {
       userId: 1,
-      content: "Hello",
+      content: 'Hello',
     },
     {
       userId: 2,
-      content: "Hi",
+      content: 'Hi',
     },
     {
       userId: 3,
-      content: "Hey",
+      content: 'Hey',
     },
   ],
   currentMembersIds: [

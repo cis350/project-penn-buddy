@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable consistent-return */
 /* eslint-disable no-console */
 /**
@@ -59,14 +60,14 @@ test('Endpoint status code and response async/await', async () => {
   const res = await request(webapp).put(`/group/${testGroupID}`)
     .send(
       {
-        ownerId: "6348acd2e1a47ca32e79f46f",
-        location: "testLocation",
-        departDate: "test",
-        modeTransport: "test",
-        departPlace: "test",
-        maxCapacity: "test",
-        currCapacity: "test",
-        currMemberIds: ["6348acd2e1a47ca32e79f46f"],
+        ownerId: '6348acd2e1a47ca32e79f46f',
+        location: 'testLocation',
+        departDate: 'test',
+        modeTransport: 'test',
+        departPlace: 'test',
+        maxCapacity: 'test',
+        currCapacity: 'test',
+        currMemberIds: ['6348acd2e1a47ca32e79f46f'],
       },
     );
   expect(res.status).toEqual(200);
@@ -82,16 +83,16 @@ test('PUT /user/:id - Endpoint status code and response async/await', async () =
   const res = await request(webapp).put(`/user/${testUserID}`)
     .send(
       {
-        name: "testUser",
-        email: "test@example.com",
-        number: "1234567890",
-        year: "2023",
-        major: "Computer Science",
-        bio: "This is a test bio",
-        venmo: "test-venmo",
-        pennId: "12345678",
+        name: 'testUser',
+        email: 'test@example.com',
+        number: '1234567890',
+        year: '2023',
+        major: 'Computer Science',
+        bio: 'This is a test bio',
+        venmo: 'test-venmo',
+        pennId: '12345678',
         rating: 4.5,
-        password: "test-password",
+        password: 'test-password',
       },
     );
   expect(res.status).toEqual(200);
@@ -117,8 +118,8 @@ test('PUT chatroom - Endpoint status code and response async/await', async () =>
     .send(
       {
         // do I need id? "6348acd2e1a47ca32e79f46f",
-        texts: [{ userId: "6348acd2e1a47ca32e79f46f", content: "Hello" }],
-        currentMembersIds: ["6348acd2e1a47ca32e79f46f"],
+        texts: [{ userId: '6348acd2e1a47ca32e79f46f', content: 'Hello' }],
+        currentMembersIds: ['6348acd2e1a47ca32e79f46f'],
       },
     );
   expect(res.status).toEqual(200);

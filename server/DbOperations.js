@@ -349,4 +349,5 @@ module.exports = {
   changeChatroom,
   deleteChatroom,
   createNewChatroom,
+  usernameExists,
 };
