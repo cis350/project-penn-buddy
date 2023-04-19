@@ -1,5 +1,3 @@
-/* eslint-disable consistent-return */
-/* eslint-disable no-console */
 // this is a node app, we must use commonJS modules/ require
 // the names of the functions come from the operationId field
 /**
@@ -35,8 +33,9 @@ const connect = async () => {
     // console.log(`connected to db: ${MongoConnection.db().databaseName}`);
     return MongoConnection;
   } catch (err) {
-    console.log('Error', err.message);
+    // console.log('Error', err.message);
   }
+  return 0;
 };
 
 /**
@@ -71,8 +70,9 @@ const getAllUsers = async () => {
     // console.log(`Users: ${JSON.stringify(result)}`);
     return result;
   } catch (err) {
-    console.log(`error: ${err.message}`);
+    // console.log(`error: ${err.message}`);
   }
+  return 0;
 };
 
 /**
@@ -84,11 +84,12 @@ const getUserById = async (userID) => {
     const db = await getDB();
     const result = await db.collection('user').findOne({ _id: new ObjectId(userID) });
     // print the result
-    console.log(`User: ${JSON.stringify(result)}`);
+    // console.log(`User: ${JSON.stringify(result)}`);
     return result;
   } catch (err) {
-    console.log(`error: ${err.message}`);
+    // console.log(`error: ${err.message}`);
   }
+  return 0;
 };
 
 /**
@@ -98,11 +99,12 @@ const createUser = async (newUser) => {
   try {
     const db = await getDB();
     const result = db.collection('user').insertOne(newUser);
-    console.log(`Created User: ${JSON.stringify(result)}`);
+    // console.log(`Created User: ${JSON.stringify(result)}`);
     return result;
   } catch (err) {
-    console.log(`error: ${err.message}`);
+    // console.log(`error: ${err.message}`);
   }
+  return 0;
 };
 
 /*
@@ -118,8 +120,9 @@ const changeUser = async (userID, newUser) => {
     );
     return result;
   } catch (err) {
-    console.log(`error: ${err.message}`);
+    // console.log(`error: ${err.message}`);
   }
+  return 0;
 };
 
 /**
@@ -148,11 +151,12 @@ const deleteUser = async (userId) => {
       { _id: new ObjectId(userId) },
     );
     // print the result
-    console.log(`Deleted User: ${JSON.stringify(result)}`);
+    // console.log(`Deleted User: ${JSON.stringify(result)}`);
     return result;
   } catch (err) {
-    console.log(`error: ${err.message}`);
+    // console.log(`error: ${err.message}`);
   }
+  return 0;
 };
 
 /**
@@ -164,11 +168,12 @@ const getAllGroups = async () => {
     const db = await getDB();
     const result = await db.collection('group').find({}).toArray();
     // print the results
-    console.log(`Groups: ${JSON.stringify(result)}`);
+    // console.log(`Groups: ${JSON.stringify(result)}`);
     return result;
   } catch (err) {
-    console.log(`error: ${err.message}`);
+    // console.log(`error: ${err.message}`);
   }
+  return 0;
 };
 
 /**
@@ -183,8 +188,9 @@ const getGroupById = async (groupID) => {
     // console.log(`Group: ${JSON.stringify(result)}`);
     return result;
   } catch (err) {
-    console.log(`error: ${err.message}`);
+    // console.log(`error: ${err.message}`);
   }
+  return 0;
 };
 
 /**
@@ -195,11 +201,12 @@ const createGroup = async (newGroup) => {
     // get the db
     const db = await getDB();
     const result = await db.collection('group').insertOne(newGroup);
-    console.log(`Created Group: ${JSON.stringify(result)}`);
+    // console.log(`Created Group: ${JSON.stringify(result)}`);
     return result;
   } catch (err) {
-    console.log(`error: ${err.message}`);
+    // console.log(`error: ${err.message}`);
   }
+  return 0;
 };
 
 /**
@@ -213,11 +220,12 @@ const changeGroup = async (groupID, newGroup) => {
       { _id: new ObjectId(groupID) },
       { $set: newGroup },
     );
-    console.log('post-changeGroup group', db.collection('group').find({}).toArray());
+    // console.log('post-changeGroup group', db.collection('group').find({}).toArray());
     return result;
   } catch (err) {
-    console.log(`error: ${err.message}`);
+    // console.log(`error: ${err.message}`);
   }
+  return 0;
 };
 
 /**
@@ -231,11 +239,12 @@ const deleteGroupById = async (groupID) => {
       { _id: new ObjectId(groupID) },
     );
     // print the result
-    console.log(`Deleted Group: ${JSON.stringify(result)}`);
+    // console.log(`Deleted Group: ${JSON.stringify(result)}`);
     return result;
   } catch (err) {
-    console.log(`error: ${err.message}`);
+    // console.log(`error: ${err.message}`);
   }
+  return 0;
 };
 
 // functions to deal with chatroom
@@ -249,11 +258,12 @@ const getAllChatrooms = async () => {
     const db = await getDB();
     const result = await db.collection('Chatroom').find({}).toArray();
     // print the results
-    console.log(`Chatroom: ${JSON.stringify(result)}`);
+    // console.log(`Chatroom: ${JSON.stringify(result)}`);
     return result;
   } catch (err) {
-    console.log(`error: ${err.message}`);
+    // console.log(`error: ${err.message}`);
   }
+  return 0;
 };
 
 /**
@@ -268,8 +278,9 @@ const getChatroomById = async (chatId) => {
     // console.log(`Group: ${JSON.stringify(result)}`);
     return result;
   } catch (err) {
-    console.log(`error: ${err.message}`);
+    // console.log(`error: ${err.message}`);
   }
+  return 0;
 };
 
 /**
@@ -282,16 +293,17 @@ const changeChatroom = async (chatId, newChat) => {
   try {
     // get the db
     const db = await getDB();
-    console.log('chatid db', chatId);
-    console.log('new chat db', newChat);
+    // console.log('chatid db', chatId);
+    // console.log('new chat db', newChat);
     const result = await db.collection('Chatroom').updateOne(
       { _id: new ObjectId(chatId) },
       { $set: newChat },
     );
     return result;
   } catch (err) {
-    console.log(`error: ${err.message}`);
+    // console.log(`error: ${err.message}`);
   }
+  return 0;
 };
 
 /**
@@ -305,11 +317,12 @@ const deleteChatroom = async (chatId) => {
       { _id: new ObjectId(chatId) },
     );
     // print the result
-    console.log(`Deleted Group: ${JSON.stringify(result)}`);
+    // console.log(`Deleted Group: ${JSON.stringify(result)}`);
     return result;
   } catch (err) {
-    console.log(`error: ${err.message}`);
+    // console.log(`error: ${err.message}`);
   }
+  return 0;
 };
 
 /**
@@ -321,14 +334,15 @@ const deleteChatroom = async (chatId) => {
 const createNewChatroom = async (newChatroom) => {
   // get the db
   try {
-    console.log('new chatroom', newChatroom);
+    // console.log('new chatroom', newChatroom);
     const db = await getDB();
     const result = await db.collection('Chatroom').insertOne(newChatroom);
-    console.log(`Created chatroom: ${JSON.stringify(result)}`);
+    // console.log(`Created chatroom: ${JSON.stringify(result)}`);
     return result;
   } catch (err) {
-    console.log(`error: ${err.message}`);
+    // console.log(`error: ${err.message}`);
   }
+  return 0;
 };
 
 module.exports = {
