@@ -177,7 +177,7 @@ webapp.get('/group', async (req, resp) => {
  * Testing done
  */
 webapp.get('/group/:id', async (req, res) => {
-  console.log('GET a group by ID');
+  // console.log('GET a group by ID');
   try {
     // get the data from the db
     const results = await dbLib.getGroupById(req.params.id);
@@ -197,7 +197,7 @@ webapp.get('/group/:id', async (req, res) => {
  * Testing done
  */
 webapp.put('/group/:id', async (req, res) => {
-  console.log('UPDATE a group');
+  // console.log('UPDATE a group');
   console.log('PUT group/id req body print:', req.body);
   const updatedGroup = {
     ownerId: new ObjectId(req.body.ownerId),
@@ -298,6 +298,118 @@ webapp.delete('/user/:id', async (req, res) => {
     const result = await dbLib.deleteUser(req.params.id);
     if (result.deletedCount === 0) {
       res.status(404).json({ error: 'user not in the system' });
+      return;
+    }
+    // send the response with the appropriate status code
+    res.status(200).json({ message: result });
+  } catch (err) {
+    res.status(400).json({ message: 'there was error' });
+  }
+});
+
+// methods for dealing with chatroom's backend
+
+/**
+ * route implementation POST /Chatroom
+ * testing NOT DONE
+ */
+webapp.post('/Chatroom', async (req, resp) => {
+  // if (!req.body.id || !req.body.texts || !req.body.currentMembersIds) {
+  //   resp.status(404).json({ message: 'missing info' });
+  //   return;
+  // }
+  try {
+    // create the new student object
+    console.log('req id', req.body.id);
+    console.log('req texts', req.body.texts);
+    console.log('req members', req.body.currentMembersIds);
+
+    const newChatroom = {
+      _id: new ObjectId(req.body.id),
+      texts: req.body.texts,
+      currentMembersIds: req.body.currentMembersIds,
+    };
+
+    console.log('new chat s', newChatroom);
+    const result = await dbLib.createNewChatroom(newChatroom);
+    // const result = await dbLib.addChatroom(newChatroom);
+    resp.status(201).json({ data: { id: result } });
+  } catch (err) {
+    resp.status(400).json({ message: 'There was an error' });
+  }
+});
+
+/**
+ * route implementation PUT /group/:id
+ * Testing done
+ */
+// isn't being ran
+webapp.put('/Chatroom/:id', async (req, res) => {
+  console.log('UPDATE a chatroom');
+  console.log('PUT chatroom/id req body print:', req.body);
+  const updatedChat = {
+    // _id: new ObjectId(req.body.chatId),
+    texts: req.body.texts,
+    currentMembersIds: req.body.currentMembersIds,
+  };
+  console.log('updated chat obj', updatedChat);
+  try {
+    const result = await dbLib.changeChatroom(req.params.id, updatedChat);
+    // send the response with the appropriate status code
+    console.log('UPDATE message', result);
+    res.status(200).json({ message: result });
+  } catch (err) {
+    res.status(404).json({ message: 'there was error' });
+  }
+});
+
+/**
+ * route implementation GET /chat
+ * Testing NOT DONE
+ */
+webapp.get('/Chatroom', async (req, resp) => {
+  console.log('entered');
+  try {
+    // get the data from the DB
+    const chats = await dbLib.getAllChatrooms();
+    console.log('chats from server', chats);
+    // send response
+    resp.status(200).json({ data: chats });
+  } catch (err) {
+    // send the error code
+    resp.status(400).json({ message: 'There was an error' });
+  }
+});
+
+/**
+ * route implementation GET /group/:id
+ * Testing NOT done
+ */
+webapp.get('/Chatroom/:id', async (req, res) => {
+  // console.log('GET a chatroom by ID');
+  try {
+    // get the data from the db
+    const results = await dbLib.getChatroomById(req.params.id);
+    if (results === undefined) {
+      res.status(404).json({ error: 'unknown chatroom' });
+      return;
+    }
+    // send the response with the appropriate status code
+    res.status(200).json({ data: results });
+  } catch (err) {
+    res.status(404).json({ message: 'there was error' });
+  }
+});
+
+/**
+ * route implementation DELETE /Chatroom/:id
+ * testing NOT done
+ */
+webapp.delete('/Chatroom/:id', async (req, res) => {
+  try {
+    const result = await dbLib.deleteChatroom(req.params.id);
+    if (result.deletedCount === 0) {
+      res.status(404).json({ error: 'chat not in the system' });
       return;
     }
     // send the response with the appropriate status code

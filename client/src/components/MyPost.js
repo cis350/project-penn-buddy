@@ -11,7 +11,9 @@ import {
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import PostDetail from './PostDetail';
-import { createNewChatroom, getChatroomById } from '../api/chat';
+import {
+  changeChatroom, createNewChatroom, getChatroomById, modifyChatMember,
+} from '../api/chat';
 import { getGroupById } from '../api/groups';
 
 export default function MyPost({
@@ -33,9 +35,15 @@ export default function MyPost({
     // create currMembersId
     const r1 = await getGroupById(groupId);
     const memberIds = r1.currMemberIds;
-    const existChat = await getChatroomById(groupId);
-    if (typeof existChat === 'undefined') {
+    const existChat = await getChatroomById(groupId.toString());
+    if (existChat == null) {
       const response = await createNewChatroom(groupId, memberIds);
+    // }
+    } else {
+      const t = existChat.texts;
+      const membersId = existChat.currentMembersIds;
+      membersId.push(userId);
+      changeChatroom(groupId, t, membersId);
     }
     navigate('/chatroom');
   };

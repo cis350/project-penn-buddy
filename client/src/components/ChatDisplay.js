@@ -13,7 +13,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SendIcon from '@mui/icons-material/Send';
 
 import {
-  getChatroomById, modifyText, getAllChatroom, deleteChatroom,
+  getChatroomById, modifyText, getAllChatrooms, deleteChatroom, changeChatroom,
 } from '../api/chat';
 import MyText from "./MyText";
 import { getUserById } from '../api/users';
@@ -41,14 +41,23 @@ export default function ChatDisplay({ userId, chatId }) {
   // const fullName = name.concat(lastName);
 
   // const [currChatId, setCurrChatId] = React.useState(1);
+  // try the interval thing
 
   // next time, I have to enter id as a prop, depending on where user clicks
   useEffect(() => {
     async function getAllTextsWrapper() {
-      const r2 = await getChatroomById(currChatId);
-      setText(r2.texts);
-      setCurrentMembersIds(r2.currentMembersIds);
-      setCurrMembersName(r2.currentMembersIds);
+      if (currChatId !== 0) {
+        console.log('current id', currChatId);
+        const r2 = await getChatroomById(currChatId);
+        console.log('chat by id', r2);
+        setText(r2.texts);
+        console.log('text chatdisplay', r2.texts);
+        setCurrentMembersIds(r2.currentMembersIds);
+        setCurrMembersName(r2.currentMembersIds);
+      } else {
+        setText([]);
+        setCurrentMembersIds([]);
+      }
     }
     getAllTextsWrapper();
   });
@@ -59,24 +68,40 @@ export default function ChatDisplay({ userId, chatId }) {
     message.current = e.target.value; // update the reference
   };
 
+  // debug using breakpoints
+  // currently put request is not writing things in the database
+  // returning undefined
+
+  // test for backend without using frontend
+  // postman? software for texting api (decouple software and backend)
+
+  // seems correct -> check changeChatroom
   const modifyTextOnServer = async (textData, membersData) => {
     // console.log('text input', message);
-    const response = await modifyText(currChatId, textData, membersData);
+    console.log('mod text');
+    console.log('chat id to be changed', currChatId);
+    console.log('members data', membersData);
+    const response = await changeChatroom(currChatId, textData, membersData);
+    console.log('response in mod text', response);
   };
 
-  const handleSendText = (e) => {
+  // correct
+  const handleSendText = async (e) => {
     // update the login state
     // setRender(!render);
     const modifiedTextData = [];
     text.forEach((element) => {
       modifiedTextData.push(element);
     });
+    console.log('user id of sender:', userId);
+    console.log('message sent', message.current);
     const modifiedData = {
       userId,
       content: message.current,
     };
     modifiedTextData.push(modifiedData);
-    modifyTextOnServer(modifiedTextData, currentMembersIds);
+    console.log('new text data', modifiedTextData);
+    await modifyTextOnServer(modifiedTextData, currentMembersIds);
   };
 
   return (

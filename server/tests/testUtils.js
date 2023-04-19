@@ -58,6 +58,26 @@ const deleteGroupTestDataFromDB = async (db, testlocation, collection) => {
   }
 };
 
+/**
+ *
+ * @param {*} db
+ * @param {*} testData
+ * @returns
+ */
+const deleteChatTestDataFromDB = async (db, testMembers, collection) => {
+  try {
+    const result = await db.collection(collection).deleteMany({ currentMembersIds: testMembers });
+    const { deletedCount } = result;
+    if (deletedCount === 1) {
+      console.log('info', 'Successfully deleted test data');
+    } else {
+      console.log('warning', 'test data was not deleted');
+    }
+  } catch (err) {
+    console.log('error', err.message);
+  }
+};
+
 // test user
 // define the test user
 const testUser = {
@@ -93,6 +113,28 @@ const testGroup = {
   ],
 };
 
+const testChatroom = {
+  texts: [
+    {
+      userId: 1,
+      content: "Hello",
+    },
+    {
+      userId: 2,
+      content: "Hi",
+    },
+    {
+      userId: 3,
+      content: "Hey",
+    },
+  ],
+  currentMembersIds: [
+    1,
+    2,
+    3,
+  ],
+};
+
 /**
  * utility function to test if the id
  * of the test student is in the response (array)
@@ -116,7 +158,9 @@ module.exports = {
   insertTestDataToDB,
   deleteTestDataFromDB,
   deleteGroupTestDataFromDB,
+  deleteChatTestDataFromDB,
   testUser,
   testGroup,
+  testChatroom,
   isInArray,
 };

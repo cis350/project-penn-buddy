@@ -13,7 +13,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SendIcon from '@mui/icons-material/Send';
 
 import {
-  getChatroomById, modifyText, getAllChatroom, deleteChatroom,
+  getChatroomById, modifyText, getAllChatrooms, deleteChatroom,
 } from '../api/chat';
 import MyText from '../components/MyText';
 import { getUserById } from '../api/users';
@@ -36,7 +36,7 @@ export default function Chatroom({ userId, name }) {
 
   const message = useRef('');
   const listNum = useRef(1);
-  const currChatId = useRef(1);
+  const currChatId = useRef(0);
   // const fullName = name.concat(lastName);
 
   const navigate = useNavigate();
@@ -47,32 +47,47 @@ export default function Chatroom({ userId, name }) {
   // const [currChatId, setCurrChatId] = React.useState(1);
 
   // next time, I have to enter id as a prop, depending on where user clicks
+
+  // use timeOut
+  // call the backend after a set amount of time (100 or 1000 millisecond)
+
   useEffect(() => {
+    // use setINterval to call it every x seconds
+    // refresh your UI component -> useEffect
+    // need a callback, the value change
+
+    // const interval = setInterval(() => {
+    //   console.log('This will run every second!');
+    //   getAllChatroomWrapper();
+    // }, 1000);
+    // return () => clearInterval(interval);
+
     async function getAllChatroomWrapper() {
-      const response = await getAllChatroom();
+      const response = await getAllChatrooms();
+      console.log('all chatrooms', response);
       setChatrooms(response);
+      console.log('cr', chatrooms);
       setFiltered(chatrooms.filter(
         (chat) => chat.currentMembersIds.includes(userId),
       ));
-      const r2 = await getChatroomById(currChatId.current);
-      setCurrentMembersIds(r2.currentMembersIds);
+      // console.log('userId', userId.toString());
+      console.log('chat user is in', filteredCr);
+      console.log('currChat id', currChatId.current);
+      if (currChatId.current !== 0) {
+        console.log('nonzero');
+        const r2 = await getChatroomById(currChatId.current);
+        setCurrentMembersIds(r2.currentMembersIds);
+      }
       // setCurrMembersName(r2.currentMembersIds);
     }
     getAllChatroomWrapper();
     // convertIdToName();
   }, [chatrooms.length]);
-
-  // const idToNameFunction = (c) => {
-  //   currentMembersIds.forEach((id) => {
-  //     const r3 = getUserById(id);
-  //     // console.log('members name ', user.user.name);
-  //     console.log('user', user);
-  //     currMembersName.push(user.name);
-  //   });
-  //   console.log('group members', currMembersName);
-  // }
+  
   const handleChangeChat = (c) => {
-    currChatId.current = c.c.id;
+    console.log('hcc', c.c._id);
+    currChatId.current = c.c._id;
+    console.log('hcc chatid', currChatId);
   };
 
   const handleExitChatroom = (e) => {
@@ -84,7 +99,7 @@ export default function Chatroom({ userId, name }) {
           (chat) => (chat.id !== currChatId.current),
         ));
         // might have to fix this later
-        currChatId.current = 1;
+        currChatId.current = 0;
       }
     });
   };
@@ -154,14 +169,16 @@ export default function Chatroom({ userId, name }) {
             <Divider />
             <List style={{ color: 'white', backgroundColor: '#0096FF' }}>
               {
-              filteredCr.map((c, index) => (
+                // NOTE: WILL HAVE TO CHANGE CHATROOMS TO FILTERED CHATROOM LATER
+              filteredCr.map((c) => (
                 <ListItem
                   button
                   data-testid="chatNames"
-                  id={c.id}
+                  id={c._id}
                   onClick={() => handleChangeChat({ c })}
                 >
-                  {c.id}
+                  {/* ASK PROF HOW TO CHANGE NAME OF CHAT */}
+                  {c._id}
                 </ListItem>
               ))
             }
