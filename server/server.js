@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /**
  * Express webserver / controller
  */
@@ -74,8 +75,8 @@ webapp.post('/api/login', async (req, resp) => {
  * route implementation add user signup
  */
 webapp.post('/user', async (req, res) => {
-  // console.log('POST a acc');
-  // console.log('POST register req body print:', req.body);
+  console.log('POST a acc');
+  console.log('POST register req body print:', req.body);
   /*
   if (!req.body.pennId || req.body.pennId.length === 0) {
     resp.status(401).json({ error: 'pennId not provided' });
@@ -140,7 +141,7 @@ webapp.post('/user', async (req, res) => {
  * TESTING NOT DONE!!!
  */
 webapp.get('/user/:id', async (req, res) => {
-  // console.log('GET a user by ID');
+  console.log('GET a user by ID');
   try {
     // get the data from the db
     const results = await dbLib.getUserById(req.params.id);
@@ -197,7 +198,7 @@ webapp.get('/group/:id', async (req, res) => {
  */
 webapp.put('/group/:id', async (req, res) => {
   // console.log('UPDATE a group');
-  // console.log('PUT group/id req body print:', req.body);
+  console.log('PUT group/id req body print:', req.body);
   const updatedGroup = {
     ownerId: new ObjectId(req.body.ownerId),
     location: req.body.location,
@@ -210,7 +211,7 @@ webapp.put('/group/:id', async (req, res) => {
   };
   try {
     const result = await dbLib.changeGroup(req.params.id, updatedGroup);
-    // console.log('changeGroup result', result);
+    console.log('changeGroup result', result);
     // send the response with the appropriate status code
     res.status(200).json({ message: result });
   } catch (err) {
@@ -223,8 +224,8 @@ webapp.put('/group/:id', async (req, res) => {
  * TESTING NOT DONE
  */
 webapp.post('/group', async (req, res) => {
-  // console.log('CREATE a group');
-  // console.log('POST group req body print:', req.body);
+  console.log('CREATE a group');
+  console.log('POST group req body print:', req.body);
   try {
     const newGroup = {
       ownerId: new ObjectId(req.body.ownerId),
@@ -249,8 +250,8 @@ webapp.post('/group', async (req, res) => {
  * Testing NOT DONE!!
  */
 webapp.put('/user/:id', async (req, res) => {
-  // console.log('UPDATE a user');
-  // console.log('PUT user/id req body print:', req.body);
+  console.log('UPDATE a user');
+  console.log('PUT user/id req body print:', req.body);
   const updatedUser = {
     name: req.body.name,
     email: req.body.email,
@@ -319,9 +320,9 @@ webapp.post('/Chatroom', async (req, resp) => {
   // }
   try {
     // create the new student object
-    // console.log('req id', req.body.id);
-    // console.log('req texts', req.body.texts);
-    // console.log('req members', req.body.currentMembersIds);
+    console.log('req id', req.body.id);
+    console.log('req texts', req.body.texts);
+    console.log('req members', req.body.currentMembersIds);
 
     const newChatroom = {
       _id: new ObjectId(req.body.id),
@@ -329,7 +330,7 @@ webapp.post('/Chatroom', async (req, resp) => {
       currentMembersIds: req.body.currentMembersIds,
     };
 
-    // console.log('new chat s', newChatroom);
+    console.log('new chat s', newChatroom);
     const result = await dbLib.createNewChatroom(newChatroom);
     // const result = await dbLib.addChatroom(newChatroom);
     resp.status(201).json({ data: { id: result } });
@@ -344,18 +345,18 @@ webapp.post('/Chatroom', async (req, resp) => {
  */
 // isn't being ran
 webapp.put('/Chatroom/:id', async (req, res) => {
-  // console.log('UPDATE a chatroom');
-  // console.log('PUT chatroom/id req body print:', req.body);
+  console.log('UPDATE a chatroom');
+  console.log('PUT chatroom/id req body print:', req.body);
   const updatedChat = {
     // _id: new ObjectId(req.body.chatId),
     texts: req.body.texts,
     currentMembersIds: req.body.currentMembersIds,
   };
-  // console.log('updated chat obj', updatedChat);
+  console.log('updated chat obj', updatedChat);
   try {
     const result = await dbLib.changeChatroom(req.params.id, updatedChat);
     // send the response with the appropriate status code
-    // console.log('UPDATE message', result);
+    console.log('UPDATE message', result);
     res.status(200).json({ message: result });
   } catch (err) {
     res.status(404).json({ message: 'there was error' });
@@ -367,11 +368,11 @@ webapp.put('/Chatroom/:id', async (req, res) => {
  * Testing NOT DONE
  */
 webapp.get('/Chatroom', async (req, resp) => {
-  // console.log('entered');
+  console.log('entered');
   try {
     // get the data from the DB
     const chats = await dbLib.getAllChatrooms();
-    // console.log('chats from server', chats);
+    console.log('chats from server', chats);
     // send response
     resp.status(200).json({ data: chats });
   } catch (err) {
