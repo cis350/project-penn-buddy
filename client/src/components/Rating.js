@@ -53,19 +53,19 @@ function Rating({ userId }) {
       rating: newRating,
       password,
     };
-    console.log('modified rating user', modifiedData);
-    console.log('user id to cu', userId);
+    // console.log('modified rating user', modifiedData);
+    // console.log('user id to cu', userId);
     const response = await changeUser(userId, modifiedData);
   };
 
   const handleRate = (value) => {
     setRating(value);
-    console.log('value of the star clicked', value);
+    // console.log('value of the star clicked', value);
     const modRatingArr = [value];
     ratingScore.forEach((r) => {
       modRatingArr.push(r);
     });
-    console.log('modRatingarr', modRatingArr);
+    // console.log('modRatingarr', modRatingArr);
     createNewUser(modRatingArr);
   };
 
