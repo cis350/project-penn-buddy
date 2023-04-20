@@ -82,8 +82,7 @@ export default function Chatroom({ userId, name }) {
     }
     getAllChatroomWrapper();
     // convertIdToName();
-  }, [chatrooms.length]);
-  
+  }, [chatrooms.length]); 
   const handleChangeChat = (c) => {
     console.log('hcc', c.c._id);
     currChatId.current = c.c._id;
