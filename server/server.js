@@ -323,9 +323,11 @@ webapp.post('/Chatroom', async (req, resp) => {
     console.log('req id', req.body.id);
     console.log('req texts', req.body.texts);
     console.log('req members', req.body.currentMembersIds);
+    console.log('req chatname', req.body.chatName);
 
     const newChatroom = {
       _id: new ObjectId(req.body.id),
+      chatName: req.body.chatName,
       texts: req.body.texts,
       currentMembersIds: req.body.currentMembersIds,
     };
@@ -349,6 +351,7 @@ webapp.put('/Chatroom/:id', async (req, res) => {
   console.log('PUT chatroom/id req body print:', req.body);
   const updatedChat = {
     // _id: new ObjectId(req.body.chatId),
+    chatName: req.body.chatName,
     texts: req.body.texts,
     currentMembersIds: req.body.currentMembersIds,
   };
@@ -400,6 +403,26 @@ webapp.get('/Chatroom/:id', async (req, res) => {
     res.status(404).json({ message: 'there was error' });
   }
 });
+
+// /**
+//  * route implementation GET /group/:name
+//  * Testing NOT done
+//  */
+// webapp.get('/Chatroom/:chatName', async (req, res) => {
+//   // console.log('GET a chatroom by ID');
+//   try {
+//     // get the data from the db
+//     const results = await dbLib.getChatroomByName(req.params.chatName);
+//     if (results === undefined) {
+//       res.status(404).json({ error: 'unknown chatroom' });
+//       return;
+//     }
+//     // send the response with the appropriate status code
+//     res.status(200).json({ data: results });
+//   } catch (err) {
+//     res.status(404).json({ message: 'there was error' });
+//   }
+// });
 
 /**
  * route implementation DELETE /Chatroom/:id

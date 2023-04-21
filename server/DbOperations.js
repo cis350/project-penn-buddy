@@ -257,7 +257,7 @@ const getAllChatrooms = async () => {
 };
 
 /**
- * Get group by ID
+ * Get chatroom by ID
  */
 const getChatroomById = async (chatId) => {
   try {
@@ -271,6 +271,22 @@ const getChatroomById = async (chatId) => {
     console.log(`error: ${err.message}`);
   }
 };
+
+// /**
+//  * Get chatroom by name
+//  */
+// const getChatroomByName = async (name) => {
+//   try {
+//     // get the db
+//     const db = await getDB();
+//     const result = await db.collection('Chatroom').findOne({ chatName: name });
+//     // print the result
+//     // console.log(`Group: ${JSON.stringify(result)}`);
+//     return result;
+//   } catch (err) {
+//     console.log(`error: ${err.message}`);
+//   }
+// };
 
 /**
  * Update chatroom by passing in new chatroom object
@@ -346,6 +362,7 @@ module.exports = {
   deleteUser,
   getAllChatrooms,
   getChatroomById,
+  // getChatroomByName,
   changeChatroom,
   deleteChatroom,
   createNewChatroom,

@@ -13,7 +13,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SendIcon from '@mui/icons-material/Send';
 
 import {
-  getChatroomById, modifyText, getAllChatrooms, deleteChatroom, changeChatroom,
+  getChatroomById, getAllChatrooms, deleteChatroom, changeChatroom,
 } from '../api/chat';
 import MyText from "./MyText";
 import { getUserById } from '../api/users';
@@ -21,7 +21,7 @@ import { getUserById } from '../api/users';
 // import SendMessage from './chat/SendMessage';
 // import { getAllChats } from '../api/chat';
 
-export default function ChatDisplay({ userId, chatId }) {
+export default function ChatDisplay({ userId, chatId, chatName }) {
 // for backend mocking
   // try hardcoding chatId for now bc we only have one chat
   // const { chatId } = useParams();
@@ -81,7 +81,7 @@ export default function ChatDisplay({ userId, chatId }) {
     // console.log('mod text');
     // console.log('chat id to be changed', currChatId);
     // console.log('members data', membersData);
-    const response = await changeChatroom(currChatId, textData, membersData);
+    const response = await changeChatroom(currChatId, chatName, textData, membersData);
     // console.log('response in mod text', response);
   };
 

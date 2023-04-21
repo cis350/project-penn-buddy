@@ -14,7 +14,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SendIcon from '@mui/icons-material/Send';
 
 import {
-  getChatroomById, modifyText, getAllChatrooms, deleteChatroom,
+  getChatroomById, getAllChatrooms, deleteChatroom,
 } from '../api/chat';
 import MyText from '../components/MyText';
 import { getUserById } from '../api/users';
@@ -30,13 +30,12 @@ export default function Chatroom({ userId, name }) {
   const [text, setText] = useState([]);
   const [chatrooms, setChatrooms] = useState([]);
   const [currentMembersIds, setCurrentMembersIds] = useState([]);
+  const [chatName, setChatname] = useState('');
   // const [currMembersName, setCurrMembersName] = useState([]);
   const [filteredCr, setFiltered] = useState([]);
   // let memName be an array of array
   // memName[i] has i-th chat's name of everyone
 
-  const message = useRef('');
-  const listNum = useRef(1);
   const currChatId = useRef(0);
   // const fullName = name.concat(lastName);
 
@@ -67,7 +66,7 @@ export default function Chatroom({ userId, name }) {
       const response = await getAllChatrooms();
       // console.log('all chatrooms', response);
       setChatrooms(response);
-      // console.log('cr', chatrooms);
+      // CHECK WHY IT's NOT FILTERING CORRECTLY
       setFiltered(chatrooms.filter(
         (chat) => chat.currentMembersIds.includes(userId),
       ));
@@ -78,6 +77,8 @@ export default function Chatroom({ userId, name }) {
         // console.log('nonzero');
         const r2 = await getChatroomById(currChatId.current);
         setCurrentMembersIds(r2.currentMembersIds);
+        setChatname(r2.chatName);
+        console.log('chatname chatroom.js', chatName);
       }
       // setCurrMembersName(r2.currentMembersIds);
     }
@@ -178,13 +179,14 @@ export default function Chatroom({ userId, name }) {
                   onClick={() => handleChangeChat({ c })}
                 >
                   {/* ASK PROF HOW TO CHANGE NAME OF CHAT */}
-                  {c._id}
+                  {c.chatName}
+                  {/* {c._id} */}
                 </ListItem>
               ))
             }
             </List>
           </Grid>
-          <ChatDisplay chatId={currChatId} userId={userId} />
+          <ChatDisplay chatId={currChatId} userId={userId} chatName={chatName} />
         </Grid>
       </div>
     </div>

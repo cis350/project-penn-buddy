@@ -9,9 +9,10 @@ import {
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import PostDetail from './PostDetail';
 import {
-  changeChatroom, createNewChatroom, getChatroomById, modifyChatMember,
+  changeChatroom, createNewChatroom, getChatroomById, getAllChatrooms,
 } from '../api/chat';
 import { getGroupById } from '../api/groups';
+import { getUserById } from '../api/users';
 
 export default function OtherPost({
   ownerId, location, departDate, modeTransport,
@@ -20,22 +21,48 @@ export default function OtherPost({
 }) {
   const navigate = useNavigate();
   const handleChatroom = async (e) => {
-    const newTextData = [];
+    // const newTextData = [];
     const r1 = await getGroupById(groupId);
     const memberIds = r1.currMemberIds;
     // add a separate field in the chatroom that adds a groupId
     console.log('this is group id', groupId);
-    const existChat = await getChatroomById(groupId.toString());
-    if (existChat == null) {
-      console.log('null');
-      const response = await createNewChatroom(groupId, memberIds);
+    const r2 = await getUserById(r1.ownerId);
+    const postOwner = r2.name;
+    const postLoc = r1.location;
+    const chatName = postOwner.concat(' Group to ', postLoc);
+    console.log('chat name is ', chatName);
+    // const existChat = await getChatroomByName(chatName);
+    // if (existChat == null) {
+    //   console.log('null');
+    //   const response = await createNewChatroom(groupId, memberIds, chatName);
+    // // }
+    // } else {
+    //   console.log('chat form', existChat);
+    //   const t = existChat.texts;
+    //   const membersId = existChat.currentMembersIds;
+    //   membersId.push(userId);
+    //   changeChatroom(groupId, chatName, t, membersId);
+    // }
+    const allChats = await getAllChatrooms;
+    console.log('all chats mpost', allChats);
+    const exist = Object.values(allChats).filter(
+      (chat) => (chat.chatName === chatName),
+    );
+    // const existChat = await getChatroomByName(chatName);
+    if (exist === []) {
+      // console.log('null');
+      const response = await createNewChatroom(groupId, memberIds, chatName);
     // }
     } else {
-      console.log('chat form', existChat);
-      const t = existChat.texts;
-      const membersId = existChat.currentMembersIds;
-      membersId.push(userId);
-      changeChatroom(groupId, t, membersId);
+      // console.log('chat form', existChat);
+      Object.values(allChats).forEach((c) => {
+        if (c.chatName === chatName) {
+          const t = c.texts;
+          const membersId = c.currentMembersIds;
+          membersId.push(userId);
+          changeChatroom(groupId, chatName, t, membersId);
+        }
+      });
     }
     navigate('/chatroom');
   };

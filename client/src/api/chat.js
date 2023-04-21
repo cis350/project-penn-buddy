@@ -18,6 +18,17 @@ export const getChatroomById = async (id) => {
   }
 };
 
+// // THIS IS NOT WORKING 
+// // check if I can do this
+// export const getChatroomByName = async (name) => {
+//   try {
+//     const response = await axios.get(`${rootURL}/Chatroom/${name}`);
+//     return response.data.data;
+//   } catch (err) {
+//     // console.error('error', err.message);
+//   }
+// };
+
 export const getAllChatrooms = async () => {
   try {
     const response = await axios.get(`${rootURL}/Chatroom`);
@@ -28,11 +39,11 @@ export const getAllChatrooms = async () => {
   }
 };
 
-export const changeChatroom = async (id, texts, currentMembersIds) => {
+export const changeChatroom = async (id, name, texts, currentMembersIds) => {
   try {
     const chatId = id;
     // console.log('chatId cc', chatId);
-    const response = await axios.put(`${rootURL}/Chatroom/${chatId}`, { id, texts, currentMembersIds });
+    const response = await axios.put(`${rootURL}/Chatroom/${chatId}`, { id, name, texts, currentMembersIds });
     // console.log('r message cc', response);
     return response.data.message;
   } catch (err) {
@@ -40,32 +51,35 @@ export const changeChatroom = async (id, texts, currentMembersIds) => {
   }
 };
 
-export const modifyText = async (id, texts, currentMembersIds) => {
-  try {
-    const chatId = id;
-    const response = await axios.put(`${rootURL}/Chatroom/${chatId}`, { id, texts, currentMembersIds });
-    return response.data.data;
-  } catch (err) {
-    //   console.log('error', err.message);
-  }
-};
+// consider deleting
 
-export const modifyChatMember = async (id, texts, currentMembersIds) => {
-  try {
-    const chatId = id;
-    const response = await axios.put(`${rootURL}/Chatroom/${chatId}`, { id, texts, currentMembersIds });
-    return response.data.data;
-  } catch (err) {
-    //   console.log('error', err.message);
-  }
-};
+// export const modifyText = async (id, texts, currentMembersIds) => {
+//   try {
+//     const chatId = id;
+//     const response = await axios.put(`${rootURL}/Chatroom/${chatId}`, { id, texts, currentMembersIds });
+//     return response.data.data;
+//   } catch (err) {
+//     //   console.log('error', err.message);
+//   }
+// };
 
-export const createNewChatroom = async (chatId, membersId) => {
+// export const modifyChatMember = async (id, texts, currentMembersIds) => {
+//   try {
+//     const chatId = id;
+//     const response = await axios.put(`${rootURL}/Chatroom/${chatId}`, { id, texts, currentMembersIds });
+//     return response.data.data;
+//   } catch (err) {
+//     //   console.log('error', err.message);
+//   }
+// };
+
+export const createNewChatroom = async (chatId, membersId, name) => {
   try {
     // console.log('chat id', chatId);
     // const _id = chatId
     const texts = [];
     const currentMembersIds = membersId;
+    const chatName = name;
     // console.log('_id', _id);
     // console.log('texts', texts);
     // console.log('members', currentMembersIds);
@@ -73,6 +87,7 @@ export const createNewChatroom = async (chatId, membersId) => {
       _id: `${chatId}`,
       // texts: `${texts}`,
       // currentMembersIds: `${currentMembersIds}`,
+      chatName,
       texts,
       currentMembersIds,
     });

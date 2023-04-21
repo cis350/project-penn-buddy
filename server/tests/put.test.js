@@ -117,7 +117,7 @@ test('PUT chatroom - Endpoint status code and response async/await', async () =>
   const res = await request(webapp).put(`/Chatroom/${testChatroomID}`)
     .send(
       {
-        // do I need id? "6348acd2e1a47ca32e79f46f",
+        chatName: 'Eric Hroup to JFK',
         texts: [{ userId: '6348acd2e1a47ca32e79f46f', content: 'Hello' }],
         currentMembersIds: ['6348acd2e1a47ca32e79f46f'],
       },

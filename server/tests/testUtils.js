@@ -112,6 +112,7 @@ const testGroup = {
 };
 
 const testChatroom = {
+  chatName: 'Eric Group to JFK',
   texts: [
     {
       userId: 1,

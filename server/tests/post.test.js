@@ -41,7 +41,6 @@ test('the status code is 201 and response type', async () => {
   const result = await db.collection('group').deleteMany({ location: 'testLocation' });
 });
 
-// FAILING
 /**
  * Status code and response type
  */
@@ -50,8 +49,9 @@ test('Chatroom - the status code is 201 and response type', async () => {
   db = mongo.db();
   const response = await request(webapp).post('/Chatroom').send(testChatroom);
   expect(response.status).toBe(201); // status code
+  const iChatroom = await db.collection('Chatroom').findOne({ chatName: 'Eric Group to JFK' });
+  expect(iChatroom.chatName).toEqual('Eric Group to JFK');
   const insertedChatroom = await db.collection('Chatroom').findOne({ currentMembersIds: [1, 2, 3] });
-  console.log('inserted chatroom:', insertedChatroom);
   expect(insertedChatroom.currentMembersIds).toEqual([1, 2, 3]);
   const result = await db.collection('Chatroom').deleteMany({ currentMembersIds: [1, 2, 3] });
 });
