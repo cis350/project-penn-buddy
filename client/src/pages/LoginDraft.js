@@ -37,8 +37,9 @@ function Login({ setLogin, setUserId, setName }) {
     async function getAllUsersWrapper() {
       const response = await getAllUsers();
       console.log('name1:', name1);
-      console.log('User login', response.filter((item) => item.name === name1)[0]._id.toString());
-      setUserId(response.filter((item) => item.name === name1)[0]._id.toString());
+      if (response.filter((item) => item.name === name1).length > 0) {
+        setUserId(response.filter((item) => item.name === name1)[0]._id.toString());
+      }
     }
     // run the wrapper function
     getAllUsersWrapper();
@@ -50,6 +51,7 @@ function Login({ setLogin, setUserId, setName }) {
         <h3 className="center">Welcome to Penn Buddy!</h3>
         <FormGroup>
           <TextField
+            id="namefield"
             label="pennKey"
             variant="filled"
             required
@@ -60,6 +62,7 @@ function Login({ setLogin, setUserId, setName }) {
         <br />
         <FormGroup>
           <TextField
+            id="passwordfield"
             label="Password"
             variant="filled"
             required
@@ -68,7 +71,7 @@ function Login({ setLogin, setUserId, setName }) {
           />
         </FormGroup>
         <div className="center">
-          <Button type="submit" variant="contained" color="primary" onClick={handleClickLogin}>
+          <Button id="loginbutton" type="submit" variant="contained" color="primary" onClick={handleClickLogin}>
             Login
           </Button>
         </div>
