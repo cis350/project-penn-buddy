@@ -95,7 +95,7 @@ export default function ActivityFeedPost({
               <h4 style={{ margin: '10px 0 5px 0' }}>Other Destinations:</h4>
             </div>
             <TextField
-              id="outlined-basic"
+              id="locationinput"
               label="Destination"
               variant="outlined"
               size="small"
@@ -114,6 +114,7 @@ export default function ActivityFeedPost({
               onChange={handleDateChange}
             />
             <Button
+              id="searchfilter"
               variant="contained"
               color="secondary"
               onClick={handleSubmit}
