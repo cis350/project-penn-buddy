@@ -81,6 +81,7 @@ function Login({
         <h3 className="center">Welcome to Penn Buddy!</h3>
         <FormGroup>
           <TextField
+            id="namefield"
             label="pennKey"
             variant="filled"
             required
@@ -91,6 +92,7 @@ function Login({
         <br />
         <FormGroup>
           <TextField
+            id="passwordfield"
             label="Password"
             variant="filled"
             required
