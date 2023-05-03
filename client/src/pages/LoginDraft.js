@@ -7,7 +7,7 @@ import {
 // import '../css/Login.css';
 import { useNavigate, Link } from 'react-router-dom';
 import NavbarLogin from '../components/NavbarLogin';
-import { getAllUsers, getUserById, loginUser } from '../api/users';
+import { getAllUsers, getUserById } from '../api/users';
 import { usernameExists } from '../api/login';
 
 function Login({
