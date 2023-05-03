@@ -6,7 +6,25 @@ import { rootURL } from "../utils/utils";
 
 /**
  * This module contains HTTP calls to the backend
- */
+
+const setHeaders = () => {
+  axios.defaults.headers.authorization = sessionStorage.getItem('app-token');
+};
+
+/**
+ * This function authenticates the user
+ * sends a POSt request to the login endpoint
+ * returns the JWT
+
+export const loginUser = async (username) => {
+  try {
+    const response = await axios.post(`${rootURL}/login`, `name=${username}`);
+    // return the token
+    return response.data.apptoken;
+  } catch (err) {
+    console.log('error', err.message);
+  }
+}; */
 
 export const getAllUsers = async () => {
   try {
@@ -17,6 +35,14 @@ export const getAllUsers = async () => {
     console.log('error', err.message);
   }
 };
+
+/* export async function getUser(name, password) {
+  const response = await axios.get(`${rootURL}/user/login`, {
+    name: `${name}`,
+    password: `${password}`,
+  });
+  return response.data.apptoken;
+} */
 
 /**
  * Get a user based on groupId
