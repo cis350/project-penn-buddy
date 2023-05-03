@@ -14,9 +14,18 @@ const { ObjectId } = require('mongodb');
 
 // create a new express app
 const webapp = express();
+// const session = require('cookie-session');
 
 // enable cors
 webapp.use(cors());
+
+/*
+webapp.use(session({
+  name: 'session',
+  keys: ['key1', 'key2'],
+  maxAge: 100000000,
+})); */
+
 
 // support parsing of application/json type post data
 const bodyParser = require('body-parser');
@@ -36,8 +45,8 @@ webapp.get('/', (req, res) => {
 
 /**
  * route implementation GET /user
- * Testing done
- */
+ * Testing done */
+ 
 webapp.get('/user', async (req, resp) => {
   try {
     // get the data from the DB
@@ -48,28 +57,8 @@ webapp.get('/user', async (req, resp) => {
     // send the error code
     resp.status(400).json({ message: 'There was an error' });
   }
-});
+}); 
 
-/**
- * route implementation add user Login
-webapp.post('/api/login', async (req, resp) => {
-  if (!req.body.name || req.body.name.length === 0) {
-    resp.status(401).json({ error: 'pennKey not provided' });
-    return;
-  }
-  if (!req.body.password || req.body.password.length === 0) {
-    resp.status(401).json({ error: 'password not provided' });
-    return;
-  }
-  try {
-    const result = await dbLib.getUserById(req.params.id);
-    // req.session.name = result.name;
-    resp.status(200).json({ message: 'successfully logged in', data: result });
-  } catch (err) {
-    resp.status(401).json({ error: 'could not find user' });
-  }
-});
-*/
 
 /**
  * route implementation add user signup
@@ -77,7 +66,6 @@ webapp.post('/api/login', async (req, resp) => {
 webapp.post('/user', async (req, res) => {
   console.log('POST a acc');
   console.log('POST register req body print:', req.body);
-  /*
   if (!req.body.pennId || req.body.pennId.length === 0) {
     resp.status(401).json({ error: 'pennId not provided' });
     return;
@@ -113,7 +101,7 @@ webapp.post('/user', async (req, res) => {
   if (!req.body.bio || req.body.bio.length === 0) {
     resp.status(401).json({ error: 'bio not provided' });
     return;
-  } */
+  }
   try {
     const newUser = {
       name: req.body.name,
@@ -128,14 +116,29 @@ webapp.post('/user', async (req, res) => {
       password: req.body.password,
     };
     const result = await dbLib.createUser(newUser);
-    // req.session.pennid = result.pennid;
-    // req.session.firstname = result.firstname;
-    // req.session.lastname = result.lastname;
+    req.session.name = result.name;
+    req.session.pennId = result.pennId;
     res.status(201).json({ message: 'successfully added user', data: result });
   } catch (err) {
     res.status(400).json({ error: 'could not add user' });
   }
 });
+
+/*
+// check if username exists
+webapp.get('/checkuser', async (req, resp) => {
+  try {
+    const exists = await dbLib.usernameExists(req.params.name);
+    if (exists) {
+      resp.status(200).json({ message: 'username exist' });
+    } else {
+      resp.status(200).json({ message: 'username does not exist' });
+    }
+  } catch (err) {
+    resp.status(500).json({ error: 'try again later' });
+  }
+}); */
+
 /**
  * route implementation GET /user/:id
  * TESTING NOT DONE!!!
@@ -145,6 +148,8 @@ webapp.get('/user/:id', async (req, res) => {
   try {
     // get the data from the db
     const results = await dbLib.getUserById(req.params.id);
+    // req.session.name = results.name;
+    // req.session.pennId = results.pennId;
     if (results === undefined) {
       res.status(404).json({ error: 'unknown user' });
       return;
@@ -155,6 +160,44 @@ webapp.get('/user/:id', async (req, res) => {
     res.status(404).json({ message: 'there was error' });
   }
 });
+
+/*
+webapp.get('/login', async (req, resp) => {
+  if (!req.body.name || req.body.name.length === 0) {
+    resp.status(401).json({ error: 'pennKey not provided' });
+    return;
+  }
+  if (!req.body.password || req.body.password.length === 0) {
+    resp.status(401).json({ error: 'password not provided' });
+    return;
+  }
+  try {
+    const result = await lib.getUser(db,{ name: req.body.name });
+    req.session.name = result.name;
+    req.session.pennId = result.pennId;
+    resp.status(200).json({ message: 'successfully logged in', data: result });
+  } catch (err) {
+    resp.status(401).json({ error: 'could not find user' });
+  }
+}); */
+
+/* NEW VER
+webapp.post('/login', (req, resp)=>{
+  // check that the name was sent in the body
+  if(!req.body.name || req.body.name===''){
+    resp.status(401).json({error: 'empty or missing name'});
+    return;
+  }
+  // authenticate the user
+  try{
+    const token = authenticateUser(req.body.name);
+    resp.status(201).json({apptoken: token});
+
+  } catch(err){
+    resp.status(401).json({error: 'hey I am an error'});
+  }
+}) */
+
 
 /**
  * route implementation GET /group

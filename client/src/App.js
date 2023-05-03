@@ -59,55 +59,9 @@ function App() {
     },
   });
 
-  const [login, setLogin] = useState(false);
+  const [login, setLogin] = useState(sessionStorage.getItem('app-token') !== null);
   const [userId, setUserId] = useState('');
   const [name, setName] = useState('');
-
-  // const name = useRef('');
-
-  /*
-  return (
-    <BrowserRouter>
-      <ThemeProvider theme={theme}>
-        <CssBaseline/>
-        <Routes>
-        </Routes>
-      </ThemeProvider>
-    </BrowserRouter>
-  );
-  const name = useRef('');
-  // Please change this part & useEffect later. Now, we obtain userId from the name user inputs in.
-  const [userId, setUserId] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [pennId, setPennId] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // console.log(firstName, lastName, email, password);
-  };
-
-  useEffect(() => {
-    // wrapper function
-    async function getAllUsersWrapper() {
-      const response = await getAllUsers();
-      // console.log('User login', response.filter((item) => item.name === name.current)[0]);
-      setUserId(response.filter((item) => item.name === name.current)[0].id);
-      // console.log('current userId', response.filter((item) => item.name === name.current)[0].id);
-    }
-    // run the wrapper function
-    getAllUsersWrapper();
-  }, [login]);
-
-  const handleClickLogin = (e) => {
-    setLogin(true);
-  };
-
-  const handleChangeName = (e) => {
-    name.current = e.target.value;
-  };  */
 
   if (login === false) {
     // console.log(login);

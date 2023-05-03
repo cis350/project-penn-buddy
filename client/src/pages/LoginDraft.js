@@ -7,12 +7,14 @@ import {
 // import '../css/Login.css';
 import { useNavigate, Link } from 'react-router-dom';
 import NavbarLogin from '../components/NavbarLogin';
-import { getAllUsers } from '../api/users';
+import { getAllUsers, getUserById, loginUser } from '../api/users';
+import { usernameExists } from '../api/login';
 
-function Login({ setLogin, setUserId, setName }) {
+function Login({
+  setLogin, setUserId, setName,
+}) {
   const [name1, setName1] = useState('');
-  const [firstName, setfirstName] = useState('');
-  const [pennId, setPennId] = useState('');
+  const [tempId, setTempId] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const [error, setError] = useState(false);
@@ -23,11 +25,12 @@ function Login({ setLogin, setUserId, setName }) {
     // if correct, setLogin to true, setUserId to userid
     // if password is correct, return userId to client
     // if not correct, do nothing
+    // login();
     setLogin(true);
     navigate('/home');
   };
 
-  const handleName = (e) => {
+  const handlePennKey = (e) => {
     setName(e.target.value);
     setName1(e.target.value);
   };
@@ -39,10 +42,38 @@ function Login({ setLogin, setUserId, setName }) {
       console.log('name1:', name1);
       console.log('User login', response.filter((item) => item.name === name1)[0]._id.toString());
       setUserId(response.filter((item) => item.name === name1)[0]._id.toString());
+      setTempId(response.filter((item) => item.name === name1)[0]._id.toString());
+      console.log('tempId', tempId);
     }
     // run the wrapper function
     getAllUsersWrapper();
   });
+
+  async function login() {
+    if (!name1 || !password) {
+      setMessage('Fill in all required fields');
+      setError(true);
+    } else {
+      setError(false);
+      const exists = await getUserById(tempId);
+      console.log('exists?', exists);
+      if (exists != null) {
+        const user = await getUserById(tempId);
+        if (user.password === password) {
+          // const token = await loginUser(name1);
+          // sessionStorage.setItem('app-token', token);
+          setLogin(true);
+          navigate('/home');
+        } else {
+          setMessage('Incorrect password or incorrect username');
+          setError(true);
+        }
+      } else {
+        setMessage('user does not exist!');
+        setError(true);
+      }
+    }
+  }
 
   return (
     <div>
@@ -54,7 +85,7 @@ function Login({ setLogin, setUserId, setName }) {
             variant="filled"
             required
             data-testid="Name"
-            onChange={handleName}
+            onChange={handlePennKey}
           />
         </FormGroup>
         <br />
@@ -68,10 +99,11 @@ function Login({ setLogin, setUserId, setName }) {
           />
         </FormGroup>
         <div className="center">
-          <Button type="submit" variant="contained" color="primary" onClick={handleClickLogin}>
+          <Button type="submit" variant="contained" color="primary" onClick={() => login()}>
             Login
           </Button>
         </div>
+        {error ? <div style={{ color: '#EA3C3C' }} className="errorTextStyle center">{message}</div> : null}
         <div>
           <br />
           <hr />
