@@ -27,7 +27,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-      - run: cd server
+      - run: cd project-penn-buddy/server
       - run: npm install
       - run: npm run test
       - run: npm run lint
