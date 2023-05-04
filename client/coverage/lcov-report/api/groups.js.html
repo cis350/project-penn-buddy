@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">61.76% </span>
+                <span class="strong">63.88% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>21/34</span>
+                <span class='fraction'>23/36</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">63.63% </span>
+                <span class="strong">65.71% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>21/33</span>
+                <span class='fraction'>23/35</span>
             </div>
         
             
@@ -149,7 +149,9 @@
 <a name='L84'></a><a href='#L84'>84</a>
 <a name='L85'></a><a href='#L85'>85</a>
 <a name='L86'></a><a href='#L86'>86</a>
-<a name='L87'></a><a href='#L87'>87</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -162,6 +164,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -198,6 +201,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -251,7 +255,8 @@ import { rootURL } from "../utils/utils";
 export const getGroupById = async (groupId) =&gt; {
   try {
     const response = await axios.get(`${rootURL}/group/${groupId}`);
-    return response.data;
+    console.log('getGroupById response:', response.data.data);
+    return response.data.data;
   } catch (err) {
 <span class="cstat-no" title="statement not covered" >    console.log('error', err.message);</span>
   }
@@ -263,7 +268,7 @@ export const getGroupById = async (groupId) =&gt; {
 export const changeGroup = async (groupId, newGroup) =&gt; {
   try {
     const response = await axios.put(`${rootURL}/group/${groupId}`, newGroup);
-<span class="cstat-no" title="statement not covered" >    return response.data;</span>
+<span class="cstat-no" title="statement not covered" >    return response.data.data;</span>
   } catch (err) {
     console.log('error', err.message);
   }
@@ -275,7 +280,7 @@ export const changeGroup = async (groupId, newGroup) =&gt; {
 export const createGroup = async (newGroup) =&gt; {
   try {
     const response = await axios.post(`${rootURL}/group`, newGroup);
-<span class="cstat-no" title="statement not covered" >    return response.data;</span>
+<span class="cstat-no" title="statement not covered" >    return response.data.data;</span>
   } catch (err) {
     console.log('error', err.message);
   }
@@ -287,7 +292,8 @@ export const createGroup = async (newGroup) =&gt; {
 export const getAllGroups = async () =&gt; {
   try {
     const response = await axios.get(`${rootURL}/group`);
-    return response.data;
+    console.log('getAllGroups response:', response.data.data);
+    return response.data.data;
   } catch (err) {
 <span class="cstat-no" title="statement not covered" >    console.log('error', err.message);</span>
   }
@@ -299,7 +305,7 @@ export const getAllGroups = async () =&gt; {
 export const deleteGroupById = async (groupId) =&gt; {
   try {
     const response = await axios.delete(`${rootURL}/group/${groupId}`);
-    return response.data;
+    return response.data.data;
   } catch (err) {
 <span class="cstat-no" title="statement not covered" >    console.log('error', err.message);</span>
   }
@@ -311,7 +317,7 @@ export const deleteGroupById = async (groupId) =&gt; {
 export const deleteGroupsByOwnerId = <span class="fstat-no" title="function not covered" >as</span>ync (userId) =&gt; {
 <span class="cstat-no" title="statement not covered" >  try {</span>
     const response = <span class="cstat-no" title="statement not covered" >await axios.get(`${rootURL}/group`);</span>
-    const allGroups = <span class="cstat-no" title="statement not covered" >response.data;</span>
+    const allGroups = <span class="cstat-no" title="statement not covered" >response.data.data;</span>
     const groupsToDelete = <span class="cstat-no" title="statement not covered" >allGroups.filter(<span class="fstat-no" title="function not covered" >(g</span>roup) =&gt; <span class="cstat-no" title="statement not covered" >group.ownerId === userId)</span>;</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    await Promise.all(groupsToDelete.map(<span class="fstat-no" title="function not covered" >as</span>ync (group) =&gt; {</span>
@@ -328,7 +334,7 @@ export const deleteGroupsByOwnerId = <span class="fstat-no" title="function not 
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-04-05T04:25:07.161Z
+                at 2023-05-03T00:27:59.812Z
             </div>
         <script src="../prettify.js"></script>
         <script>

@@ -40,9 +40,10 @@ function Login({
     async function getAllUsersWrapper() {
       const response = await getAllUsers();
       console.log('name1:', name1);
-      console.log('User login', response.filter((item) => item.name === name1)[0]._id.toString());
-      setUserId(response.filter((item) => item.name === name1)[0]._id.toString());
-      setTempId(response.filter((item) => item.name === name1)[0]._id.toString());
+      if (response.filter((item) => item.name === name1).length > 0) {
+        setUserId(response.filter((item) => item.name === name1)[0]._id.toString());
+        setTempId(response.filter((item) => item.name === name1)[0]._id.toString());
+      }
       console.log('tempId', tempId);
     }
     // run the wrapper function
@@ -101,7 +102,7 @@ function Login({
           />
         </FormGroup>
         <div className="center">
-          <Button type="submit" variant="contained" color="primary" onClick={() => login()}>
+          <Button id="loginbutton" type="submit" variant="contained" color="primary" onClick={() => login()}>
             Login
           </Button>
         </div>
