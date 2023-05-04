@@ -59,6 +59,7 @@ describe('the api returned correct data of group 3', () => {
   mockAxios.onGet(`${rootURL}/group/3`).reply(200, allGroups[2]);
   test('Group 3 is returned', async () => {
     const data = await getGroupById(3);
+    // console.log('Get group 3:', data);
     expect(data.location).toBe('JFK Airport');
   });
 });

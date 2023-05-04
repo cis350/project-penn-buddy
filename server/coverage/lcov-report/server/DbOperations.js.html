@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">77.6% </span>
+                <span class="strong">75.19% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>97/125</span>
+                <span class='fraction'>97/129</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">89.47% </span>
+                <span class="strong">85% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>17/19</span>
+                <span class='fraction'>17/20</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">77.6% </span>
+                <span class="strong">75.19% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>97/125</span>
+                <span class='fraction'>97/129</span>
             </div>
         
             
@@ -416,7 +416,17 @@
 <a name='L351'></a><a href='#L351'>351</a>
 <a name='L352'></a><a href='#L352'>352</a>
 <a name='L353'></a><a href='#L353'>353</a>
-<a name='L354'></a><a href='#L354'>354</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L354'></a><a href='#L354'>354</a>
+<a name='L355'></a><a href='#L355'>355</a>
+<a name='L356'></a><a href='#L356'>356</a>
+<a name='L357'></a><a href='#L357'>357</a>
+<a name='L358'></a><a href='#L358'>358</a>
+<a name='L359'></a><a href='#L359'>359</a>
+<a name='L360'></a><a href='#L360'>360</a>
+<a name='L361'></a><a href='#L361'>361</a>
+<a name='L362'></a><a href='#L362'>362</a>
+<a name='L363'></a><a href='#L363'>363</a>
+<a name='L364'></a><a href='#L364'>364</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -510,6 +520,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
@@ -750,6 +769,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -862,6 +882,15 @@ const getUserById = <span class="fstat-no" title="function not covered" >as</spa
   }
 };
 &nbsp;
+async function <span class="fstat-no" title="function not covered" >getUser(</span>db, User) {
+<span class="cstat-no" title="statement not covered" >  try {</span>
+    const result = <span class="cstat-no" title="statement not covered" >await db.collection('user').findOne({ name: User.name });</span>
+<span class="cstat-no" title="statement not covered" >    return result;</span>
+  } catch (err) {
+<span class="cstat-no" title="statement not covered" >    throw new Error('failed to get user');</span>
+  }
+}
+&nbsp;
 /**
  * Add user when register
  */
@@ -896,9 +925,9 @@ const changeUser = async (userID, newUser) =&gt; {
 /**
  * Check if user exists in Login
  */
-const usernameExists = <span class="fstat-no" title="function not covered" >as</span>ync (db, newUser) =&gt; {
+const usernameExists = <span class="fstat-no" title="function not covered" >as</span>ync (name) =&gt; {
 <span class="cstat-no" title="statement not covered" >  try {</span>
-    const result = <span class="cstat-no" title="statement not covered" >await db.collection('user').findOne({ pennid: newUser.pennid });</span>
+    const result = <span class="cstat-no" title="statement not covered" >await db.collection('user').findOne({ name: name });</span>
 <span class="cstat-no" title="statement not covered" >    if (!result) {</span>
 <span class="cstat-no" title="statement not covered" >      return false;</span>
     }
@@ -1113,6 +1142,7 @@ module.exports = {
   getGroupById,
   changeGroup,
   createGroup,
+  getUser,
   deleteGroupById,
   deleteUser,
   getAllChatrooms,
@@ -1129,7 +1159,7 @@ module.exports = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-05-03T00:28:52.732Z
+                at 2023-05-04T19:34:25.507Z
             </div>
         <script src="../prettify.js"></script>
         <script>

@@ -3,7 +3,7 @@ import MockAdapter from 'axios-mock-adapter';
 import { getAllUsers, getUserById } from '../../api/users';
 import { rootURL } from "../../utils/utils";
 import {
-  getAllChatroom, getChatroomById, createNewChatroom, deleteChatroom, modifyText,
+  getAllChatrooms, getChatroomById, createNewChatroom, deleteChatroom, modifyText,
 } from '../../api/chat';
 
 // This sets the mock adapter on the default axios instance
@@ -49,7 +49,7 @@ const allChats = [
 describe('the api returned correct data of all chats', () => {
   mockAxios.onGet(`${rootURL}/Chatroom`).reply(200, allChats);
   test('chatId 1 is in the returned chat', async () => {
-    const response = await getAllChatroom();
+    const response = await getAllChatrooms();
     expect(response[0].id).toBe(1);
   });
 });
