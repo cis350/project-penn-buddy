@@ -27,7 +27,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-      - run: cd server
       - run: npm install
         working-directory: server
       - run: npm run test
