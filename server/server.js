@@ -26,7 +26,6 @@ webapp.use(session({
   maxAge: 100000000,
 })); */
 
-
 // support parsing of application/json type post data
 const bodyParser = require('body-parser');
 
@@ -46,7 +45,6 @@ webapp.get('/', (req, res) => {
 /**
  * route implementation GET /user
  * Testing done */
- 
 webapp.get('/user', async (req, resp) => {
   try {
     // get the data from the DB
@@ -57,13 +55,12 @@ webapp.get('/user', async (req, resp) => {
     // send the error code
     resp.status(400).json({ message: 'There was an error' });
   }
-}); 
-
+});
 
 /**
  * route implementation add user signup
  */
-webapp.post('/user', async (req, res) => {
+webapp.post('/user', async (req, resp) => {
   console.log('POST a acc');
   console.log('POST register req body print:', req.body);
   if (!req.body.pennId || req.body.pennId.length === 0) {
@@ -118,9 +115,9 @@ webapp.post('/user', async (req, res) => {
     const result = await dbLib.createUser(newUser);
     req.session.name = result.name;
     req.session.pennId = result.pennId;
-    res.status(201).json({ message: 'successfully added user', data: result });
+    resp.status(201).json({ message: 'successfully added user', data: result });
   } catch (err) {
-    res.status(400).json({ error: 'could not add user' });
+    resp.status(400).json({ error: 'could not add user' });
   }
 });
 
@@ -197,7 +194,6 @@ webapp.post('/login', (req, resp)=>{
     resp.status(401).json({error: 'hey I am an error'});
   }
 }) */
-
 
 /**
  * route implementation GET /group

@@ -136,7 +136,8 @@ const changeUser = async (userID, newUser) => {
  */
 const usernameExists = async (name) => {
   try {
-    const result = await db.collection('user').findOne({ name: name });
+    const db = await getDB();
+    const result = await db.collection('user').findOne({ name });
     if (!result) {
       return false;
     }
