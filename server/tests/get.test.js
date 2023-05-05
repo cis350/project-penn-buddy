@@ -16,7 +16,7 @@ const {
 
 let mongo;
 let db;
-// leep track of id of test user
+// keep track of id of test user
 let testUserID;
 let testGroupID;
 let testChatroomID;

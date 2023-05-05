@@ -91,6 +91,23 @@ const getUserById = async (userID) => {
   }
 };
 
+/**
+ * Read a user by name
+ *
+ */
+const getUserByName = async (username) => {
+  try {
+    // get the db
+    const db = await getDB();
+    const result = await db.collection('user').findOne({ name: username });
+    // print the result
+    console.log(`User: ${JSON.stringify(result)}`);
+    return result;
+  } catch (err) {
+    console.log(`error: ${err.message}`);
+  }
+};
+
 async function getUser(db, User) {
   try {
     const result = await db.collection('user').findOne({ name: User.name });
@@ -134,17 +151,17 @@ const changeUser = async (userID, newUser) => {
 /**
  * Check if user exists in Login
  */
-const usernameExists = async (name) => {
-  try {
-    const result = await db.collection('user').findOne({ name: name });
-    if (!result) {
-      return false;
-    }
-    return true;
-  } catch (err) {
-    throw new Error('failed checking username');
-  }
-};
+// const usernameExists = async (name) => {
+//   try {
+//     const result = await db.collection('user').findOne({ name });
+//     if (!result) {
+//       return false;
+//     }
+//     return true;
+//   } catch (err) {
+//     throw new Error('failed checking username');
+//   }
+// };
 
 /**
  * Delete user by ID
@@ -344,6 +361,7 @@ module.exports = {
   connect,
   closeMongoDBConnection,
   getAllUsers,
+  getUserByName,
   getUserById,
   createUser,
   changeUser,
@@ -359,5 +377,4 @@ module.exports = {
   changeChatroom,
   deleteChatroom,
   createNewChatroom,
-  usernameExists,
 };
