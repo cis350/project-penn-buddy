@@ -44,7 +44,7 @@ export default function MyPost({
     // console.log('chat name is ', chatName);
     // THIS IS NOT WORKING
     const allChats = await getAllChatrooms;
-    console.log('all chats mpost', allChats);
+    // console.log('all chats mpost', allChats);
     const exist = allChats.filter(
       (chat) => (chat.chatName === chatName),
     );

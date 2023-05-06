@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1683407477360" clover="3.2.0">
-  <project timestamp="1683407477360" name="All files">
-    <metrics statements="334" coveredstatements="246" conditionals="60" coveredconditionals="41" methods="44" coveredmethods="39" elements="438" coveredelements="326" complexity="0" loc="334" ncloc="334" packages="2" files="3" classes="3"/>
+<coverage generated="1681932890694" clover="3.2.0">
+  <project timestamp="1681932890694" name="All files">
+    <metrics statements="297" coveredstatements="233" conditionals="24" coveredconditionals="14" methods="43" coveredmethods="39" elements="364" coveredelements="286" complexity="0" loc="297" ncloc="297" packages="2" files="3" classes="3"/>
     <package name="server">
-      <metrics statements="294" coveredstatements="209" conditionals="52" coveredconditionals="33" methods="38" coveredmethods="33"/>
-      <file name="DbOperations.js" path="/Users/gracethanglerdsumpan/project-penn-buddy/server/DbOperations.js">
-        <metrics statements="130" coveredstatements="97" conditionals="4" coveredconditionals="1" methods="20" coveredmethods="17"/>
+      <metrics statements="257" coveredstatements="196" conditionals="16" coveredconditionals="6" methods="37" coveredmethods="33"/>
+      <file name="DbOperations.js" path="/Users/nickywong/Documents/GitHub/project-penn-buddy/server/DbOperations.js">
+        <metrics statements="125" coveredstatements="97" conditionals="4" coveredconditionals="1" methods="19" coveredmethods="17"/>
         <line num="12" count="4" type="stmt"/>
         <line num="15" count="4" type="stmt"/>
         <line num="18" count="4" type="stmt"/>
@@ -137,8 +137,8 @@
         <line num="356" count="0" type="stmt"/>
         <line num="360" count="4" type="stmt"/>
       </file>
-      <file name="server.js" path="/Users/gracethanglerdsumpan/project-penn-buddy/server/server.js">
-        <metrics statements="164" coveredstatements="112" conditionals="48" coveredconditionals="32" methods="18" coveredmethods="16"/>
+      <file name="server.js" path="/Users/nickywong/Documents/GitHub/project-penn-buddy/server/server.js">
+        <metrics statements="132" coveredstatements="99" conditionals="12" coveredconditionals="5" methods="18" coveredmethods="16"/>
         <line num="7" count="4" type="stmt"/>
         <line num="10" count="4" type="stmt"/>
         <line num="13" count="4" type="stmt"/>
@@ -307,7 +307,7 @@
     </package>
     <package name="server.tests">
       <metrics statements="40" coveredstatements="37" conditionals="8" coveredconditionals="8" methods="6" coveredmethods="6"/>
-      <file name="testUtils.js" path="/Users/gracethanglerdsumpan/project-penn-buddy/server/tests/testUtils.js">
+      <file name="testUtils.js" path="/Users/nickywong/Documents/GitHub/project-penn-buddy/server/tests/testUtils.js">
         <metrics statements="40" coveredstatements="37" conditionals="8" coveredconditionals="8" methods="6" coveredmethods="6"/>
         <line num="15" count="4" type="stmt"/>
         <line num="16" count="36" type="stmt"/>
@@ -320,8 +320,8 @@
         <line num="33" count="15" type="stmt"/>
         <line num="34" count="15" type="stmt"/>
         <line num="35" count="15" type="cond" truecount="2" falsecount="0"/>
-        <line num="36" count="11" type="stmt"/>
-        <line num="38" count="4" type="stmt"/>
+        <line num="36" count="10" type="stmt"/>
+        <line num="38" count="5" type="stmt"/>
         <line num="41" count="0" type="stmt"/>
         <line num="45" count="4" type="stmt"/>
         <line num="46" count="12" type="stmt"/>
@@ -345,7 +345,7 @@
         <line num="146" count="4" type="stmt"/>
         <line num="147" count="6" type="stmt"/>
         <line num="148" count="6" type="stmt"/>
-        <line num="149" count="58" type="cond" truecount="2" falsecount="0"/>
+        <line num="149" count="52" type="cond" truecount="2" falsecount="0"/>
         <line num="150" count="6" type="stmt"/>
         <line num="153" count="6" type="stmt"/>
         <line num="157" count="4" type="stmt"/>
