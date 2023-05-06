@@ -59,6 +59,44 @@ const closeMongoDBConnection = async () => {
   await MongoConnection.close();
 };
 
+//get user
+async function getUser(name) {
+  try {
+    const result = await db.collection('user').findOne({ name: name});
+    return result;
+  } catch (err) {
+    throw new Error('failed to get user');
+  }
+}
+
+async function usernameExists(db, newUser) {
+  try {
+    const result = await db.collection('Users').findOne({ name: newUser.name });
+    if (!result) {
+      return false;
+    }
+    return true;
+  } catch (err) {
+    throw new Error('failed to check username');
+  }
+}
+
+/**
+ * Check if user exists in Login
+ const usernameExists = async (name) => {
+  try {
+    const db = await getDB();
+    const result = await db.collection('user').findOne({ name });
+    if (!result) {
+      return false;
+    }
+    return true;
+  } catch (err) {
+    throw new Error('failed checking username');
+  }
+};
+ */
+
 /**
  * Get all users
  */
@@ -91,15 +129,6 @@ const getUserById = async (userID) => {
   }
 };
 
-async function getUser(db, User) {
-  try {
-    const result = await db.collection('user').findOne({ name: User.name });
-    return result;
-  } catch (err) {
-    throw new Error('failed to get user');
-  }
-}
-
 /**
  * Add user when register
  */
@@ -128,22 +157,6 @@ const changeUser = async (userID, newUser) => {
     return result;
   } catch (err) {
     console.log(`error: ${err.message}`);
-  }
-};
-
-/**
- * Check if user exists in Login
- */
-const usernameExists = async (name) => {
-  try {
-    const db = await getDB();
-    const result = await db.collection('user').findOne({ name });
-    if (!result) {
-      return false;
-    }
-    return true;
-  } catch (err) {
-    throw new Error('failed checking username');
   }
 };
 

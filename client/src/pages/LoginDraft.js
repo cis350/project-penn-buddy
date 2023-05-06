@@ -7,8 +7,12 @@ import {
 // import '../css/Login.css';
 import { useNavigate, Link } from 'react-router-dom';
 import NavbarLogin from '../components/NavbarLogin';
-import { getAllUsers, getUserById } from '../api/users';
-import { usernameExists } from '../api/login';
+import {
+  getAllUsers, getUserById, loginUser, loginU,
+} from '../api/users';
+import {
+  usernameExists, getUser, checkPassword, checkUserSession,
+} from '../api/login';
 
 function Login({
   setLogin, setUserId, setName,
@@ -56,13 +60,18 @@ function Login({
       setError(true);
     } else {
       setError(false);
-      const exists = await getUserById(tempId);
-      console.log('exists?', exists);
-      if (exists != null) {
-        const user = await getUserById(tempId);
+      const token = await loginU(name1);
+      // const exists = await getUserById(tempId);
+      console.log('exists?', token);
+      if (token || token != null) {
+        // const user = await getUser(name1, password);
+        const user = await loginUser(tempId);
+        console.log('user?', user);
         if (user.password === password) {
-          // const token = await loginUser(name1);
-          // sessionStorage.setItem('app-token', token);
+          // const token = await loginUser(tempId);
+          sessionStorage.setItem('app-token', token);
+          sessionStorage.setItem('app-userId', user._id);
+          sessionStorage.setItem('app-name', user.name);
           setLogin(true);
           navigate('/home');
         } else {
