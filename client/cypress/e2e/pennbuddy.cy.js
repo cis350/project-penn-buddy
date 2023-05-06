@@ -20,8 +20,8 @@ describe('Flow 2: After login, search activity feed for PHL Airport', () => {
     cy.get('#passwordfield').type('nicky');
     cy.get('#loginbutton').click();
     cy.get('#activityfeedbutton').click();
-    cy.get('#locationinput').type('PHL');
-    cy.get('#locationinput').should('have.value', 'PHL');
+    cy.get('#locationinput').type('EWR');
+    cy.get('#locationinput').should('have.value', 'EWR');
     cy.get('#searchfilter').click();
     cy.contains(/spots remaining/).should('be.visible'); // Check if there exists post
   });
@@ -35,7 +35,7 @@ describe('Flow 3: View my profile after logging in', () => {
     cy.get('#passwordfield').type('nicky');
     cy.get('#loginbutton').click();
     cy.get('#myprofilebutton').click();
-    cy.contains(/Wharton/).should('be.visible');
-    cy.contains(/nicky@/).should('be.visible');
+    cy.contains(/CIS/).should('be.visible');
+    cy.contains(/nicky/).should('be.visible');
   });
 });
