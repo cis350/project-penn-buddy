@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75.57% </span>
+                <span class="strong">77.6% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>99/131</span>
+                <span class='fraction'>97/125</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">85% </span>
+                <span class="strong">89.47% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>17/20</span>
+                <span class='fraction'>17/19</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75.57% </span>
+                <span class="strong">77.6% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>99/131</span>
+                <span class='fraction'>97/125</span>
             </div>
         
             
@@ -679,13 +679,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -695,31 +695,31 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1073,25 +1073,25 @@ const getChatroomById = async (chatId) =&gt; {
     // console.log(`Group: ${JSON.stringify(result)}`);
     return result;
   } catch (err) {
-    console.log(`error: ${err.message}`);
-  }
-};
-&nbsp;
-/**
- * Get chatroom by name
- */
-const getChatroomByName = <span class="fstat-no" title="function not covered" >as</span>ync (name) =&gt; {
-<span class="cstat-no" title="statement not covered" >  try {</span>
-    // get the db
-    const db = <span class="cstat-no" title="statement not covered" >await getDB();</span>
-    const result = <span class="cstat-no" title="statement not covered" >await db.collection('Chatroom').findOne({ chatName: name });</span>
-    // print the result
-    // console.log(`Group: ${JSON.stringify(result)}`);
-<span class="cstat-no" title="statement not covered" >    return result;</span>
-  } catch (err) {
 <span class="cstat-no" title="statement not covered" >    console.log(`error: ${err.message}`);</span>
   }
 };
+&nbsp;
+// /**
+//  * Get chatroom by name
+//  */
+// const getChatroomByName = async (name) =&gt; {
+//   try {
+//     // get the db
+//     const db = await getDB();
+//     const result = await db.collection('Chatroom').findOne({ chatName: name });
+//     // print the result
+//     // console.log(`Group: ${JSON.stringify(result)}`);
+//     return result;
+//   } catch (err) {
+//     console.log(`error: ${err.message}`);
+//   }
+// };
 &nbsp;
 /**
  * Update chatroom by passing in new chatroom object
@@ -1167,7 +1167,7 @@ module.exports = {
   deleteUser,
   getAllChatrooms,
   getChatroomById,
-  getChatroomByName,
+  // getChatroomByName,
   changeChatroom,
   deleteChatroom,
   createNewChatroom,
@@ -1180,7 +1180,7 @@ module.exports = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-04-21T04:38:34.127Z
+                at 2023-05-06T04:01:04.014Z
             </div>
         <script src="../prettify.js"></script>
         <script>

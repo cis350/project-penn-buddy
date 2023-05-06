@@ -23,7 +23,7 @@ export default function Navbar() {
   }
 
   function handleActivityCR() {
-    navigate('/chatroom');
+    navigate('/chatroom/0');
   }
 
   function handleHistory() {

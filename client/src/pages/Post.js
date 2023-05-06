@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-console */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect, useState } from 'react';
@@ -8,7 +9,10 @@ import {
 import OtherPost from '../components/OtherPost';
 import MyPost from '../components/MyPost';
 import { getGroupById, changeGroup, deleteGroupById } from '../api/groups';
-import { deleteChatroom } from '../api/chat';
+import {
+  changeChatroom, createNewChatroom, getChatroomById, getChatroomByName, getAllChatrooms,
+} from '../api/chat';
+import { getUserById } from '../api/users';
 
 export default function Post({ name, userId }) {
   if (userId === null) {
@@ -41,8 +45,9 @@ export default function Post({ name, userId }) {
 
   const handleDeleteGroup = (e) => {
     // MADE EDITS HERE: when you delete group, chat is deleted too
-    deleteChatroom(groupId);
-    deleteGroupOnServer();
+    // should be leave chatroom instead
+    // deleteChatroom(groupId);
+    // deleteGroupOnServer();
   };
 
   const handleLeaveGroup = (e) => {
@@ -87,6 +92,41 @@ export default function Post({ name, userId }) {
     modifyGroupOnServer(modifiedData);
   };
 
+  // chat functions
+  const handleGoToChatroom = async (e) => {
+    const r2 = await getUserById(ownerId);
+    const postOwner = r2.name;
+    const postLoc = location;
+    const chatName = postOwner.concat(' Group to ', postLoc);
+    console.log('chat name is ', chatName);
+    const allChats = await getAllChatrooms();
+    // console.log('check response', allChats.response);
+    console.log('all chats most', allChats);
+    const exist = Object.values(allChats).filter(
+      (chat) => (chat.chatName === chatName),
+    );
+    console.log('does it exist', exist);
+    // const existChat = await getChatroomByName(chatName);
+    if (exist.length === 0) {
+      console.log('no chat exist');
+      const response = await createNewChatroom(groupId, currMemberIds, chatName);
+    // }
+    } else {
+      const r3 = await getChatroomByName(chatName);
+      const id = r3._id;
+      Object.values(allChats).forEach((c) => {
+        if (c.chatName === chatName) {
+          const t = c.texts;
+          const membersId = c.currentMembersIds;
+          membersId.push(userId);
+          console.log(groupId);
+          changeChatroom(id, chatName, t, membersId, groupId);
+        }
+      });
+    }
+    navigate(`/chatroom/${groupId}`);
+  };
+
   useEffect(() => {
     // wrapper function
     async function getGroupByIdWrapper() {
@@ -123,6 +163,7 @@ export default function Post({ name, userId }) {
         userId={userId}
         group={group}
         handleDeleteGroup={handleDeleteGroup}
+        handleGoToChatroom={handleGoToChatroom}
       />
     );
   }
@@ -142,6 +183,7 @@ export default function Post({ name, userId }) {
         group={group}
         handleLeaveGroup={handleLeaveGroup}
         handleJoinGroup={handleJoinGroup}
+        handleGoToChatroom={handleGoToChatroom}
       />
     </div>
   );

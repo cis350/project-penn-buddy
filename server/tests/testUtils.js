@@ -132,6 +132,7 @@ const testChatroom = {
     2,
     3,
   ],
+  groupId: 1,
 };
 
 /**

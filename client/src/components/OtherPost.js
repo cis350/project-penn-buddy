@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable no-console */
 /* eslint-disable react/jsx-props-no-spreading */
@@ -9,7 +10,7 @@ import {
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import PostDetail from './PostDetail';
 import {
-  changeChatroom, createNewChatroom, getChatroomById, getAllChatrooms,
+  changeChatroom, createNewChatroom, getChatroomById, getAllChatrooms, getChatroomByName,
 } from '../api/chat';
 import { getGroupById } from '../api/groups';
 import { getUserById } from '../api/users';
@@ -18,6 +19,7 @@ export default function OtherPost({
   ownerId, location, departDate, modeTransport,
   departPlace, maxCapacity, currCapacity, currMemberIds,
   groupId, userId, group, handleLeaveGroup, handleJoinGroup,
+  handleGoToChatroom,
 }) {
   const navigate = useNavigate();
   const handleChatroom = async (e) => {
@@ -31,36 +33,27 @@ export default function OtherPost({
     const postLoc = r1.location;
     const chatName = postOwner.concat(' Group to ', postLoc);
     console.log('chat name is ', chatName);
-    // const existChat = await getChatroomByName(chatName);
-    // if (existChat == null) {
-    //   console.log('null');
-    //   const response = await createNewChatroom(groupId, memberIds, chatName);
-    // // }
-    // } else {
-    //   console.log('chat form', existChat);
-    //   const t = existChat.texts;
-    //   const membersId = existChat.currentMembersIds;
-    //   membersId.push(userId);
-    //   changeChatroom(groupId, chatName, t, membersId);
-    // }
-    const allChats = await getAllChatrooms;
-    console.log('all chats mpost', allChats);
+    const allChats = await getAllChatrooms();
+    // console.log('check response', allChats.response);
+    console.log('all chats most', allChats);
     const exist = Object.values(allChats).filter(
       (chat) => (chat.chatName === chatName),
     );
+    console.log('does it exist', exist);
     // const existChat = await getChatroomByName(chatName);
-    if (exist === []) {
-      // console.log('null');
+    if (exist.length === 0) {
+      console.log('no chat exist');
       const response = await createNewChatroom(groupId, memberIds, chatName);
     // }
     } else {
-      // console.log('chat form', existChat);
+      const r3 = await getChatroomByName(chatName);
+      const id = r3._id;
       Object.values(allChats).forEach((c) => {
         if (c.chatName === chatName) {
           const t = c.texts;
           const membersId = c.currentMembersIds;
           membersId.push(userId);
-          changeChatroom(groupId, chatName, t, membersId);
+          changeChatroom(id, chatName, t, membersId);
         }
       });
     }
@@ -92,7 +85,7 @@ export default function OtherPost({
               (currMemberIds.includes(userId)) ? (
                 <Stack direction="row" spacing={3}>
                   <Button variant="contained" color="warning" onClick={handleLeaveGroup}>Leave Group</Button>
-                  <Button variant="contained" color="secondary" onClick={handleChatroom}>Go to Chatroom</Button>
+                  <Button variant="contained" color="secondary" onClick={handleGoToChatroom}>Go to Chatroom</Button>
                 </Stack>
               )
                 : ((currCapacity < maxCapacity) && <Button variant="contained" color="secondary" onClick={handleJoinGroup}>Join Group</Button>)

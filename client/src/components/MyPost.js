@@ -21,7 +21,7 @@ import { getGroupById } from '../api/groups';
 export default function MyPost({
   ownerId, location, departDate, modeTransport,
   departPlace, maxCapacity, currCapacity, currMemberIds, groupId, userId, group,
-  handleDeleteGroup,
+  handleDeleteGroup, handleGoToChatroom,
 }) {
   const navigate = useNavigate();
   function handleClickBack() {
@@ -89,7 +89,7 @@ export default function MyPost({
             <Stack direction="row" spacing={3}>
               <Button variant="contained" color="warning" onClick={handleDeleteGroup}>Delete Group</Button>
               <Button variant="contained" color="secondary" onClick={handleEditGroup}>Edit Group</Button>
-              <Button variant="contained" color="secondary" onClick={handleChatroom}>Go to Chatroom</Button>
+              <Button variant="contained" color="secondary" onClick={handleGoToChatroom}>Go to Chatroom</Button>
             </Stack>
           </Toolbar>
         </AppBar>

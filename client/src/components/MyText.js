@@ -14,6 +14,7 @@ import {
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SendIcon from '@mui/icons-material/Send';
 import { getChatroomById } from '../api/chat';
+import { getUserById } from '../api/users';
 
 // function textRow(props) {
 //   return (
@@ -58,10 +59,13 @@ import { getChatroomById } from '../api/chat';
 //   }
 // };
 
-export default function MyText({ text, currMembersId, userId }) {
-  console.log('text mytext', text);
-  console.log('currmembersid mytext', currMembersId);
-  console.log('userId mytext', userId);
+export default function MyText({
+  text, currMembersId, userId, name,
+}) {
+  // console.log('text mytext', text);
+  // console.log('currmembersid mytext', currMembersId);
+// maybe i should add another field to text to be name
+  // const name = r.name;
   return (
     <div>
       {
@@ -75,7 +79,7 @@ export default function MyText({ text, currMembersId, userId }) {
           <ListItem key={index}>
             <Grid container>
               <Grid item xs={12}>
-                <ListItemText data-testid="text-content" align="right" style={{ color: 'black' }} primary={t.userId} />
+                <ListItemText data-testid="text-content" align="right" style={{ color: 'black' }} primary={t.name} />
                 <ListItemText data-testid="sender" align="right" primary={t.content} style={{ color: '#0096FF' }} />
               </Grid>
             </Grid>

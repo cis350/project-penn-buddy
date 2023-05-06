@@ -324,12 +324,15 @@ webapp.post('/Chatroom', async (req, resp) => {
     console.log('req texts', req.body.texts);
     console.log('req members', req.body.currentMembersIds);
     console.log('req chatname', req.body.chatName);
+    console.log('req groudId', req.body.groupId);
+    console.log('DO I EVEN ENTER THIS?');
 
     const newChatroom = {
       _id: new ObjectId(req.body.id),
       chatName: req.body.chatName,
       texts: req.body.texts,
       currentMembersIds: req.body.currentMembersIds,
+      groupId: req.body.groupId,
     };
 
     console.log('new chat s', newChatroom);
@@ -354,6 +357,8 @@ webapp.put('/Chatroom/:id', async (req, res) => {
     chatName: req.body.chatName,
     texts: req.body.texts,
     currentMembersIds: req.body.currentMembersIds,
+    // CHECK
+    groupId: req.body.groupId,
   };
   console.log('updated chat obj', updatedChat);
   try {

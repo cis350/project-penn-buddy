@@ -21,7 +21,9 @@ import { getUserById } from '../api/users';
 // import SendMessage from './chat/SendMessage';
 // import { getAllChats } from '../api/chat';
 
-export default function ChatDisplay({ userId, chatId, chatName }) {
+export default function ChatDisplay({
+  userId, chatId, chatName, name,
+}) {
 // for backend mocking
   // try hardcoding chatId for now bc we only have one chat
   // const { chatId } = useParams();
@@ -31,6 +33,9 @@ export default function ChatDisplay({ userId, chatId, chatName }) {
   const [currMembersName, setCurrMembersName] = useState([]);
   const [filteredCr, setFiltered] = useState([]);
   const [render, setRender] = useState(false);
+
+  const { groupId } = useParams();
+
   // let memName be an array of array
   // memName[i] has i-th chat's name of everyone
 
@@ -42,7 +47,6 @@ export default function ChatDisplay({ userId, chatId, chatName }) {
 
   // const [currChatId, setCurrChatId] = React.useState(1);
   // try the interval thing
-
   // next time, I have to enter id as a prop, depending on where user clicks
   useEffect(() => {
     async function getAllTextsWrapper() {
@@ -77,11 +81,8 @@ export default function ChatDisplay({ userId, chatId, chatName }) {
 
   // seems correct -> check changeChatroom
   const modifyTextOnServer = async (textData, membersData) => {
-    // console.log('text input', message);
-    // console.log('mod text');
-    // console.log('chat id to be changed', currChatId);
-    // console.log('members data', membersData);
-    const response = await changeChatroom(currChatId, chatName, textData, membersData);
+    console.log('name in chatdisplay', chatName);
+    const response = await changeChatroom(currChatId, chatName, textData, membersData, groupId);
     // console.log('response in mod text', response);
   };
 
@@ -95,19 +96,21 @@ export default function ChatDisplay({ userId, chatId, chatName }) {
     });
     // console.log('user id of sender:', userId);
     // console.log('message sent', message.current);
+    const r = getUserById(userId);
     const modifiedData = {
       userId,
+      name,
       content: message.current,
     };
     modifiedTextData.push(modifiedData);
-    // console.log('new text data', modifiedTextData);
+    console.log('new text data', modifiedTextData);
     await modifyTextOnServer(modifiedTextData, currentMembersIds);
   };
 
   return (
     <Grid item xs={9}>
       <List style={{ color: 'white', backgroundColor: '#F0F0F0', height: '680px' }}>
-        <MyText data-testid="textData" text={text} currMembersId={currentMembersIds} userId={userId} />
+        <MyText data-testid="textData" text={text} currMembersId={currentMembersIds} userId={userId} name={name} />
       </List>
       <Divider />
       <Grid container style={{ color: 'white', backgroundColor: '#D9D9D9', padding: '20px' }}>
