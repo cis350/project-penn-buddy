@@ -11,6 +11,7 @@ import MyPost from '../components/MyPost';
 import { getGroupById, changeGroup, deleteGroupById } from '../api/groups';
 import {
   changeChatroom, createNewChatroom, getChatroomById, getChatroomByName, getAllChatrooms,
+  deleteChatroom,
 } from '../api/chat';
 import { getUserById } from '../api/users';
 
@@ -46,8 +47,8 @@ export default function Post({ name, userId }) {
   const handleDeleteGroup = (e) => {
     // MADE EDITS HERE: when you delete group, chat is deleted too
     // should be leave chatroom instead
-    // deleteChatroom(groupId);
-    // deleteGroupOnServer();
+    deleteChatroom(groupId);
+    deleteGroupOnServer();
   };
 
   const handleLeaveGroup = (e) => {
@@ -102,6 +103,7 @@ export default function Post({ name, userId }) {
     const allChats = await getAllChatrooms();
     // console.log('check response', allChats.response);
     console.log('all chats most', allChats);
+    // const targetChatId = 0;
     const exist = Object.values(allChats).filter(
       (chat) => (chat.chatName === chatName),
     );
@@ -112,14 +114,21 @@ export default function Post({ name, userId }) {
       const response = await createNewChatroom(groupId, currMemberIds, chatName);
     // }
     } else {
-      const r3 = await getChatroomByName(chatName);
-      const id = r3._id;
+      console.log('exist is', exist);
+      const id = exist[0]._id;
+      // const r3 = await getChatroomByName(chatName);
+      // const id = r3._id;
+      console.log('chatid', id);
       Object.values(allChats).forEach((c) => {
         if (c.chatName === chatName) {
+          console.log('chat c ', c);
           const t = c.texts;
           const membersId = c.currentMembersIds;
+          console.log('before pushing', membersId);
           membersId.push(userId);
           console.log(groupId);
+          console.log('new mem id post', membersId);
+          // ID IS UNDEFINED
           changeChatroom(id, chatName, t, membersId, groupId);
         }
       });

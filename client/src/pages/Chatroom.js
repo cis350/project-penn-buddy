@@ -62,61 +62,41 @@ export default function Chatroom({ userId, name }) {
   // use timeOut
   // call the backend after a set amount of time (100 or 1000 millisecond)
 
+  async function getAllChatroomWrapper() {
+    // console.log('entered async');
+    const response = await getAllChatrooms();
+    // console.log('all chatrooms', response);
+    setChatrooms(response);
+    // CHECK WHY IT's NOT FILTERING CORRECTLY
+    setFiltered(chatrooms.filter(
+      (chat) => chat.currentMembersIds.includes(userId),
+    ));
+    // console.log('userId', userId.toString());
+    console.log('chat user is in', filteredCr);
+    // console.log('currChat id', currChatId.current);
+    if (currChatId.current !== 0) {
+      // console.log('nonzero');
+      const r2 = await getChatroomById(currChatId.current);
+      setCurrentMembersIds(r2.currentMembersIds);
+      setText(r2.texts);
+      setChatname(r2.chatName);
+      // console.log('chatname chatroom.js', chatName);
+    }
+    // setCurrMembersName(r2.currentMembersIds);
+  }
+
   useEffect(() => {
     // use setINterval to call it every x seconds
     // refresh your UI component -> useEffect
     // need a callback, the value change
 
-    // const interval = setInterval(() => {
-    //   console.log('This will run every second!');
-    //   getAllChatroomWrapper();
-    // }, 1000);
-    // return () => clearInterval(interval);
-    // console.log('entered useEffect');
+    const intervalID = setInterval(() => {
+      getAllChatroomWrapper();
+    }, 1000);
+    return () => clearInterval(intervalID);
 
-    async function getAllChatroomWrapper() {
-      // console.log('entered async');
-      const response = await getAllChatrooms();
-      // console.log('all chatrooms', response);
-      setChatrooms(response);
-      // CHECK WHY IT's NOT FILTERING CORRECTLY
-      setFiltered(chatrooms.filter(
-        (chat) => chat.currentMembersIds.includes(userId),
-      ));
-      // console.log('userId', userId.toString());
-      // console.log('chat user is in', filteredCr);
-      // console.log('currChat id', currChatId.current);
-      if (currChatId.current !== 0) {
-        // console.log('nonzero');
-        const r2 = await getChatroomById(currChatId.current);
-        setCurrentMembersIds(r2.currentMembersIds);
-        setText(r2.texts);
-        setChatname(r2.chatName);
-        // console.log('chatname chatroom.js', chatName);
-      }
-      // setCurrMembersName(r2.currentMembersIds);
-    }
-    getAllChatroomWrapper();
-
-    // async function getGroupByIdWrapper() {
-    //   console.log('UserId in Post', userId);
-    //   console.log('GroupId in Post', groupId);
-    //   const response = await getGroupById(groupId);
-    //   // console.log('response', response);
-    //   setGroup(response);
-    //   setOwnerId(response.ownerId);
-    //   setLocation(response.location);
-    //   setDepartDate(response.departDate);
-    //   setModeTransport(response.modeTransport);
-    //   setDepartPlace(response.departPlace);
-    //   setMaxCapacity(response.maxCapacity);
-    //   setCurrCapacity(response.currCapacity);
-    //   setCurrMemberIds(response.currMemberIds);
-    // }
-    // // run the wrapper function
-    // getGroupByIdWrapper();
-    // convertIdToName();
-  }, [chatrooms.length]);
+    // getAllChatroomWrapper();
+  }, [chatrooms.length, filteredCr.length]);
   const handleChangeChat = (c) => {
     // console.log('hcc', c.c._id);
     currChatId.current = c.c._id;
@@ -129,49 +109,6 @@ export default function Chatroom({ userId, name }) {
     // console.log('hcc chatid', currChatId);
     // console.log('chatname here', chatName);
     navigate(`/chatroom/${c.c.groupId}`);
-  };
-
-  const handleExitChatroom = async (e) => {
-    console.log('cr currId', currChatId.current);
-    const r2 = await getChatroomById(currChatId.current);
-    setCurrentMembersIds(r2.currentMembersIds);
-    setText(r2.texts);
-    setChatname(r2.chatName);
-    // console.log("clicked");
-    const modifiedChatData = [];
-    chatrooms.forEach((element) => {
-      // console.log("currChatId", currChatId.current);
-      // console.log("element id", element._id);
-      if (currChatId.current === element._id) {
-        // console.log('chatname chatroom.js', chatName);
-        // console.log("entered if");
-        // console.log("text in leavec", text);
-        // console.log("members leavec", currentMembersIds);
-        // console.log("chatname leavec", chatName);
-        // console.log("userId leavec", userId);
-
-        const memFiltered = currentMembersIds.filter((item) => item.toString() !== userId);
-        // console.log("WHY ARENT U WORKING", memFiltered);
-        setCurrentMembersIds(memFiltered);
-
-        //   // console.log('modifiedData', modifiedData);
-        //   changeChatroom(modifiedData);
-        // console.log("chats leavec", chatrooms);
-        // const modifiedData = {
-        //   text,
-        //   currentMembersIds,
-        //   chatName,
-        // };
-        changeChatroom(currChatId.current, chatName, text, memFiltered, groupId);
-        setChatrooms(chatrooms.filter(
-          (chat) => (chat.id !== currChatId.current),
-        ));
-        // console.log("chats leavec filtered", chatrooms);
-        // console.log("members leavec filtered", currentMembersIds);
-        // might have to fix this later
-        currChatId.current = 0;
-      }
-    });
   };
 
   const modifyGroupOnServer = async (data) => {
@@ -237,12 +174,22 @@ export default function Chatroom({ userId, name }) {
 
       // currMemberIds is the filtered one from groups
       const r2 = await changeChatroom(currChatId.current, chatName, text, currMemberIds, groupId);
-
+      console.log('filered initial length', filteredCr.length);
+      // setCurrMemberIds(currMemberIds.filter((item) => item !== userId));
+      // setFiltered(chatrooms.filter(
+      //   (chat) => chat.currentMembersIds.includes(userId),
+      // ));
+      getAllChatroomWrapper();
+      console.log('after filtered length', filteredCr.length);
+      currChatId.current = 0;
+      // navigate(`/chatroom/0`);
       // setChatrooms(chatrooms.filter(
       //   (chat) => (chat.id !== currChatId.current),
       // ));
       // OKAY IT WORKS NOW BUT WE HAVE TO REFRESH -> TRY SET INTERVAL
-      currChatId.current = 0;
+      // still not working
+      // getAllChatroomWrapper();
+      // location.reload(true);
     }
   };
 
@@ -319,9 +266,7 @@ export default function Chatroom({ userId, name }) {
                   id={c._id}
                   onClick={() => handleChangeChat({ c })}
                 >
-                  {/* ASK PROF HOW TO CHANGE NAME OF CHAT */}
                   {c.chatName}
-                  {/* {c._id} */}
                 </ListItem>
               ))
             }
