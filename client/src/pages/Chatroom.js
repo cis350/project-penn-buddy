@@ -37,18 +37,9 @@ export default function Chatroom({ userId, name }) {
 
   // GROUP PARAMS
   const { groupId } = useParams();
-  const [ownerId, setOwnerId] = useState(0);
-  const [location, setLocation] = useState('');
-  const [departDate, setDepartDate] = useState('');
-  const [modeTransport, setModeTransport] = useState('');
-  const [departPlace, setDepartPlace] = useState('');
-  const [maxCapacity, setMaxCapacity] = useState(0);
-  const [currCapacity, setCurrCapacity] = useState(0);
-  const [currMemberIds, setCurrMemberIds] = useState([]);
-  const [group, setGroup] = useState([]);
-  const [membership, setMembership] = useState(currMemberIds.includes(userId));
 
   const currChatId = useRef(0);
+  const firstUpdate = useRef(true);
   // const fullName = name.concat(lastName);
 
   const navigate = useNavigate();
@@ -91,13 +82,18 @@ export default function Chatroom({ userId, name }) {
     // refresh your UI component -> useEffect
     // need a callback, the value change
 
+    if (firstUpdate.current) {
+      firstUpdate.current = false;
+      getAllChatroomWrapper(false);
+    }
+
     const intervalID = setInterval(() => {
-      getAllChatroomWrapper();
+      getAllChatroomWrapper(true);
     }, 1000);
     return () => clearInterval(intervalID);
 
     // getAllChatroomWrapper();
-  }, [chatrooms.length, filteredCr.length]);
+  });
   const handleChangeChat = (c) => {
     // console.log('hcc', c.c._id);
     // console.log('hcc', c.c._id);
@@ -124,27 +120,10 @@ export default function Chatroom({ userId, name }) {
 
     if (groupId !== 0) {
       const response = await getGroupById(groupId);
-      // returns correct thing but the values i mod data IS NOT RIgzht
-      // console.log('response', response);
-      setGroup(response);
-      setOwnerId(response.ownerId);
-      // console.log(ownerId);
-      setLocation(response.location);
-      setDepartDate(response.departDate);
-      setModeTransport(response.modeTransport);
-      setDepartPlace(response.departPlace);
-      setMaxCapacity(response.maxCapacity);
-      setCurrCapacity(response.currCapacity);
-      setCurrMemberIds(response.currMemberIds);
-      // console.log('current members cr', response.currMemberIds);
-      // console.log('current cap cr', response.currCapacity);
 
-      setMembership(false);
-      // console.log('membership', membership);
-      // console.log('group', group);
-      // MODIFIED IT CORRECTLY NOW
-      // DO I NEED TO RELOAD?
-      // OH, I HAVE TO EDIT CHATROOM ACCORDINGLY TOo
+      const newCap = response.currCapacity - 1;
+      const newMems = response.currMemberIds.filter((item) => item !== userId);
+
       const modifiedData = {
         id: groupId,
         ownerId: response.ownerId,
@@ -153,14 +132,10 @@ export default function Chatroom({ userId, name }) {
         modeTransport: response.modeTransport,
         departPlace: response.departPlace,
         maxCapacity: response.maxCapacity,
-        currCapacity: response.currCapacity - 1,
-        currMemberIds: response.currMemberIds.filter((item) => item !== userId),
+        currCapacity: newCap,
+        currMemberIds: newMems,
       };
       // CHANGES MADE TO GROUP
-      setCurrMemberIds(currMemberIds.filter((item) => item !== userId));
-      setCurrCapacity(currCapacity - 1);
-      // console.log('new total cr', chatrooms);
-      // console.log("called");
       // console.log('modifiedData', modifiedData);
       modifyGroupOnServer(modifiedData);
 
@@ -169,29 +144,17 @@ export default function Chatroom({ userId, name }) {
         id: currChatId.current,
         chatName,
         texts: text,
-        currentMembersIds: currMemberIds,
+        currentMembersIds: newMems,
         groupId,
       };
       // console.log('modified chat data', modifiedData);
 
       // currMemberIds is the filtered one from groups
-      const r2 = await changeChatroom(currChatId.current, chatName, text, currMemberIds, groupId);
-      // console.log('filered initial length', filteredCr.length);
-      // setCurrMemberIds(currMemberIds.filter((item) => item !== userId));
-      // setFiltered(chatrooms.filter(
-      //   (chat) => chat.currentMembersIds.includes(userId),
-      // ));
-      getAllChatroomWrapper();
-      // console.log('after filtered length', filteredCr.length);
-      currChatId.current = 0;
-      // navigate(`/chatroom/0`);
-      // setChatrooms(chatrooms.filter(
-      //   (chat) => (chat.id !== currChatId.current),
-      // ));
-      // OKAY IT WORKS NOW BUT WE HAVE TO REFRESH -> TRY SET INTERVAL
-      // still not working
+      // console.log('curr mem id after delete', newMems);
+      const r2 = await changeChatroom(currChatId.current, chatName, text, newMems, groupId);
       // getAllChatroomWrapper();
-      // location.reload(true);
+      // console.log('modified chat data', modifiedChatData);
+      currChatId.current = 0;
     }
   };
 
