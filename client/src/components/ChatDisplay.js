@@ -52,9 +52,12 @@ export default function ChatDisplay({
     async function getAllTextsWrapper() {
       if (currChatId !== 0) {
         // console.log('current id', currChatId);
+        // console.log('current id', currChatId);
         const r2 = await getChatroomById(currChatId);
         // console.log('chat by id', r2);
+        // console.log('chat by id', r2);
         setText(r2.texts);
+        // console.log('text chatdisplay', r2.texts);
         // console.log('text chatdisplay', r2.texts);
         setCurrentMembersIds(r2.currentMembersIds);
         setCurrMembersName(r2.currentMembersIds);
@@ -103,7 +106,7 @@ export default function ChatDisplay({
       content: message.current,
     };
     modifiedTextData.push(modifiedData);
-    console.log('new text data', modifiedTextData);
+    // console.log('new text data', modifiedTextData);
     await modifyTextOnServer(modifiedTextData, currentMembersIds);
   };
 

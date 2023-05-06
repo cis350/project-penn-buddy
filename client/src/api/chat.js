@@ -35,6 +35,7 @@ export const getAllChatrooms = async () => {
   try {
     const response = await axios.get(`${rootURL}/Chatroom`);
     // console.log('all chats .js', response.data.data);
+    // console.log('all chats .js', response.data.data);
     return response.data.data;
   } catch (err) {
     // console.log('error', err.message);

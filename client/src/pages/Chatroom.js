@@ -1,4 +1,5 @@
 /* eslint-disable no-underscore-dangle */
+/* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
@@ -98,6 +99,7 @@ export default function Chatroom({ userId, name }) {
     // getAllChatroomWrapper();
   }, [chatrooms.length, filteredCr.length]);
   const handleChangeChat = (c) => {
+    // console.log('hcc', c.c._id);
     // console.log('hcc', c.c._id);
     currChatId.current = c.c._id;
     setChatname(c.c.chatName);
