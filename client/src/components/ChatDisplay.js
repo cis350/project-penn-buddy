@@ -84,7 +84,7 @@ export default function ChatDisplay({
 
   // seems correct -> check changeChatroom
   const modifyTextOnServer = async (textData, membersData) => {
-    console.log('name in chatdisplay', chatName);
+    // console.log('name in chatdisplay', chatName);
     const response = await changeChatroom(currChatId, chatName, textData, membersData, groupId);
     // console.log('response in mod text', response);
   };

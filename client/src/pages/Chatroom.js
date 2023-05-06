@@ -73,7 +73,7 @@ export default function Chatroom({ userId, name }) {
       (chat) => chat.currentMembersIds.includes(userId),
     ));
     // console.log('userId', userId.toString());
-    console.log('chat user is in', filteredCr);
+    // console.log('chat user is in', filteredCr);
     // console.log('currChat id', currChatId.current);
     if (currChatId.current !== 0) {
       // console.log('nonzero');
@@ -176,13 +176,13 @@ export default function Chatroom({ userId, name }) {
 
       // currMemberIds is the filtered one from groups
       const r2 = await changeChatroom(currChatId.current, chatName, text, currMemberIds, groupId);
-      console.log('filered initial length', filteredCr.length);
+      // console.log('filered initial length', filteredCr.length);
       // setCurrMemberIds(currMemberIds.filter((item) => item !== userId));
       // setFiltered(chatrooms.filter(
       //   (chat) => chat.currentMembersIds.includes(userId),
       // ));
       getAllChatroomWrapper();
-      console.log('after filtered length', filteredCr.length);
+      // console.log('after filtered length', filteredCr.length);
       currChatId.current = 0;
       // navigate(`/chatroom/0`);
       // setChatrooms(chatrooms.filter(

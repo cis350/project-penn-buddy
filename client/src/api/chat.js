@@ -45,18 +45,17 @@ export const getAllChatrooms = async () => {
 export const changeChatroom = async (id, name, texts, currentMembersIds, groupId) => {
   try {
     const chatId = id;
-    console.log('name added', name);
-    console.log('id added', id);
-    console.log('text added', texts);
-    console.log('mems added', currentMembersIds);
-    console.log('group id added', groupId);
+    // console.log('name added', name);
+    // console.log('id added', id);
+    // console.log('text added', texts);
+    // console.log('mems added', currentMembersIds);
+    // console.log('group id added', groupId);
     const chatName = name;
 
     // console.log('chatId cc', chatId);
     const response = await axios.put(`${rootURL}/Chatroom/${id}`, {
       chatName, texts, currentMembersIds, groupId,
     });
-    console.log('r message cc', response);
     return response.data.message;
   } catch (err) {
     //   console.log('error', err.message);
