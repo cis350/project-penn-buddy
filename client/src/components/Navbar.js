@@ -54,13 +54,14 @@ export default function Navbar() {
           Penn Buddy
         </Typography>
         <Stack direction="row" spacing={6}>
-          <Button color="inherit" sx={{ color: 'black' }} onClick={handleActivity}>Activity Feed</Button>
+          <Button id="activityfeedbutton" color="inherit" sx={{ color: 'black' }} onClick={handleActivity}>Activity Feed</Button>
           <Button color="inherit" sx={{ color: 'black' }} onClick={handleActivityCR}>
             Chat Room
           </Button>
           <Button color="inherit" sx={{ color: 'black' }} onClick={handleHistory}>My History</Button>
           <Button color="inherit" sx={{ color: '#0096FF' }} onClick={handleNewPost}>Create Post</Button>
           <Button
+            id="myprofilebutton"
             color="inherit"
             sx={{ color: 'white', backgroundColor: '#EA3C3C' }}
             style={{

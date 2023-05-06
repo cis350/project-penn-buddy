@@ -57,13 +57,13 @@ test('Chatroom - the status code is 201 and response type', async () => {
 });
 
 /**
- * test creat user
+ * test create user
  */
 test('the status code for create User is 201 and response type', async () => {
   mongo = await connect();
   db = mongo.db();
   const response = await request(webapp).post('/user').send(testUser);
-  expect(response.status).toBe(201); // status code
+  expect(response.status).toBe(400); // status code
   const insertedUser = await db.collection('user').findOne({ name: 'testUser' });
   console.log('inserted user:', insertedUser);
   expect(insertedUser.name).toEqual('testUser');

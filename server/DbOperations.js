@@ -91,6 +91,15 @@ const getUserById = async (userID) => {
   }
 };
 
+async function getUser(db, User) {
+  try {
+    const result = await db.collection('user').findOne({ name: User.name });
+    return result;
+  } catch (err) {
+    throw new Error('failed to get user');
+  }
+}
+
 /**
  * Add user when register
  */
@@ -125,9 +134,10 @@ const changeUser = async (userID, newUser) => {
 /**
  * Check if user exists in Login
  */
-const usernameExists = async (db, newUser) => {
+const usernameExists = async (name) => {
   try {
-    const result = await db.collection('user').findOne({ pennid: newUser.pennid });
+    const db = await getDB();
+    const result = await db.collection('user').findOne({ name });
     if (!result) {
       return false;
     }
@@ -358,6 +368,7 @@ module.exports = {
   getGroupById,
   changeGroup,
   createGroup,
+  getUser,
   deleteGroupById,
   deleteUser,
   getAllChatrooms,
