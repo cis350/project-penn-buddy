@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /**
 * This module contains authentication and session functions
 */
@@ -10,7 +11,7 @@ require('dotenv').config();
 
 // import DB function
 // const { getStudentByName } = require('../DbOperations');
-console.log(process.env.KEY);
+// console.log(process.env.KEY);
 
 /**
 * Create a JWT containing the username
@@ -20,10 +21,10 @@ console.log(process.env.KEY);
 const authenticateUser = (userid) => {
   try {
     const token = jwt.sign({ username: userid }, process.env.KEY, { expiresIn: '120s' });
-    console.log('token', token);
+    // console.log('token', token);
     return token;
   } catch (err) {
-    console.log('authenticateUser error', err.message);
+    // console.log('authenticateUser error', err.message);
   }
 };
 
