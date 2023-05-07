@@ -47,7 +47,7 @@ export const loginU = async (name) => {
     // return the token
     return response.data.apptoken;
   } catch (err) {
-    console.log('error', err.message);
+    console.log('loginU error', err.message);
   }
 };
 
@@ -56,7 +56,7 @@ export const loginUser = async (userId) => {
     const response = await axios.get(`${rootURL}/user/login/${userId}`);
     return response.data.data;
   } catch (err) {
-    console.log('error', err.message);
+    console.log('loginUser error', err.message);
     throw err;
   }
 };

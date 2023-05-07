@@ -9,6 +9,8 @@ const express = require('express');
 // import the cors -cross origin resource sharing- module
 const cors = require('cors');
 
+require('dotenv').config();
+
 // import ObjectID
 const { ObjectId } = require('mongodb');
 
@@ -16,21 +18,18 @@ const { ObjectId } = require('mongodb');
 const webapp = express();
 // const session = require('cookie-session');
 const session = require('cookie-session');
-require('dotenv').config();
-const { authenticateUser } = require('./utils/auth')
+// support parsing of application/json type post data
+const bodyParser = require('body-parser');
+const { authenticateUser } = require('./utils/auth');
 
 // enable cors
 webapp.use(cors());
-
 
 webapp.use(session({
   name: 'session',
   keys: 'key1',
   maxAge: 100000000,
 }));
-
-// support parsing of application/json type post data
-const bodyParser = require('body-parser');
 
 webapp.use(bodyParser.json());
 
@@ -49,24 +48,24 @@ webapp.get('/', (req, res) => {
 * Login endpoint
 * The name is used to log in
 */
-webapp.post('/login', (req, resp)=>{
+webapp.post('/login', (req, resp) => {
   // check that the name was sent in the body
-  if(!req.body.name || req.body.name===''){
-    resp.status(401).json({error: 'empty or missing name'});
+  if (!req.body.name || req.body.name === '') {
+    resp.status(401).json({ error: 'empty or missing name' });
     return;
   }
   // authenticate the user
-  try{
+  try {
     const token = authenticateUser(req.body.name);
-    resp.status(201).json({apptoken: token});
-  } catch(err){
-    resp.status(401).json({error: 'hey I am an error'});
+    console.log('token in server.js', token);
+    resp.status(201).json({ apptoken: token });
+  } catch (err) {
+    resp.status(401).json({ error: 'hey I am an error' });
   }
- })
- 
- 
- // addUser login endpoint
- webapp.post('/user/login', async (req, resp) => {
+});
+
+// addUser login endpoint
+webapp.post('/user/login', async (req, resp) => {
   if (!req.body.name || req.body.name.length === 0) {
     resp.status(401).json({ error: 'pennKey not provided' });
     return;
@@ -77,7 +76,7 @@ webapp.post('/login', (req, resp)=>{
   }
   try {
     const result = await dbLib.getUser(req.body.name);
-    console.log('getUser',result)
+    console.log('getUser', result);
     req.session.name = result.name;
     // req.session.firstname = result.firstname;
     // req.session.lastname = result.lastname;
@@ -85,9 +84,9 @@ webapp.post('/login', (req, resp)=>{
   } catch (err) {
     resp.status(401).json({ error: 'could not find user' });
   }
- });
+});
 
- webapp.get('/user/login/:id', async (req, res) => {
+webapp.get('/user/login/:id', async (req, res) => {
   console.log('GET a user by ID');
   try {
     // get the data from the db
@@ -104,7 +103,7 @@ webapp.post('/login', (req, resp)=>{
   } catch (err) {
     res.status(404).json({ message: 'there was error' });
   }
- }); 
+});
 
 /**
  * route implementation GET /user
