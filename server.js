@@ -9,6 +9,8 @@ const express = require('express');
 // import the cors -cross origin resource sharing- module
 const cors = require('cors');
 
+require('dotenv').config();
+
 //import path
 const path = require('path');
 
@@ -18,19 +20,20 @@ const { ObjectId } = require('mongodb');
 // create a new express app
 const webapp = express();
 // const session = require('cookie-session');
+const session = require('cookie-session');
+// support parsing of application/json type post data
+const bodyParser = require('body-parser');
+const { authenticateUser } = require('./utils/auth');
 
 // enable cors
 webapp.use(cors());
 
-/*
+
 webapp.use(session({
   name: 'session',
-  keys: ['key1', 'key2'],
+  keys: 'key1',
   maxAge: 100000000,
-})); */
-
-// support parsing of application/json type post data
-const bodyParser = require('body-parser');
+}));
 
 webapp.use(bodyParser.json());
 
@@ -42,6 +45,8 @@ const dbLib = require('./DbOperations');
 
 //tell express where to find static files
 webapp.use(express.static(path.join(__dirname, './client/build')));
+
+
 
 // root endpoint route
 webapp.get('/', (req, res) => {
@@ -62,6 +67,69 @@ webapp.get('/user', async (req, resp) => {
     resp.status(400).json({ message: 'There was an error' });
   }
 });
+
+
+/**
+* Login endpoint
+* The name is used to log in
+*/
+webapp.post('/login', (req, resp) => {
+  // check that the name was sent in the body
+  if (!req.body.name || req.body.name === '') {
+    resp.status(401).json({ error: 'empty or missing name' });
+    return;
+  }
+  // authenticate the user
+  try {
+    const token = authenticateUser(req.body.name);
+    console.log('token in server.js', token);
+    resp.status(201).json({ apptoken: token });
+  } catch (err) {
+    resp.status(401).json({ error: 'hey I am an error' });
+  }
+});
+
+// addUser login endpoint
+webapp.post('/user/login', async (req, resp) => {
+  if (!req.body.name || req.body.name.length === 0) {
+    resp.status(401).json({ error: 'pennKey not provided' });
+    return;
+  }
+  if (!req.body.password || req.body.password.length === 0) {
+    resp.status(401).json({ error: 'password not provided' });
+    return;
+  }
+  try {
+    const result = await dbLib.getUser(req.body.name);
+    console.log('getUser', result);
+    req.session.name = result.name;
+    // req.session.firstname = result.firstname;
+    // req.session.lastname = result.lastname;
+    resp.status(200).json({ message: 'successfully logged in', data: result });
+  } catch (err) {
+    resp.status(401).json({ error: 'could not find user' });
+  }
+});
+
+webapp.get('/user/login/:id', async (req, res) => {
+  console.log('GET a user by ID');
+  try {
+    // get the data from the db
+    const results = await dbLib.getUserById(req.params.id);
+    req.session.name = results.name;
+    // req.session.password = results.password;
+    // req.session.pennId = results.pennId;
+    if (results === undefined) {
+      res.status(404).json({ error: 'unknown user' });
+      return;
+    }
+    // send the response with the appropriate status code
+    res.status(200).json({ data: results });
+  } catch (err) {
+    res.status(404).json({ message: 'there was error' });
+  }
+});
+
 
 /**
  * route implementation add user signup

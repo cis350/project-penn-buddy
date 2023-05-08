@@ -60,8 +60,8 @@ function App() {
   });
 
   const [login, setLogin] = useState(sessionStorage.getItem('app-token') !== null);
-  const [userId, setUserId] = useState('');
-  const [name, setName] = useState('');
+  const [userId, setUserId] = useState(sessionStorage.getItem('app-userId') || '');
+  const [name, setName] = useState(sessionStorage.getItem('app-name') || '');
 
   if (login === false) {
     // console.log(login);

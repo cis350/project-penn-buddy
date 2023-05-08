@@ -28,6 +28,18 @@ export default function UserInfo({
     navigate('/');
   }
 
+  // logout button click event handler.
+  const handleLogout = () => {
+    // detele the JWT
+    sessionStorage.removeItem('app-token');
+    sessionStorage.removeItem('app-name');
+    sessionStorage.removeItem('app-userId');
+    // relaunch the app
+    // setLogin(false);
+    navigate('/');
+    window.location.reload(true);
+  };
+
   return (
     <Box
       data-testid="box"
@@ -87,7 +99,7 @@ export default function UserInfo({
       </Typography>
       <Stack direction="row" spacing={2}>
         <Button
-          onClick={() => handleSignOut()}
+          onClick={() => handleLogout()}
           login={false}
           variant="contained"
           color="secondary"
