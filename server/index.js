@@ -6,7 +6,8 @@
 // import the express app
 const webapp = require('./server');
 
-const port = 8080;
+//update port
+const port = process.env.PORT || 8080;
 
 // start the web server
 webapp.listen(port, () => {

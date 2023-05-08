@@ -9,6 +9,9 @@ const express = require('express');
 // import the cors -cross origin resource sharing- module
 const cors = require('cors');
 
+//import path
+const path = require('path');
+
 // import ObjectID
 const { ObjectId } = require('mongodb');
 
@@ -36,6 +39,9 @@ webapp.use(express.urlencoded({ extended: true }));
 
 // import the db function
 const dbLib = require('./DbOperations');
+
+//tell express where to find static files
+webapp.use(express.static(path.join(__dirname, './client/build')));
 
 // root endpoint route
 webapp.get('/', (req, res) => {
@@ -485,6 +491,12 @@ webapp.delete('/Chatroom/:id', async (req, res) => {
     res.status(400).json({ message: 'there was error' });
   }
 });
+
+
+//add wildcard endpoint - serve react files
+webapp.get('*', (req, resp) => {
+  resp.send(path.join(__dirname, './client/build/index.html'))
+})
 
 // export the webapp// export the webapp
 module.exports = webapp;
